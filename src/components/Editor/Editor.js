@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Project from '../Project';
 
 const EditorContainer = styled.div`
 `;
@@ -79,6 +80,36 @@ const BlockItem = styled.div`
   }
 `;
 
+const mockBlocks = {
+  _id: 12123,
+  creatorId: 12345,
+  category: 'wedding',
+  concept: 'basic',
+  blocks: [
+    {
+      type: 'title1',
+      data: {
+        texts: 'Happy Wedding not happy',
+        styles: 'default',
+      },
+    },
+    {
+      type: 'img1',
+      data: {
+        src: '//g0.evitecdn.com/pages/signed-out-virtual-homepage/6210705586454528/21f2897a86ca4a338a9ff2a6dd83665f.png',
+        styles: 'default',
+      },
+    },
+    {
+      type: 'title1',
+      data: {
+        texts: 'End of Title Title1!!!',
+        styles: 'default',
+      },
+    },
+  ],
+};
+
 export default function Editor() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -88,11 +119,10 @@ export default function Editor() {
 
   return (
     <EditorContainer>
-      <Main>
-        <div>
-          hello
-        </div>
-      </Main>
+      <Project
+        isEditable
+        blocks={mockBlocks}
+      />
       <Sidebar isSidebarOpen={isSidebarOpen}>
         <SidebarToggler onClick={toggleSidebar}>
           {isSidebarOpen ? '>' : '﹤'}
