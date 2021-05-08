@@ -2,20 +2,19 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const EditorContainer = styled.div`
+`;
+
+const Main = styled.main`
+  margin: 150px auto;
   max-width: 800px;
   width: 100%;
   padding: 0 35px;
   box-sizing: border-box;
 `;
 
-const Main = styled.main`
-  background: #fff;
-  width: 100%;
-  height: 100%;
-`;
-
 const Sidebar = styled.div`
   position: fixed;
+  top: 0;
   right: ${({ isSidebarOpen }) => (isSidebarOpen ? '0px' : '-230px')};
   background: #fff;
   width: 230px;
@@ -41,6 +40,7 @@ const Selectbox = styled.div`
 
 const SidebarToggler = styled.div`
   position: absolute;
+  color: grey;
   width: 40px;
   height: 40px;
   top: 170px;
@@ -82,12 +82,20 @@ const BlockItem = styled.div`
 export default function Editor() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+  function toggleSidebar() {
+    setIsSidebarOpen((prev) => !prev);
+  }
+
   return (
     <EditorContainer>
-      <Main />
+      <Main>
+        <div>
+          hello
+        </div>
+      </Main>
       <Sidebar isSidebarOpen={isSidebarOpen}>
-        <SidebarToggler onClick={() => setIsSidebarOpen((prev) => !prev)}>
-          {isSidebarOpen ? '﹥' : '﹤'}
+        <SidebarToggler onClick={toggleSidebar}>
+          {isSidebarOpen ? '>' : '﹤'}
         </SidebarToggler>
         <Selectbox>
           <span>
