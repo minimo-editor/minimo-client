@@ -5,7 +5,7 @@ import Project from '../Project';
 const EditorContainer = styled.div`
 `;
 
-const Main = styled.main`
+const ProjectWrapper = styled.main`
   margin: 150px auto;
   max-width: 800px;
   width: 100%;
@@ -119,10 +119,12 @@ export default function Editor() {
 
   return (
     <EditorContainer>
-      <Project
-        isEditable
-        blocks={mockBlocks}
-      />
+      <ProjectWrapper>
+        <Project
+          isEditable
+          blocks={mockBlocks.blocks}
+        />
+      </ProjectWrapper>
       <Sidebar isSidebarOpen={isSidebarOpen}>
         <SidebarToggler onClick={toggleSidebar}>
           {isSidebarOpen ? '>' : '﹤'}
