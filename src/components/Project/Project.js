@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import blockMap from '../../utils/blockMaps';
+import blocksMap from '../../utils/blocksMap';
 
 export default function Project({ isEditable, blocks: initialBlocks }) {
   const [blocks, setBlocks] = useState(initialBlocks);
@@ -9,7 +9,7 @@ export default function Project({ isEditable, blocks: initialBlocks }) {
   return (
     <>
       {blocks.map((block, index) => {
-        const Block = blockMap.get(block.type);
+        const Block = blocksMap.get(block.type);
 
         return (
           <Block index={index} data={block.data} />
