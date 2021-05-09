@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import Project from '../Project';
 
@@ -68,7 +68,7 @@ const BlockList = styled.div`
 const BlockItem = styled.div`
   width: 170px;
   overflow: hidden;
-  background: rgb(0, 0, 0, 0.5);
+  background: rgb(0, 0, 0, 0.06);
   margin: 22px 22px 0;
   cursor: move;
   outline: rgba(219, 219, 219, 0.52) 1px solid;
@@ -77,7 +77,9 @@ const BlockItem = styled.div`
   & img {
     width: 100%;
     display: block;
+    /* opacity: ${({ isDragging }) => (isDragging ? '0' : 'none')}; */
   }
+
 `;
 
 const mockBlocks = {
@@ -111,10 +113,54 @@ const mockBlocks = {
 };
 
 export default function Editor() {
+  const [blocks, setBlocks] = useState(mockBlocks.blocks);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const dragOverItem = useRef();
+  const draggingItem = useRef();
+  const [isDragging, setIsDragging] = useState(false);
 
   function toggleSidebar() {
     setIsSidebarOpen((prev) => !prev);
+  }
+
+  function handleDrop(e, index) {
+    // TODO: stop propagaion propely
+
+    if (isDragging) {
+      return;
+    }
+
+    e.stopPropagation();
+    console.log('drag enter');
+    setIsDragging(true);
+
+    dragOverItem.current = index;
+
+    const blocksCopy = [...blocks];
+
+    const ghost = {
+      type: 'ghost',
+      data: {},
+    };
+
+    console.log(dragOverItem.current);
+
+    // blocksCopy.splice(draggingItem.current, 1);
+    blocksCopy.splice(dragOverItem.current, 0, ghost);
+
+    // draggingItem.current = dragOverItem.current;
+    draggingItem.current = null;
+    dragOverItem.current = null;
+    setBlocks(blocksCopy);
+  }
+
+  function handleDragEnter(e, index) {
+    e.target.style.borderTop = '20px solid rgb(0, 0, 0, 0.06)';
+  }
+
+  function handleDragLeave(e, index) {
+    e.target.style.borderTop = 'none';
   }
 
   return (
@@ -122,7 +168,9 @@ export default function Editor() {
       <ProjectWrapper>
         <Project
           isEditable
-          blocks={mockBlocks.blocks}
+          onDragEnter={handleDragEnter}
+          onDragLeave={handleDragLeave}
+          blocks={blocks}
         />
       </ProjectWrapper>
       <Sidebar isSidebarOpen={isSidebarOpen}>
@@ -138,8 +186,11 @@ export default function Editor() {
           </span>
         </Selectbox>
         <BlockList>
-          <BlockItem>
-            <img id='title1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-01.png' alt='title' />
+          <BlockItem
+            isDragging
+            draggable
+          >
+            <img draggable={false} id='title1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-01.png' alt='title' />
           </BlockItem>
           <BlockItem>
             <img id='img1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-05.png' alt='img' />

@@ -1,20 +1,34 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
+import styled from 'styled-components';
 import blocksMap from '../../utils/blocksMap';
 
-export default function Project({ isEditable, blocks: initialBlocks }) {
-  const [blocks, setBlocks] = useState(initialBlocks);
-  const draggingItem = useRef();
-  const dragOverItem = useRef();
+const BlockWrapper = styled.div`
 
+`;
+
+export default function Project({
+  blocks,
+  isEditable,
+  onDragEnter,
+  onDragLeave,
+}) {
   return (
-    <>
+    <div>
       {blocks.map((block, index) => {
         const Block = blocksMap.get(block.type);
 
         return (
-          <Block index={index} data={block.data} />
+          <BlockWrapper
+            onDragEnter={(e) => onDragEnter(e, index)}
+            onDragLeave={onDragLeave}
+          >
+            <Block
+              index={index}
+              data={block.data}
+            />
+          </BlockWrapper>
         );
       })}
-    </>
+    </div>
   );
 }
