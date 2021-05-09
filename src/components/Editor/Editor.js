@@ -46,7 +46,7 @@ const SidebarToggler = styled.div`
   width: 40px;
   height: 40px;
   top: 170px;
-  left: -41px;
+  left: -40px;
   background: #fff;
   border: 1px solid rgba(211, 211, 211, 0.52);
   border-right: none;
@@ -120,6 +120,22 @@ export default function Editor() {
   const draggingItem = useRef();
   const [isDragging, setIsDragging] = useState(false);
 
+  function handleChangeBlock(e, index, name) {
+    setBlocks((prev) => (
+      [...prev].map((each, idx) => {
+        if (index === idx) {
+          each.data[name] = e.target.value;
+        }
+
+        return each;
+      })
+    ));
+  }
+
+  function handleClickBlock(e, index, name) {
+    console.log(e);
+  }
+
   function toggleSidebar() {
     setIsSidebarOpen((prev) => !prev);
   }
@@ -192,6 +208,8 @@ export default function Editor() {
       <ProjectWrapper>
         <Project
           isEditable
+          handleChangeBlock={handleChangeBlock}
+          handleClickBlock={handleClickBlock}
           onDragEnter={handleDragEnter}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
