@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Project from '../Project';
 
 const EditorContainer = styled.div`
+  transition: all ease-in 0.3s;
 `;
 
 const ProjectWrapper = styled.main`
@@ -79,7 +80,6 @@ const BlockItem = styled.div`
     display: block;
     /* opacity: ${({ isDragging }) => (isDragging ? '0' : 'none')}; */
   }
-
 `;
 
 const mockBlocks = {
@@ -156,7 +156,7 @@ export default function Editor() {
   }
 
   function handleDragEnter(e, index) {
-    e.target.style.borderTop = '20px solid rgb(0, 0, 0, 0.06)';
+    e.target.style.borderTop = '40px solid rgb(0, 0, 0, 0.06)';
   }
 
   function handleDragLeave(e, index) {
