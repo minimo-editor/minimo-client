@@ -124,43 +124,67 @@ export default function Editor() {
     setIsSidebarOpen((prev) => !prev);
   }
 
+  // function handleDrop(e, index) {
+  //   // TODO: stop propagaion propely
+
+  //   if (isDragging) {
+  //     return;
+  //   }
+
+  //   e.stopPropagation();
+  //   console.log('drag enter');
+  //   setIsDragging(true);
+
+  //   dragOverItem.current = index;
+
+  //   const blocksCopy = [...blocks];
+
+  //   const ghost = {
+  //     type: 'ghost',
+  //     data: {},
+  //   };
+
+  //   console.log(dragOverItem.current);
+
+  //   // blocksCopy.splice(draggingItem.current, 1);
+  //   blocksCopy.splice(dragOverItem.current, 0, ghost);
+
+  //   // draggingItem.current = dragOverItem.current;
+  //   draggingItem.current = null;
+  //   dragOverItem.current = null;
+  //   setBlocks(blocksCopy);
+  // }
+
   function handleDrop(e, index) {
-    // TODO: stop propagaion propely
+    e.preventDefault();
+    e.target.style.borderTop = 'none';
 
-    if (isDragging) {
-      return;
-    }
-
-    e.stopPropagation();
-    console.log('drag enter');
-    setIsDragging(true);
-
-    dragOverItem.current = index;
-
-    const blocksCopy = [...blocks];
-
-    const ghost = {
-      type: 'ghost',
+    const blockId = e.dataTransfer.getData('block_id');
+    const newBlock = {
+      type: blockId,
       data: {},
     };
 
-    console.log(dragOverItem.current);
+    setBlocks((prev) => {
+      const prevCopy = [...prev];
+      prevCopy.splice(index, 0, newBlock);
 
-    // blocksCopy.splice(draggingItem.current, 1);
-    blocksCopy.splice(dragOverItem.current, 0, ghost);
-
-    // draggingItem.current = dragOverItem.current;
-    draggingItem.current = null;
-    dragOverItem.current = null;
-    setBlocks(blocksCopy);
+      return prevCopy;
+    });
   }
 
   function handleDragEnter(e, index) {
-    e.target.style.borderTop = '40px solid rgb(0, 0, 0, 0.06)';
+    e.stopPropagation();
+    e.target.style.borderTop = '40px solid rgb(0, 0, 0, 0.03)';
   }
 
   function handleDragLeave(e, index) {
     e.target.style.borderTop = 'none';
+  }
+
+  function handleDragStart(e, index) {
+    const { target } = e;
+    e.dataTransfer.setData('block_id', target.id);
   }
 
   return (
@@ -170,6 +194,7 @@ export default function Editor() {
           isEditable
           onDragEnter={handleDragEnter}
           onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
           blocks={blocks}
         />
       </ProjectWrapper>
@@ -187,10 +212,12 @@ export default function Editor() {
         </Selectbox>
         <BlockList>
           <BlockItem
+            id='title1'
             isDragging
             draggable
+            onDragStart={handleDragStart}
           >
-            <img draggable={false} id='title1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-01.png' alt='title' />
+            <img draggable={false} src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-01.png' alt='title' />
           </BlockItem>
           <BlockItem>
             <img id='img1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-05.png' alt='img' />

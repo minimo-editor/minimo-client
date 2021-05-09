@@ -9,6 +9,7 @@ const BlockWrapper = styled.div`
 export default function Project({
   blocks,
   isEditable,
+  onDrop,
   onDragEnter,
   onDragLeave,
 }) {
@@ -19,8 +20,10 @@ export default function Project({
 
         return (
           <BlockWrapper
-            onDragEnter={(e) => onDragEnter(e, index)}
+            onDragEnterCapture={(e) => onDragEnter(e, index)}
             onDragLeave={onDragLeave}
+            onDrop={(e) => onDrop(e, index)}
+            onDragOver={(e) => e.preventDefault()}
           >
             <Block
               index={index}
