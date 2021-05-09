@@ -9,7 +9,6 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   height: 300px;
-  border: .1rem solid green;
   color: red;
   font-size: 2.5rem;
 `;
