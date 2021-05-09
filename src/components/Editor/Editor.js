@@ -2,6 +2,192 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import Project from '../Project';
 
+const mockBlocks = {
+  _id: 12123,
+  creatorId: 12345,
+  category: 'wedding',
+  concept: 'basic',
+  blocks: [
+    {
+      type: 'title1',
+      data: {
+        texts: 'Happy Wedding not happy',
+        styles: 'default',
+      },
+    },
+    {
+      type: 'img1',
+      data: {
+        src: '//g0.evitecdn.com/pages/signed-out-virtual-homepage/6210705586454528/21f2897a86ca4a338a9ff2a6dd83665f.png',
+        styles: 'default',
+      },
+    },
+    {
+      type: 'title1',
+      data: {
+        texts: 'End of Title Title1!!!',
+        styles: 'default',
+      },
+    },
+  ],
+};
+
+export default function Editor() {
+  const [blocks, setBlocks] = useState(mockBlocks.blocks);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  function handleChangeBlock(e, index, name) {
+    setBlocks((prev) => (
+      [...prev].map((each, idx) => {
+        if (index === idx) {
+          each.data[name] = e.target.value;
+        }
+
+        return each;
+      })
+    ));
+  }
+
+  function toggleSidebar() {
+    setIsSidebarOpen((prev) => !prev);
+  }
+
+  // function handleDrop(e, index) {
+  //   // TODO: stop propagaion propely
+
+  //   if (isDragging) {
+  //     return;
+  //   }
+
+  //   e.stopPropagation();
+  //   console.log('drag enter');
+  //   setIsDragging(true);
+
+  //   dragOverItem.current = index;
+
+  //   const blocksCopy = [...blocks];
+
+  //   const ghost = {
+  //     type: 'ghost',
+  //     data: {},
+  //   };
+
+  //   console.log(dragOverItem.current);
+
+  //   // blocksCopy.splice(draggingItem.current, 1);
+  //   blocksCopy.splice(dragOverItem.current, 0, ghost);
+
+  //   // draggingItem.current = dragOverItem.current;
+  //   draggingItem.current = null;
+  //   dragOverItem.current = null;
+  //   setBlocks(blocksCopy);
+  // }
+
+  function handleDrop(e, index) {
+    e.preventDefault();
+    e.target.style.borderTop = 'none';
+
+    const blockId = e.dataTransfer.getData('block_id');
+    const newBlock = {
+      type: blockId,
+      data: {},
+    };
+
+    setBlocks((prev) => {
+      const prevCopy = [...prev];
+      prevCopy.splice(index, 0, newBlock);
+
+      return prevCopy;
+    });
+  }
+
+  function handleDragEnter(e, index) {
+    e.stopPropagation();
+    e.target.style.borderTop = '40px solid rgb(0, 0, 0, 0.03)';
+  }
+
+  function handleDragLeave(e, index) {
+    e.target.style.borderTop = 'none';
+  }
+
+  function handleDragStart(e, index) {
+    const { target } = e;
+    e.dataTransfer.setData('block_id', target.id);
+  }
+
+  return (
+    <EditorContainer>
+      <ProjectWrapper>
+        <Project
+          isEditable
+          handleChangeBlock={handleChangeBlock}
+          onDragEnter={handleDragEnter}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+          blocks={blocks}
+          setBlocks={setBlocks}
+        />
+      </ProjectWrapper>
+      <Sidebar isSidebarOpen={isSidebarOpen}>
+        <SidebarToggler onClick={toggleSidebar}>
+          {isSidebarOpen ? '>' : '﹤'}
+        </SidebarToggler>
+        <Selectbox>
+          <span>
+            Basic
+          </span>
+          <span>
+            ▼
+          </span>
+        </Selectbox>
+        <BlockList>
+          <BlockItem
+            id='title1'
+            isDragging
+            draggable
+            onDragStart={handleDragStart}
+          >
+            <img draggable={false} src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-01.png' alt='title' />
+          </BlockItem>
+          <BlockItem>
+            <img id='img1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-05.png' alt='img' />
+          </BlockItem>
+          <BlockItem>
+            <img id='video1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/element-video.png' alt='video' />
+          </BlockItem>
+          <BlockItem>
+            <img id='social1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-16.png' alt='social' />
+          </BlockItem>
+          <BlockItem>
+            <img id='title1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-01.png' alt='title' />
+          </BlockItem>
+          <BlockItem>
+            <img id='img1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-05.png' alt='img' />
+          </BlockItem>
+          <BlockItem>
+            <img id='video1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/element-video.png' alt='video' />
+          </BlockItem>
+          <BlockItem>
+            <img id='social1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-16.png' alt='social' />
+          </BlockItem>
+          <BlockItem>
+            <img id='title1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-01.png' alt='title' />
+          </BlockItem>
+          <BlockItem>
+            <img id='img1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-05.png' alt='img' />
+          </BlockItem>
+          <BlockItem>
+            <img id='video1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/element-video.png' alt='video' />
+          </BlockItem>
+          <BlockItem>
+            <img id='social1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-16.png' alt='social' />
+          </BlockItem>
+        </BlockList>
+      </Sidebar>
+    </EditorContainer>
+  );
+}
+
 const EditorContainer = styled.div`
   transition: all ease-in 0.3s;
 `;
@@ -81,197 +267,3 @@ const BlockItem = styled.div`
     /* opacity: ${({ isDragging }) => (isDragging ? '0' : 'none')}; */
   }
 `;
-
-const mockBlocks = {
-  _id: 12123,
-  creatorId: 12345,
-  category: 'wedding',
-  concept: 'basic',
-  blocks: [
-    {
-      type: 'title1',
-      data: {
-        texts: 'Happy Wedding not happy',
-        styles: 'default',
-      },
-    },
-    {
-      type: 'img1',
-      data: {
-        src: '//g0.evitecdn.com/pages/signed-out-virtual-homepage/6210705586454528/21f2897a86ca4a338a9ff2a6dd83665f.png',
-        styles: 'default',
-      },
-    },
-    {
-      type: 'title1',
-      data: {
-        texts: 'End of Title Title1!!!',
-        styles: 'default',
-      },
-    },
-  ],
-};
-
-export default function Editor() {
-  const [blocks, setBlocks] = useState(mockBlocks.blocks);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  const dragOverItem = useRef();
-  const draggingItem = useRef();
-  const [isDragging, setIsDragging] = useState(false);
-
-  function handleChangeBlock(e, index, name) {
-    setBlocks((prev) => (
-      [...prev].map((each, idx) => {
-        if (index === idx) {
-          each.data[name] = e.target.value;
-        }
-
-        return each;
-      })
-    ));
-  }
-
-  function handleClickBlock(e, index, name) {
-    console.log(e);
-  }
-
-  function toggleSidebar() {
-    setIsSidebarOpen((prev) => !prev);
-  }
-
-  // function handleDrop(e, index) {
-  //   // TODO: stop propagaion propely
-
-  //   if (isDragging) {
-  //     return;
-  //   }
-
-  //   e.stopPropagation();
-  //   console.log('drag enter');
-  //   setIsDragging(true);
-
-  //   dragOverItem.current = index;
-
-  //   const blocksCopy = [...blocks];
-
-  //   const ghost = {
-  //     type: 'ghost',
-  //     data: {},
-  //   };
-
-  //   console.log(dragOverItem.current);
-
-  //   // blocksCopy.splice(draggingItem.current, 1);
-  //   blocksCopy.splice(dragOverItem.current, 0, ghost);
-
-  //   // draggingItem.current = dragOverItem.current;
-  //   draggingItem.current = null;
-  //   dragOverItem.current = null;
-  //   setBlocks(blocksCopy);
-  // }
-
-  function handleDrop(e, index) {
-    e.preventDefault();
-    e.target.style.borderTop = 'none';
-
-    const blockId = e.dataTransfer.getData('block_id');
-    const newBlock = {
-      type: blockId,
-      data: {},
-    };
-
-    setBlocks((prev) => {
-      const prevCopy = [...prev];
-      prevCopy.splice(index, 0, newBlock);
-
-      return prevCopy;
-    });
-  }
-
-  function handleDragEnter(e, index) {
-    e.stopPropagation();
-    e.target.style.borderTop = '40px solid rgb(0, 0, 0, 0.03)';
-  }
-
-  function handleDragLeave(e, index) {
-    e.target.style.borderTop = 'none';
-  }
-
-  function handleDragStart(e, index) {
-    const { target } = e;
-    e.dataTransfer.setData('block_id', target.id);
-  }
-
-  return (
-    <EditorContainer>
-      <ProjectWrapper>
-        <Project
-          isEditable
-          handleChangeBlock={handleChangeBlock}
-          handleClickBlock={handleClickBlock}
-          onDragEnter={handleDragEnter}
-          onDragLeave={handleDragLeave}
-          onDrop={handleDrop}
-          blocks={blocks}
-        />
-      </ProjectWrapper>
-      <Sidebar isSidebarOpen={isSidebarOpen}>
-        <SidebarToggler onClick={toggleSidebar}>
-          {isSidebarOpen ? '>' : '﹤'}
-        </SidebarToggler>
-        <Selectbox>
-          <span>
-            Basic
-          </span>
-          <span>
-            ▼
-          </span>
-        </Selectbox>
-        <BlockList>
-          <BlockItem
-            id='title1'
-            isDragging
-            draggable
-            onDragStart={handleDragStart}
-          >
-            <img draggable={false} src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-01.png' alt='title' />
-          </BlockItem>
-          <BlockItem>
-            <img id='img1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-05.png' alt='img' />
-          </BlockItem>
-          <BlockItem>
-            <img id='video1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/element-video.png' alt='video' />
-          </BlockItem>
-          <BlockItem>
-            <img id='social1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-16.png' alt='social' />
-          </BlockItem>
-          <BlockItem>
-            <img id='title1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-01.png' alt='title' />
-          </BlockItem>
-          <BlockItem>
-            <img id='img1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-05.png' alt='img' />
-          </BlockItem>
-          <BlockItem>
-            <img id='video1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/element-video.png' alt='video' />
-          </BlockItem>
-          <BlockItem>
-            <img id='social1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-16.png' alt='social' />
-          </BlockItem>
-          <BlockItem>
-            <img id='title1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-01.png' alt='title' />
-          </BlockItem>
-          <BlockItem>
-            <img id='img1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-05.png' alt='img' />
-          </BlockItem>
-          <BlockItem>
-            <img id='video1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/element-video.png' alt='video' />
-          </BlockItem>
-          <BlockItem>
-            <img id='social1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-16.png' alt='social' />
-          </BlockItem>
-        </BlockList>
-      </Sidebar>
-    </EditorContainer>
-  );
-}
