@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import blockImgList from '../../constants/blockImgList';
 import Project from '../Project';
@@ -44,6 +44,15 @@ const mockBlocks = {
 export default function Editor() {
   const [blocks, setBlocks] = useState(mockBlocks.blocks);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  function resetBlockData(index, data) {
+    setBlocks((prev) => {
+      const prevCopy = [...prev];
+      prevCopy[index].data = data;
+
+      return prevCopy;
+    });
+  }
 
   function handleChangeBlock(e, index, name) {
     setBlocks((prev) => (
@@ -134,6 +143,7 @@ export default function Editor() {
           onDrop={handleDrop}
           blocks={blocks}
           setBlocks={setBlocks}
+          resetBlockData={resetBlockData}
         />
       </ProjectWrapper>
       <Sidebar isSidebarOpen={isSidebarOpen}>
