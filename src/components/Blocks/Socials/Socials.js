@@ -14,7 +14,6 @@ const DEFAULT_DATA = {
 export default function Socials({
   data,
   index,
-  onChange,
   resetBlockData,
 }) {
   const links = (isEmptyObject(data)) ? DEFAULT_DATA : data;
