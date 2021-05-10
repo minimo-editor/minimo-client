@@ -84,7 +84,6 @@ export default function Editor() {
   // }
 
   function handleDrop(e, index) {
-    e.preventDefault();
     e.target.style.borderTop = 'none';
 
     const blockId = e.dataTransfer.getData('block_id');

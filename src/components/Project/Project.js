@@ -5,7 +5,7 @@ import blocksMap from '../../utils/blocksMap';
 
 function Tools({ makeDraggable }) {
   return (
-    <ToolWrapper>
+    <ToolWrapper draggable={false}>
       <MoveTool
         onMouseDown={makeDraggable}
       >
@@ -48,7 +48,7 @@ export default function Project({
       return;
     }
 
-    if (draggingItem.current === null) {
+    if (draggingItem.current === null || draggingItem.current === undefined) {
       onDragEnter(e, index);
       return;
     }
@@ -64,7 +64,19 @@ export default function Project({
     draggingItem.current = dragOverItem.current;
     dragOverItem.current = null;
     setBlocks(blocksCopy);
-    setActiveIndex(dragOverItem.current);
+    setActiveIndex(index);
+  }
+
+  function handleDrop(e, index) {
+    e.preventDefault();
+    if (draggingItem.current === null || draggingItem.current === undefined) {
+      onDrop(e, index);
+    }
+  }
+
+  function onDragOver(e) {
+    e.stopPropagation();
+    e.preventDefault();
   }
 
   return (
@@ -77,10 +89,10 @@ export default function Project({
 
         return (
           <BlockWrapper
-            onDragEnterCapture={(e) => handleDragEnter(e, index)}
+            onDragEnter={(e) => handleDragEnter(e, index)}
             onDragLeave={onDragLeave}
-            onDrop={(e) => onDrop(e, index)}
-            onDragOver={(e) => e.preventDefault()}
+            onDrop={(e) => handleDrop(e, index)}
+            onDragOverCapture={onDragOver}
             isActive={isActive}
             onClick={(e) => onClick(e, index)}
             draggable={isDragging}
