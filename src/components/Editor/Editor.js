@@ -30,6 +30,14 @@ const mockBlocks = {
         styles: 'default',
       },
     },
+    {
+      type: 'social1',
+      data: {
+        facebookLink: 'https://styled-components.com/docs/advanced',
+        twitterLink: 'https://react-simple-img.vercel.app/',
+        youtubeLink: 'https://reactjsexample.com/react-lazy-load-images-with-intersectionobserver-api-and-priority-hints/',
+      },
+    },
   ],
 };
 
