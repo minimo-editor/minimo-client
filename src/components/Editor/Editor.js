@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
+import blockImgList from '../../constants/blockImgList';
 import Project from '../Project';
 
 const mockBlocks = {
@@ -140,14 +141,16 @@ export default function Editor() {
           </span>
         </Selectbox>
         <BlockList>
-          <BlockItem
-            id='title1'
-            isDragging
-            draggable
-            onDragStart={handleDragStart}
-          >
-            <img draggable={false} src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-01.png' alt='title' />
-          </BlockItem>
+          {blockImgList.map((blockImg) => (
+            <BlockItem
+              id={blockImg.id}
+              key={blockImg.id}
+              onDragStart={handleDragStart}
+              draggable
+            >
+              <img draggable={false} src={blockImg.src} alt={blockImg.id} />
+            </BlockItem>
+          ))}
           <BlockItem>
             <img id='img1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-05.png' alt='img' />
           </BlockItem>
