@@ -24,6 +24,7 @@ export default function Project({
   onDrop,
   onDragEnter,
   onDragLeave,
+  resetBlockData,
   handleChangeBlock,
 }) {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -102,6 +103,7 @@ export default function Project({
               index={index}
               data={block.data}
               onChange={handleChangeBlock}
+              resetBlockData={resetBlockData}
             />
             {isActive && (
               <Tools
