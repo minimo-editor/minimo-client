@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import * as ICON from 'react-feather';
 
 export default function Socials({
-  index,
   data,
+  index,
   onChange,
 }) {
   const { facebookLink, twitterLink, youtubeLink } = data;
