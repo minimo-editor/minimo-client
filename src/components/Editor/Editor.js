@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import blockImgList from '../../constants/blockImgList';
 import Project from '../Project';
 
+// NOTE: sixshop은 contents/ style 로 나누고 그 아래로 계층을 추가한다고 한ㄷㅏ.
+
 const mockBlocks = {
   _id: 12123,
   creatorId: 12345,
