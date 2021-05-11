@@ -56,6 +56,7 @@ const mockBlocks = {
 };
 
 export default function Editor() {
+  const [project, setProject] = useState(mockBlocks);
   const [blocks, setBlocks] = useState(mockBlocks.blocks);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -160,6 +161,14 @@ export default function Editor() {
     }
   }
 
+  function onClickFinish() {
+    setProject((prev) => ({
+      ...prev,
+      blocks,
+      backgroundColor: bgColor,
+    }));
+  }
+
   return (
     <EditorContainer
       onClick={(e) => handleClickBackground(e)}
@@ -167,6 +176,12 @@ export default function Editor() {
       <ProjectWrapper
         bgColor={bgColor}
       >
+        <FinishButton
+          type='button'
+          onClick={onClickFinish}
+        >
+          Finish
+        </FinishButton>
         <Project
           isEditable
           handleChangeBlock={handleChangeBlock}
@@ -293,4 +308,10 @@ const BlockItem = styled.div`
     display: block;
     /* opacity: ${({ isDragging }) => (isDragging ? '0' : 'none')}; */
   }
+`;
+
+const FinishButton = styled.button`
+  position: absolute;
+  top: -30px;
+  right: 30px;
 `;

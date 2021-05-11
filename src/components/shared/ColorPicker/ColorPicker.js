@@ -28,8 +28,8 @@ export default function ColorPicker({
 
 const ColorPickerIcon = styled.div`
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: -30px;
+  right: 0px;
   cursor: pointer;
 `;
 
