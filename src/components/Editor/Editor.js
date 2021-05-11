@@ -14,30 +14,38 @@ const mockBlocks = {
     {
       type: 'title1',
       data: {
-        texts: 'Happy Wedding not happy',
+        contents: {
+          texts: 'Happy Wedding not happy',
+        },
         styles: 'default',
       },
     },
     {
       type: 'img1',
       data: {
-        src: '//g0.evitecdn.com/pages/signed-out-virtual-homepage/6210705586454528/21f2897a86ca4a338a9ff2a6dd83665f.png',
+        contents: {
+          src: '//g0.evitecdn.com/pages/signed-out-virtual-homepage/6210705586454528/21f2897a86ca4a338a9ff2a6dd83665f.png',
+        },
         styles: 'default',
       },
     },
     {
       type: 'title1',
       data: {
-        texts: 'End of Title Title1!!!',
+        contents: {
+          texts: 'End of Title Title1!!!',
+        },
         styles: 'default',
       },
     },
     {
       type: 'social1',
       data: {
-        facebookLink: 'https://styled-components.com/docs/advanced',
-        twitterLink: 'https://react-simple-img.vercel.app/',
-        youtubeLink: 'https://reactjsexample.com/react-lazy-load-images-with-intersectionobserver-api-and-priority-hints/',
+        contents: {
+          facebookLink: 'https://styled-components.com/docs/advanced',
+          twitterLink: 'https://react-simple-img.vercel.app/',
+          youtubeLink: 'https://reactjsexample.com/react-lazy-load-images-with-intersectionobserver-api-and-priority-hints/',
+        },
       },
     },
   ],
@@ -47,10 +55,10 @@ export default function Editor() {
   const [blocks, setBlocks] = useState(mockBlocks.blocks);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  function resetBlockData(index, data) {
+  function resetBlockContents(index, contents) {
     setBlocks((prev) => {
       const prevCopy = [...prev];
-      prevCopy[index].data = data;
+      prevCopy[index].data.contents = contents;
 
       return prevCopy;
     });
@@ -60,7 +68,7 @@ export default function Editor() {
     setBlocks((prev) => (
       [...prev].map((each, idx) => {
         if (index === idx) {
-          each.data[name] = e.target.value;
+          each.data.contents[name] = e.target.value;
         }
 
         return each;
@@ -145,7 +153,7 @@ export default function Editor() {
           onDrop={handleDrop}
           blocks={blocks}
           setBlocks={setBlocks}
-          resetBlockData={resetBlockData}
+          resetBlockContents={resetBlockContents}
         />
       </ProjectWrapper>
       <Sidebar isSidebarOpen={isSidebarOpen}>
@@ -171,39 +179,6 @@ export default function Editor() {
               <img draggable={false} src={blockImg.src} alt={blockImg.id} />
             </BlockItem>
           ))}
-          <BlockItem>
-            <img id='img1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-05.png' alt='img' />
-          </BlockItem>
-          <BlockItem>
-            <img id='video1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/element-video.png' alt='video' />
-          </BlockItem>
-          <BlockItem>
-            <img id='social1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-16.png' alt='social' />
-          </BlockItem>
-          <BlockItem>
-            <img id='title1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-01.png' alt='title' />
-          </BlockItem>
-          <BlockItem>
-            <img id='img1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-05.png' alt='img' />
-          </BlockItem>
-          <BlockItem>
-            <img id='video1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/element-video.png' alt='video' />
-          </BlockItem>
-          <BlockItem>
-            <img id='social1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-16.png' alt='social' />
-          </BlockItem>
-          <BlockItem>
-            <img id='title1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-01.png' alt='title' />
-          </BlockItem>
-          <BlockItem>
-            <img id='img1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-05.png' alt='img' />
-          </BlockItem>
-          <BlockItem>
-            <img id='video1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/element-video.png' alt='video' />
-          </BlockItem>
-          <BlockItem>
-            <img id='social1' src='https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-16.png' alt='social' />
-          </BlockItem>
         </BlockList>
       </Sidebar>
     </EditorContainer>

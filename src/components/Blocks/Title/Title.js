@@ -17,7 +17,7 @@ const defaultTexts = 'Happy <div>&nbsp; &nbsp; &nbsp; Wedding</div>';
 export default function Title({
   data, isEditable = true, onChange, index,
 }) {
-  const texts = data.texts ?? defaultTexts;
+  const texts = data.contents?.texts ?? defaultTexts;
   return (
     <Container>
       <ContentEditable

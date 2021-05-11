@@ -24,7 +24,7 @@ export default function Project({
   onDrop,
   onDragEnter,
   onDragLeave,
-  resetBlockData,
+  resetBlockContents,
   handleChangeBlock,
 }) {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -105,7 +105,7 @@ export default function Project({
               isActive={isActive}
               // NOTE: text는 onchange, link는 reset을 쓸 듯.
               onChange={handleChangeBlock}
-              resetBlockData={resetBlockData}
+              resetBlockContents={resetBlockContents}
             />
             {isActive && (
               <Tools
