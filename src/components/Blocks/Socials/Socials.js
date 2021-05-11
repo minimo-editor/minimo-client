@@ -1,23 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import * as ICON from 'react-feather';
 import useModal from '../../../hooks/useModal';
 import Modal from '../../Modal';
 import isEmptyObject from '../../../utils/isEmptyObject';
+import LinkForm from '../../shared/LinkForm';
+import ConfigIcon from '../../shared/Config/Config';
 
 const DEFAULT_DATA = {
-  facebookLink: '',
-  twitterLink: '',
-  youtubeLink: '',
+  contents: {
+    facebookLink: '',
+    twitterLink: '',
+    youtubeLink: '',
+  },
 };
 
 export default function Socials({
   data,
   index,
   isActive,
-  resetBlockData,
+  resetBlockContents,
 }) {
-  const links = (isEmptyObject(data)) ? DEFAULT_DATA : data;
+  console.log(data);
+  const links = (isEmptyObject(data)) ? DEFAULT_DATA.contents : data.contents;
 
   const {
     facebookLink,
@@ -27,9 +32,8 @@ export default function Socials({
 
   const { modalOpen, toggle, setModalOpen } = useModal();
 
-  function handleSubmitForm(e, updatedData) {
-    e.preventDefault();
-    resetBlockData(index, updatedData);
+  function handleSubmitForm(newContents) {
+    resetBlockContents(index, newContents);
     setModalOpen(false);
   }
 
@@ -59,83 +63,22 @@ export default function Socials({
         </SocialIcon>
       </SocialsContainer>
       {isActive && (
-        <Config
-          onClick={toggle}
-        >
-          <ICON.Settings color='grey' />
-        </Config>
+        <ConfigIcon onClick={toggle} />
       )}
       {modalOpen && (
         <Modal
           handleClose={() => setModalOpen(false)}
           title='Change Social Links'
         >
-          <Form
+          <LinkForm
             inputs={links}
-            onSubmit={handleSubmitForm}
+            handleSubmitForm={handleSubmitForm}
           />
         </Modal>
       )}
     </>
   );
 }
-
-function Form({
-  inputs,
-  onSubmit,
-}) {
-  const [data, setData] = useState(inputs);
-
-  function onChange(e) {
-    const { name, value } = e.target;
-
-    setData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  }
-  return (
-    <FormContainer
-      onSubmit={(e) => onSubmit(e, data)}
-    >
-      {Object.entries(data).map((input) => (
-        <Label>
-          {input[0]}
-          <input
-            type='text'
-            name={input[0]}
-            value={input[1]}
-            onChange={(e) => onChange(e)}
-          />
-        </Label>
-      ))}
-      <button type='submit'>
-        SUBMIT
-      </button>
-    </FormContainer>
-  );
-}
-
-const Label = styled.label`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  width: 100%;
-
-  & input {
-    width: 100%;
-  }
-`;
-
-const FormContainer = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: auto;
-`;
 
 const SocialsContainer = styled.div`
   position: relative;
@@ -153,14 +96,4 @@ const SocialIcon = styled.a`
   padding: 1rem;
   line-height: 0;
   cursor: pointer;
-`;
-
-const Config = styled.div`
-  position: absolute;
-  top: 5px;
-  right: 5px;
-
-  &:hover {
-    cursor: pointer;
-  }
 `;
