@@ -9,7 +9,7 @@ const Image = styled.img`
   width: 100%;
 `;
 
-const defaultImgSrc = {
+const defaultImgContents = {
   src: 'https://i.pinimg.com/originals/55/51/4d/55514dfd272080a0f6f0e2074205aa80.jpg',
 };
 
@@ -20,7 +20,7 @@ export default function Img({
   resetBlockContents,
 }) {
   const { modalOpen, setModalOpen, toggle } = useModal();
-  const img = data.contents ?? defaultImgSrc;
+  const contents = data.contents ?? defaultImgContents;
 
   function handleSubmitForm(updatedData) {
     resetBlockContents(index, updatedData);
@@ -29,14 +29,14 @@ export default function Img({
 
   return (
     <>
-      <Image src={img.src} alt='img' />
+      <Image src={contents.src} alt='img' />
       {modalOpen && (
         <Modal
           handleClose={() => setModalOpen(false)}
           title='Change Image Link'
         >
           <LinkForm
-            inputs={img}
+            inputs={contents}
             handleSubmitForm={handleSubmitForm}
           />
         </Modal>
