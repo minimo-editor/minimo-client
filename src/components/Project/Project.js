@@ -135,7 +135,7 @@ export default function Project({
 
 const BlockWrapper = styled.div`
   position: relative;
-  padding: 2rem;
+  padding: 0.5rem 2rem;
   outline: ${({ isActive }) => (isActive ? '1px solid #00da89' : 'none')};
 `;
 
