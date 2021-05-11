@@ -14,3 +14,7 @@ body {
 a {
   color: black;
 }
+
+svg {
+  vertical-align: middle;
+}

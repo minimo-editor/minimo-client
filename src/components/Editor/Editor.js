@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import * as ICON from 'react-feather';
 import blockImgList from '../../constants/blockImgList';
 import Project from '../Project';
 
@@ -158,14 +159,14 @@ export default function Editor() {
       </ProjectWrapper>
       <Sidebar isSidebarOpen={isSidebarOpen}>
         <SidebarToggler onClick={toggleSidebar}>
-          {isSidebarOpen ? '>' : '﹤'}
+          {isSidebarOpen ? <ICON.ChevronRight /> : <ICON.ChevronLeft />}
         </SidebarToggler>
         <Selectbox>
           <span>
             Basic
           </span>
           <span>
-            ▼
+            <ICON.List size={20} />
           </span>
         </Selectbox>
         <BlockList>
@@ -233,7 +234,7 @@ const SidebarToggler = styled.div`
   background: #fff;
   border: 1px solid rgba(211, 211, 211, 0.52);
   border-right: none;
-  line-height: 39px;
+  line-height: 34px;
   text-align: center;
   box-shadow: rgb(0 0 0 / 3%) -4px 2px 5px 0px;
   cursor: pointer;
