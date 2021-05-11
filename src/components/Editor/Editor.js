@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import * as ICON from 'react-feather';
 import blockImgList from '../../constants/blockImgList';
 import Project from '../Project';
+import ColorPicker from '../shared/ColorPicker/ColorPicker';
+import useColorPicker from '../../hooks/useColorPicker';
 
 // NOTE: sixshop은 contents/ style 로 나누고 그 아래로 계층을 추가한다고 한ㄷㅏ.
 
@@ -11,6 +13,7 @@ const mockBlocks = {
   creatorId: 12345,
   category: 'wedding',
   concept: 'basic',
+  backgroundColor: '#fff',
   blocks: [
     {
       type: 'title1',
@@ -55,6 +58,14 @@ const mockBlocks = {
 export default function Editor() {
   const [blocks, setBlocks] = useState(mockBlocks.blocks);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const {
+    color: bgColor,
+    isColorPickerOpen,
+    closeColorPicker,
+    toggleColorPicker,
+    handleChangeColor,
+  } = useColorPicker();
 
   function resetBlockContents(index, contents) {
     setBlocks((prev) => {
@@ -143,9 +154,19 @@ export default function Editor() {
     e.dataTransfer.setData('block_id', target.id);
   }
 
+  function handleClickBackground(e) {
+    if (e.target === e.currentTarget) {
+      closeColorPicker();
+    }
+  }
+
   return (
-    <EditorContainer>
-      <ProjectWrapper>
+    <EditorContainer
+      onClick={(e) => handleClickBackground(e)}
+    >
+      <ProjectWrapper
+        bgColor={bgColor}
+      >
         <Project
           isEditable
           handleChangeBlock={handleChangeBlock}
@@ -155,6 +176,13 @@ export default function Editor() {
           blocks={blocks}
           setBlocks={setBlocks}
           resetBlockContents={resetBlockContents}
+        />
+        {/* FIXME: rename -> colorpicker tool ? */}
+        <ColorPicker
+          color={bgColor}
+          onChange={handleChangeColor}
+          toggleColorPicker={toggleColorPicker}
+          isColorPickerOpen={isColorPickerOpen}
         />
       </ProjectWrapper>
       <Sidebar isSidebarOpen={isSidebarOpen}>
@@ -187,15 +215,16 @@ export default function Editor() {
 }
 
 const EditorContainer = styled.div`
-  transition: all ease-in 0.3s;
 `;
 
 const ProjectWrapper = styled.main`
+  position: relative;
   margin: 150px auto;
   max-width: 800px;
   width: 100%;
   padding: 0 35px;
   box-sizing: border-box;
+  background: ${({ bgColor }) => bgColor ?? 'none'};
 `;
 
 const Sidebar = styled.div`
