@@ -21,7 +21,6 @@ export default function Socials({
   isActive,
   resetBlockContents,
 }) {
-  console.log(data);
   const links = (isEmptyObject(data)) ? DEFAULT_DATA.contents : data.contents;
 
   const {

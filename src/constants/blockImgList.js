@@ -15,4 +15,8 @@ export default [
     id: 'social1',
     src: 'https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-16.png',
   },
+  {
+    id: 'blank',
+    src: 'https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-12.png',
+  },
 ];
