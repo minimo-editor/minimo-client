@@ -84,14 +84,13 @@ export default function Project({
   return (
     <div>
       {blocks.map((block, index) => {
-        // TODO: 질문, 너무 말이 안되는 구현인가?
         const Block = blocksMap.get(block.type);
         const isActive = index === activeIndex;
         const isDragging = index === draggingIndex;
 
         return (
           <BlockWrapper
-            key={uuid()}
+            // key={uuid()}
             onDragEnter={(e) => handleDragEnter(e, index)}
             onDragLeave={onDragLeave}
             onDrop={(e) => handleDrop(e, index)}
