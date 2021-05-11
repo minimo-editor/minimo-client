@@ -35,8 +35,8 @@ export default function Project({
   const draggingItem = useRef();
 
   function onClick(e, index) {
-    // TODO: make it null when clicked background
     // json에서 selected로... 관리해야 할 수도...?
+    e.stopPropagation();
     setActiveIndex(index);
     setDraggingIndex(null);
   }
@@ -71,6 +71,7 @@ export default function Project({
 
   function handleDrop(e, index) {
     e.preventDefault();
+
     if (draggingItem.current === null || draggingItem.current === undefined) {
       onDrop(e, index);
     }
