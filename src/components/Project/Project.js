@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import * as ICON from 'react-feather';
+import uuid from 'react-uuid';
 import blocksMap from '../../utils/blocksMap';
 
 function Tools({ makeDraggable }) {
@@ -90,6 +91,7 @@ export default function Project({
 
         return (
           <BlockWrapper
+            key={uuid()}
             onDragEnter={(e) => handleDragEnter(e, index)}
             onDragLeave={onDragLeave}
             onDrop={(e) => handleDrop(e, index)}

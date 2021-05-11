@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import uuid from 'react-uuid';
 import styled from 'styled-components';
 
 export default function LinkForm({
@@ -26,7 +27,7 @@ export default function LinkForm({
       onSubmit={onSubmit}
     >
       {Object.entries(data).map((input) => (
-        <Label>
+        <Label key={uuid()}>
           {input[0]}
           <input
             type='text'
