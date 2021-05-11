@@ -102,6 +102,7 @@ export default function Project({
             <Block
               index={index}
               data={block.data}
+              isActive={isActive}
               // NOTE: text는 onchange, link는 reset을 쓸 듯.
               onChange={handleChangeBlock}
               resetBlockData={resetBlockData}

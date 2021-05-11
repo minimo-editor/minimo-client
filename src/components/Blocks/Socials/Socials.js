@@ -14,6 +14,7 @@ const DEFAULT_DATA = {
 export default function Socials({
   data,
   index,
+  isActive,
   resetBlockData,
 }) {
   const links = (isEmptyObject(data)) ? DEFAULT_DATA : data;
@@ -57,11 +58,13 @@ export default function Socials({
           <ICON.Youtube fill='white' />
         </SocialIcon>
       </SocialsContainer>
-      <Config
-        onClick={toggle}
-      >
-        <ICON.Settings color='grey' />
-      </Config>
+      {isActive && (
+        <Config
+          onClick={toggle}
+        >
+          <ICON.Settings color='grey' />
+        </Config>
+      )}
       {modalOpen && (
         <Modal
           handleClose={() => setModalOpen(false)}
