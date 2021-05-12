@@ -3,7 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import useModal from '../../../hooks/useModal';
-import Modal from '../../Modal';
+import Modal from '../../shared/Modal';
 import ConfigIcon from '../../shared/Config/Config';
 import LinkForm from '../../shared/LinkForm';
 

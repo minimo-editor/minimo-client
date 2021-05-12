@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import * as ICON from 'react-feather';
 import useModal from '../../../hooks/useModal';
-import Modal from '../../Modal';
+import Modal from '../../shared/Modal';
 import isEmptyObject from '../../../utils/isEmptyObject';
 import LinkForm from '../../shared/LinkForm';
 import ConfigIcon from '../../shared/Config/Config';
