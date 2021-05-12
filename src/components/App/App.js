@@ -4,6 +4,7 @@ import {
   Switch,
   BrowserRouter as Router,
 } from 'react-router-dom';
+import FirebaseAuth from '../../hooks/useFirebaseAuth';
 import Editor from '../Editor';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Switch>
           <Route path='/editor' component={Editor} />
         </Switch>
+        <FirebaseAuth />
       </div>
     </Router>
   );
