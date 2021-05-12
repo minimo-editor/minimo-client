@@ -60,11 +60,11 @@ export default function FirebaseAuth() {
           <button type='button' onClick={() => firebase.auth().signOut()}>Sign out!</button>
           <h1>
             Welcome
-            {firebase.auth().currentUser.displayName}
+            {currentUser.displayName}
           </h1>
           <img
-            alt='profile'
-            src={firebase.auth().currentUser.photoURL}
+            alt={currentUser.displayName}
+            src={currentUser.photoURL}
           />
         </span>
       ) : (
