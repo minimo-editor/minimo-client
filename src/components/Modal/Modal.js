@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
-export default function Modal({ children, handleClose, title }) {
+export default function Modal({ title, children, handleClose }) {
   return ReactDOM.createPortal(
     <>
       <ModalBackground onClick={handleClose} />
