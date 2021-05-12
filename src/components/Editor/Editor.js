@@ -5,12 +5,11 @@ import blockImgList from '../../constants/blockImgList';
 import Project from '../Project';
 import ColorPicker from '../shared/ColorPicker/ColorPicker';
 import useColorPicker from '../../hooks/useColorPicker';
-
-// NOTE: sixshop은 contents/ style 로 나누고 그 아래로 계층을 추가한다고 한ㄷㅏ.
+import usePost from '../../hooks/usePost';
 
 const mockBlocks = {
-  _id: 12123,
-  creatorId: 12345,
+  creatorID: '609b6a76af5bb4eff43793f6',
+  address: 'anything1',
   category: 'wedding',
   concept: 'basic',
   backgroundColor: '#fff',
@@ -59,6 +58,8 @@ export default function Editor() {
   const [project, setProject] = useState(mockBlocks);
   const [blocks, setBlocks] = useState(mockBlocks.blocks);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // const { response, isLoading, error } = usePost(`${process.env.REACT_APP_SERVER_URL}/project`, project);
 
   const {
     color: bgColor,
