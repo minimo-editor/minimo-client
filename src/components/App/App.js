@@ -6,11 +6,13 @@ import {
 } from 'react-router-dom';
 import FirebaseAuth from '../../hooks/useFirebaseAuth';
 import Editor from '../Editor';
+import ImgUploader from '../shared/ImgUploader';
 
 function App() {
   return (
     <Router>
       <div>
+        <ImgUploader />
         <Switch>
           <Route path='/editor' component={Editor} />
         </Switch>
