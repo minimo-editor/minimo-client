@@ -5,6 +5,7 @@ export default function ImgUploader() {
   const [imgs, setImgs] = useState([]);
 
   function onFileChange(e) {
+    console.log('file change');
     const { files } = e.target;
 
     Object.values(files).forEach((file) => {
@@ -26,11 +27,13 @@ export default function ImgUploader() {
   }
 
   return (
-    <Temp>
+    <ImgUploaderContainer
+      onDrop={() => console.log('drop on img')}
+    >
       <Form>
         <DropZone>
           <PlaceHolder>DRAG & DROP IMAGE HERE</PlaceHolder>
-          <input multiple type='file' onChange={onFileChange} />
+          <input multiple type='file' onChange={onFileChange} onDrop={() => console.log('drop on input')} />
         </DropZone>
       </Form>
       <PreviewImgContainer>
@@ -40,7 +43,7 @@ export default function ImgUploader() {
           ))
         )}
       </PreviewImgContainer>
-    </Temp>
+    </ImgUploaderContainer>
   );
 }
 
@@ -57,9 +60,9 @@ const PlaceHolder = styled.p`
   text-align: center;
 `;
 
-const Temp = styled.div`
-  width: 500px;
-  height: 500px;
+const ImgUploaderContainer = styled.div`
+  width: 100%;
+  height: 300px;
 `;
 
 const DropZone = styled.label`
