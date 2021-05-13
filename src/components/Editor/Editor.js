@@ -5,7 +5,6 @@ import blockImgList from '../../constants/blockImgList';
 import Project from '../Project';
 import ColorPicker from '../shared/ColorPicker/ColorPicker';
 import useColorPicker from '../../hooks/useColorPicker';
-import usePost from '../../hooks/usePost';
 
 const mockBlocks = {
   creatorID: '609b6a76af5bb4eff43793f6',
@@ -129,6 +128,11 @@ export default function Editor() {
     e.target.style.borderTop = 'none';
 
     const blockId = e.dataTransfer.getData('block_id');
+
+    if (!blockId) {
+      return;
+    }
+
     const newBlock = {
       type: blockId,
       data: {},
@@ -144,6 +148,11 @@ export default function Editor() {
 
   function handleDragEnter(e, index) {
     e.stopPropagation();
+
+    if (e.target !== e.currentTarget) {
+      return;
+    }
+
     e.target.style.borderTop = '40px solid rgb(0, 0, 0, 0.03)';
   }
 
