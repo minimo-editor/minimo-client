@@ -4,6 +4,7 @@ import useModal from '../../../hooks/useModal';
 import Modal from '../../shared/Modal';
 import ConfigIcon from '../../shared/Config/Config';
 import LinkForm from '../../shared/LinkForm';
+import ImgUploader from '../../shared/ImgUploader';
 
 const Image = styled.img`
   width: 100%;
@@ -39,6 +40,7 @@ export default function Img({
             inputs={contents}
             handleSubmitForm={handleSubmitForm}
           />
+          <ImgUploader />
         </Modal>
       )}
       {isActive && (
