@@ -4,21 +4,31 @@ import {
   Switch,
   BrowserRouter as Router,
 } from 'react-router-dom';
-import FirebaseAuth from '../../hooks/useFirebaseAuth';
 import Editor from '../Editor';
-import ImgUploader from '../shared/ImgUploader';
+import Navbar from '../Navbar';
+import Login from '../Login';
+import { AuthProvider } from '../../contexts/AuthContext';
 
 function App() {
+  // const {
+  //   data,
+  //   error,
+  //   isLoading,
+  //   isFetching,
+  // } = useQuery('user', () => fetch(
+  //   `${process.env.REACT_APP_SERVER_URL}/user`,
+  // ).then((res) => res.json()));
+
   return (
-    <Router>
-      <div>
-        <ImgUploader />
+    <AuthProvider>
+      <Router>
+        <Navbar />
         <Switch>
           <Route path='/editor' component={Editor} />
+          <Route path='/login' exact component={Login} />
         </Switch>
-        <FirebaseAuth />
-      </div>
-    </Router>
+      </Router>
+    </AuthProvider>
   );
 }
 
