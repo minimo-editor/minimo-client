@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import * as ICON from 'react-feather';
 import blockImgList from '../../constants/blockImgList';
 import Project from '../Project';
 import ColorPicker from '../shared/ColorPicker/ColorPicker';
 import useColorPicker from '../../hooks/useColorPicker';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const mockBlocks = {
-  creatorID: '609b6a76af5bb4eff43793f6',
   address: 'anything1',
   category: 'wedding',
   concept: 'basic',
@@ -54,6 +54,7 @@ const mockBlocks = {
 };
 
 export default function Editor() {
+  const { user, userId } = useContext(AuthContext);
   const [project, setProject] = useState(mockBlocks);
   const [blocks, setBlocks] = useState(mockBlocks.blocks);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -176,9 +177,10 @@ export default function Editor() {
       ...prev,
       blocks,
       backgroundColor: bgColor,
+      creatorId: userId,
     }));
   }
-
+  console.log(project);
   return (
     <EditorContainer
       onClick={(e) => handleClickBackground(e)}
