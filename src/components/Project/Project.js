@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import * as ICON from 'react-feather';
-import uuid from 'react-uuid';
 import blocksMap from '../../utils/blocksMap';
 
 function Tools({ makeDraggable }) {
@@ -71,10 +70,15 @@ export default function Project({
 
   function handleDrop(e, index) {
     e.preventDefault();
+    const blockId = e.dataTransfer.getData('block_id');
 
-    if (draggingItem.current === null || draggingItem.current === undefined) {
+    if (blockId) {
       onDrop(e, index);
     }
+
+    // if (draggingItem.current === null || draggingItem.current === undefined) {
+    //  onDrop(e, index);
+    // }
   }
 
   function onDragOver(e) {
