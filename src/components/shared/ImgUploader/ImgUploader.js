@@ -27,15 +27,11 @@ export default function ImgUploader() {
   }
 
   return (
-    <ImgUploaderContainer
-      onDrop={() => console.log('drop on img')}
-    >
-      <Form>
-        <DropZone>
-          <PlaceHolder>DRAG & DROP IMAGE HERE</PlaceHolder>
-          <input multiple type='file' onChange={onFileChange} onDrop={() => console.log('drop on input')} />
-        </DropZone>
-      </Form>
+    <ImgUploaderContainer>
+      <DropZone>
+        <PlaceHolder>DRAG & DROP IMAGE HERE</PlaceHolder>
+        <input type='file' onChange={onFileChange} />
+      </DropZone>
       <PreviewImgContainer>
         {imgs && (
           imgs.map((img) => (
@@ -86,11 +82,6 @@ const PreviewImg = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
-`;
-
-const Form = styled.form`
-  width: 100%;
-  height: 70%;
 `;
 
 // TODO: grid
