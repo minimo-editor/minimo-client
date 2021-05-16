@@ -1,18 +1,18 @@
 export default [
   {
-    id: 'title1',
+    id: 'title',
     src: 'https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-01.png',
   },
   {
-    id: 'img1',
+    id: 'img',
     src: 'https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-05.png',
   },
   {
-    id: 'video1',
+    id: 'video',
     src: 'https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/element-video.png',
   },
   {
-    id: 'social1',
+    id: 'social',
     src: 'https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-16.png',
   },
   {

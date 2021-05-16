@@ -3,18 +3,15 @@ import { ProjectContext } from '../../contexts/ProjectContext';
 import Editor from '../Editor/Editor';
 import Preview from '../Preview/Preview';
 import Publish from '../Publish';
+import Templates from '../Templates';
 
 export default function ProjectManager() {
-  const { step, loadProjectTemplate } = useContext(ProjectContext);
+  const { step } = useContext(ProjectContext);
 
   switch (step) {
     case 0:
-      // TODO: delete
-      loadProjectTemplate();
       return (
-        <div>
-          select a concept
-        </div>
+        <Templates />
       );
     case 1:
       return (
