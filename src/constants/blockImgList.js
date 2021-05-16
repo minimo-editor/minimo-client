@@ -19,4 +19,8 @@ export default [
     id: 'blank',
     src: 'https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-12.png',
   },
+  {
+    id: 'wishlist',
+    src: '/assets/wishlist.png',
+  },
 ];
