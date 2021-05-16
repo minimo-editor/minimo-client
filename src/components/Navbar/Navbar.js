@@ -13,7 +13,6 @@ export default function Navbar() {
           <p>{`Welcome, ${user.displayName}`}</p>
           <div className='dropdown-content'>
             <Link to='/editor'>Create New Project</Link>
-            <Link to='/my'>My Projects</Link>
             <button
               type='button'
               onClick={() => firebase.auth().signOut()}
@@ -23,8 +22,8 @@ export default function Navbar() {
           </div>
         </div>
       ) : (
-        <Link to='/signin'>
-          <button type='button'>SIGN IN/ REGISTER</button>
+        <Link to='/login'>
+          <button type='button'>LOG IN/ REGISTER</button>
         </Link>
       )}
     </div>
