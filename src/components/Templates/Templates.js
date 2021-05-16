@@ -54,19 +54,23 @@ const TemplatesContainer = styled.div`
   width: 800px;
   margin: auto;
   display: grid;
+  gap: 50px;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 `;
 
 const Template = styled.div`
   width: fit-content;
-  border: 2px solid tomato;
-  border-radius: 5px;
+  border-radius: 50px;
+  background: #f5f5f5;
+  padding: 1rem .5rem;
+  border: 2px solid #f5f5f5;
 `;
 
 const ProjectWrapper = styled.div`
   height: 300px;
   width: fit-content;
   overflow-y: auto;
+  border-radius: 30px;
 `;
 
 const Radio = styled.input``;
@@ -74,4 +78,6 @@ const Radio = styled.input``;
 const Header = styled.header`
   width: fit-content;
   margin: auto;
+  color: #5a5a5a;
+  font-weight: 500;
 `;
