@@ -9,19 +9,19 @@ export default function ProjectManager() {
   const { step } = useContext(ProjectContext);
 
   switch (step) {
-    case 0:
+    case 1:
       return (
         <Templates />
       );
-    case 1:
+    case 2:
       return (
         <Editor />
       );
-    case 2:
+    case 3:
       return (
         <Preview />
       );
-    case 3:
+    case 4:
       return (
         <Publish />
       );
