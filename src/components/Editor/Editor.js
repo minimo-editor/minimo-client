@@ -6,57 +6,12 @@ import Project from '../Project';
 import ColorPicker from '../shared/ColorPicker/ColorPicker';
 import useColorPicker from '../../hooks/useColorPicker';
 import { AuthContext } from '../../contexts/AuthContext';
-
-const mockBlocks = {
-  address: 'anything1',
-  category: 'wedding',
-  concept: 'basic',
-  backgroundColor: '#fff',
-  blocks: [
-    {
-      type: 'title1',
-      data: {
-        contents: {
-          texts: 'Happy Wedding not happy',
-        },
-        styles: 'default',
-      },
-    },
-    {
-      type: 'img1',
-      data: {
-        contents: {
-          src: '//g0.evitecdn.com/pages/signed-out-virtual-homepage/6210705586454528/21f2897a86ca4a338a9ff2a6dd83665f.png',
-        },
-        styles: 'default',
-      },
-    },
-    {
-      type: 'title1',
-      data: {
-        contents: {
-          texts: 'End of Title Title1!!!',
-        },
-        styles: 'default',
-      },
-    },
-    {
-      type: 'social1',
-      data: {
-        contents: {
-          facebookLink: 'https://styled-components.com/docs/advanced',
-          twitterLink: 'https://react-simple-img.vercel.app/',
-          youtubeLink: 'https://reactjsexample.com/react-lazy-load-images-with-intersectionobserver-api-and-priority-hints/',
-        },
-      },
-    },
-  ],
-};
+import { ProjectContext } from '../../contexts/ProjectContext';
 
 export default function Editor() {
   const { user, userId } = useContext(AuthContext);
-  const [project, setProject] = useState(mockBlocks);
-  const [blocks, setBlocks] = useState(mockBlocks.blocks);
+  const { project, setProject } = useContext(ProjectContext);
+  const [blocks, setBlocks] = useState(project.blocks);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // const { response, isLoading, error } = usePost(`${process.env.REACT_APP_SERVER_URL}/project`, project);
@@ -67,7 +22,7 @@ export default function Editor() {
     closeColorPicker,
     toggleColorPicker,
     handleChangeColor,
-  } = useColorPicker();
+  } = useColorPicker(project.backgroundColor);
 
   function resetBlockContents(index, contents) {
     setBlocks((prev) => {
@@ -172,7 +127,7 @@ export default function Editor() {
     }
   }
 
-  function onClickFinish() {
+  function onClickNext() {
     setProject((prev) => ({
       ...prev,
       blocks,
@@ -180,7 +135,7 @@ export default function Editor() {
       creatorId: userId,
     }));
   }
-  console.log(project);
+
   return (
     <EditorContainer
       onClick={(e) => handleClickBackground(e)}
@@ -188,12 +143,12 @@ export default function Editor() {
       <ProjectWrapper
         bgColor={bgColor}
       >
-        <FinishButton
+        <NextButton
           type='button'
-          onClick={onClickFinish}
+          onClick={onClickNext}
         >
-          Finish
-        </FinishButton>
+          Next
+        </NextButton>
         <Project
           isEditable
           handleChangeBlock={handleChangeBlock}
@@ -322,7 +277,7 @@ const BlockItem = styled.div`
   }
 `;
 
-const FinishButton = styled.button`
+const NextButton = styled.button`
   position: absolute;
   top: -30px;
   right: 30px;
