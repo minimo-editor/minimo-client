@@ -1,9 +1,15 @@
-import useAsync from '../hooks/useAsync';
-
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
-export async function getProject() {
-  return null;
+export async function getProject(address) {
+  try {
+    const response = await fetch(`${SERVER_URL}/project/${address}`, { method: 'GET' });
+    const json = await response.json();
+
+    return json;
+  } catch (error) {
+    // TODO: throw error
+    console.log(error);
+  }
 }
 
 export async function postProject(data) {
@@ -27,9 +33,8 @@ export async function postProject(data) {
 
 export async function checkValidAddress(address) {
   try {
-    const response = await fetch(`${SERVER_URL}/project/${address}`, { method: 'GET' });
-    const json = await response.json();
-    // TODO: 헛갈릴 수 있음으로 변수로 할당해도 좋을 듯 (isValid or..)
+    const json = await getProject(address);
+
     if (!json.ok && json.error.status === 404) {
       return true;
     }
