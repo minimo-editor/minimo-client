@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import styled from 'styled-components';
 import * as ICON from 'react-feather';
 import blockImgList from '../../constants/blockImgList';
@@ -9,12 +9,12 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { ProjectContext } from '../../contexts/ProjectContext';
 
 export default function Editor() {
-  const { user, userId } = useContext(AuthContext);
+  const { userId } = useContext(AuthContext);
   const { project, setProject } = useContext(ProjectContext);
   const [blocks, setBlocks] = useState(project.blocks);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  // const { response, isLoading, error } = usePost(`${process.env.REACT_APP_SERVER_URL}/project`, project);
+  const blockRef = useRef();
 
   const {
     color: bgColor,
@@ -48,37 +48,6 @@ export default function Editor() {
   function toggleSidebar() {
     setIsSidebarOpen((prev) => !prev);
   }
-
-  // function handleDrop(e, index) {
-  //   // TODO: stop propagaion propely
-
-  //   if (isDragging) {
-  //     return;
-  //   }
-
-  //   e.stopPropagation();
-  //   console.log('drag enter');
-  //   setIsDragging(true);
-
-  //   dragOverItem.current = index;
-
-  //   const blocksCopy = [...blocks];
-
-  //   const ghost = {
-  //     type: 'ghost',
-  //     data: {},
-  //   };
-
-  //   console.log(dragOverItem.current);
-
-  //   // blocksCopy.splice(draggingItem.current, 1);
-  //   blocksCopy.splice(dragOverItem.current, 0, ghost);
-
-  //   // draggingItem.current = dragOverItem.current;
-  //   draggingItem.current = null;
-  //   dragOverItem.current = null;
-  //   setBlocks(blocksCopy);
-  // }
 
   function handleDrop(e, index) {
     e.target.style.borderTop = 'none';
