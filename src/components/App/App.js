@@ -4,10 +4,12 @@ import {
   Switch,
   BrowserRouter as Router,
 } from 'react-router-dom';
-import Editor from '../Editor';
 import Navbar from '../Navbar';
 import Login from '../Login';
 import { AuthProvider } from '../../contexts/AuthContext';
+import ProjectManager from '../ProjectManager';
+import { ProjectProvider } from '../../contexts/ProjectContext';
+import ProjectStepBar from '../ProjectStepBar';
 
 function App() {
   // const {
@@ -24,7 +26,12 @@ function App() {
       <Router>
         <Navbar />
         <Switch>
-          <Route path='/editor' component={Editor} />
+          <Route path='/editor'>
+            <ProjectProvider>
+              <ProjectStepBar />
+              <ProjectManager />
+            </ProjectProvider>
+          </Route>
           <Route path='/login' exact component={Login} />
         </Switch>
       </Router>
