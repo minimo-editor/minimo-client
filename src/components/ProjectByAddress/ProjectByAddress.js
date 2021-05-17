@@ -1,26 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { getProjectByAddress } from '../../apis/project';
+import useAsync from '../../hooks/useAsync';
 import ProjectViewer from '../shared/ProjectViewer';
 
 export default function ProjectByAddress() {
   const { address } = useParams();
-  const [project, setProject] = useState(null);
-
-  useEffect(() => {
-    async function fetchData() {
-      // TODO: error handling
-      const { ok, data, error } = await getProjectByAddress(address);
-
-      if (ok) {
-        setProject(data);
-      }
-    }
-
-    fetchData();
-  }, [address]);
+  const {
+    error,
+    data,
+    loading,
+  } = useAsync(getProjectByAddress.bind(null, address), [address]);
 
   return (
-    project && <ProjectViewer project={project} />
+    <>
+      {/* useAsync를 쓰는 경우 아래 나타날 것들이 항상 같은 패턴일 듯, 재사용 가능할 듯 */}
+      {data && <ProjectViewer project={data} />}
+      {error && <p>{error.message}</p>}
+      {loading && <p>loading</p>}
+    </>
   );
 }
