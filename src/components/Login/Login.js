@@ -23,7 +23,7 @@ export default function Login() {
 
   return (
     user
-      ? <Redirect to={{ pathname: '/' }} />
+      ? <Redirect to={{ pathname: '/editor' }} />
       : (
         <StyledFirebaseAuth
           uiConfig={uiConfig}
