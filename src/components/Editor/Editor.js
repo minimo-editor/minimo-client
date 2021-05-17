@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import * as ICON from 'react-feather';
 import blockImgList from '../../constants/blockImgList';
@@ -94,7 +94,7 @@ export default function Editor() {
     }
   }
 
-  function onClickNext() {
+  function onClickSave() {
     setProject((prev) => ({
       ...prev,
       blocks,
@@ -110,17 +110,15 @@ export default function Editor() {
       <ProjectWrapper
         bgColor={bgColor}
       >
-        <NextButton
+        <SaveButton
           type='button'
-          onClick={onClickNext}
+          onClick={onClickSave}
         >
-          Next
-        </NextButton>
+          SAVE
+        </SaveButton>
         <Project
           isEditable
           handleChangeBlock={handleChangeBlock}
-          // onDragEnter={handleDragEnter}
-          // onDragLeave={handleDragLeave}
           onDrop={handleDrop}
           blocks={blocks}
           setBlocks={setBlocks}
@@ -244,7 +242,7 @@ const BlockItem = styled.div`
   }
 `;
 
-const NextButton = styled.button`
+const SaveButton = styled.button`
   position: absolute;
   top: -30px;
   right: 30px;
