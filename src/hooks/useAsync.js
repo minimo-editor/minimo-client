@@ -34,11 +34,13 @@ function useAsync(callback, deps = []) {
 
   const fetchData = async () => {
     dispatch({ type: 'LOADING' });
+
     try {
       const data = await callback();
+
       dispatch({ type: 'SUCCESS', data });
-    } catch (e) {
-      dispatch({ type: 'ERROR', error: e });
+    } catch (err) {
+      dispatch({ type: 'ERROR', error: err });
     }
   };
 
@@ -46,7 +48,9 @@ function useAsync(callback, deps = []) {
     fetchData();
   }, deps);
 
-  return [state, fetchData];
+  const { loading, data, error } = state;
+
+  return { loading, data, error };
 }
 
 export default useAsync;
