@@ -17,7 +17,8 @@ export default function Video({
   isActive,
   resetBlockContents,
 }) {
-  const contents = data.contents ?? defaultVideoContents;
+  // FIXME: to have data.
+  const contents = data?.contents ?? defaultVideoContents;
   const { modalOpen, setModalOpen, toggle } = useModal();
 
   function handleSubmitForm(updatedData) {
