@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import templates from './templateData';
 import ProjectViewer from '../shared/ProjectViewer';
 import { ProjectContext } from '../../contexts/ProjectContext';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export default function Templates() {
+  const { userId } = useContext(AuthContext);
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const { setProject } = useContext(ProjectContext);
 
@@ -13,7 +15,12 @@ export default function Templates() {
 
     setSelectedTemplate(value);
     const templateData = templates.find((each) => each.concept === value);
-    setProject(templateData);
+
+    setProject((prev) => ({
+      ...prev,
+      ...templateData,
+      creatorId: userId,
+    }));
   }
 
   return (
