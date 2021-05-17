@@ -14,8 +14,6 @@ export default function Editor() {
   const [blocks, setBlocks] = useState(project.blocks);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const blockRef = useRef();
-
   const {
     color: bgColor,
     isColorPickerOpen,
@@ -71,19 +69,19 @@ export default function Editor() {
     });
   }
 
-  function handleDragEnter(e, index) {
-    e.stopPropagation();
+  // function handleDragEnter(e, index) {
+  //   e.stopPropagation();
 
-    if (e.target !== e.currentTarget) {
-      return;
-    }
+  //   if (e.target !== e.currentTarget) {
+  //     return;
+  //   }
 
-    e.target.style.borderTop = '40px solid rgb(0, 0, 0, 0.03)';
-  }
+  //   e.target.style.borderTop = '40px solid rgb(0, 0, 0, 0.03)';
+  // }
 
-  function handleDragLeave(e, index) {
-    e.target.style.borderTop = 'none';
-  }
+  // function handleDragLeave(e, index) {
+  //   e.target.style.borderTop = 'none';
+  // }
 
   function handleDragStart(e, index) {
     const { target } = e;
@@ -121,8 +119,8 @@ export default function Editor() {
         <Project
           isEditable
           handleChangeBlock={handleChangeBlock}
-          onDragEnter={handleDragEnter}
-          onDragLeave={handleDragLeave}
+          // onDragEnter={handleDragEnter}
+          // onDragLeave={handleDragLeave}
           onDrop={handleDrop}
           blocks={blocks}
           setBlocks={setBlocks}
