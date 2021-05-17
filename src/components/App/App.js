@@ -10,6 +10,7 @@ import { AuthProvider } from '../../contexts/AuthContext';
 import ProjectManager from '../ProjectManager';
 import { ProjectProvider } from '../../contexts/ProjectContext';
 import ProjectStepBar from '../ProjectStepBar';
+import ProjectByAddress from '../ProjectByAddress';
 
 function App() {
   // const {
@@ -33,6 +34,7 @@ function App() {
             </ProjectProvider>
           </Route>
           <Route path='/login' exact component={Login} />
+          <Route path='/:address' component={ProjectByAddress} />
         </Switch>
       </Router>
     </AuthProvider>
