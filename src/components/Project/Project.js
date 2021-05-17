@@ -22,8 +22,6 @@ export default function Project({
   blocks,
   setBlocks,
   onDrop,
-  onDragEnter,
-  onDragLeave,
   resetBlockContents,
   handleChangeBlock,
 }) {
@@ -44,13 +42,23 @@ export default function Project({
     draggingItem.current = index;
   }
 
+  function onDragLeave(e) {
+    e.target.style.borderTop = 'none';
+  }
+
   function handleDragEnter(e, index) {
     if (draggingItem.current === index) {
       return;
     }
 
     if (draggingItem.current === null || draggingItem.current === undefined) {
-      onDragEnter(e, index);
+      e.stopPropagation();
+
+      // if (e.target !== e.currentTarget) {
+      //   return;
+      // }
+
+      e.target.style.borderTop = '40px solid rgb(0, 0, 0, 0.03)';
       return;
     }
 
