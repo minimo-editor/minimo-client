@@ -1,43 +1,43 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Route,
   Switch,
   BrowserRouter as Router,
+  Redirect,
 } from 'react-router-dom';
 import Navbar from '../Navbar';
 import Login from '../Login';
-import { AuthProvider } from '../../contexts/AuthContext';
 import ProjectManager from '../ProjectManager';
 import { ProjectProvider } from '../../contexts/ProjectContext';
 import ProjectStepBar from '../ProjectStepBar';
 import ProjectByAddress from '../ProjectByAddress';
+import { AuthContext } from '../../contexts/AuthContext';
+import Main from '../Main';
 
 function App() {
-  // const {
-  //   data,
-  //   error,
-  //   isLoading,
-  //   isFetching,
-  // } = useQuery('user', () => fetch(
-  //   `${process.env.REACT_APP_SERVER_URL}/user`,
-  // ).then((res) => res.json()));
+  const { user } = useContext(AuthContext);
 
   return (
-    <AuthProvider>
-      <Router>
-        <Navbar />
-        <Switch>
-          <Route path='/editor'>
+    <Router>
+      <Switch>
+        <Route exact path='/'>
+          <Navbar />
+          <Main />
+        </Route>
+        {user && (
+          <Route exact path='/editor'>
+            <Navbar />
             <ProjectProvider>
               <ProjectStepBar />
               <ProjectManager />
             </ProjectProvider>
           </Route>
-          <Route path='/login' exact component={Login} />
-          <Route path='/:address' component={ProjectByAddress} />
-        </Switch>
-      </Router>
-    </AuthProvider>
+        )}
+        {!user && <Route exact path='/login' component={Login} />}
+        <Route exact path='/:address' component={ProjectByAddress} />
+        <Redirect to='/' />
+      </Switch>
+    </Router>
   );
 }
 
