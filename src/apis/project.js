@@ -1,14 +1,17 @@
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
-export async function getProject(address) {
+export async function getProjectByAddress(address) {
   try {
     const response = await fetch(`${SERVER_URL}/project/${address}`, { method: 'GET' });
     const json = await response.json();
 
-    return json;
+    if (json.ok) {
+      return json.data;
+    }
+
+    throw new Error(json.error.message);
   } catch (error) {
-    // TODO: throw error
-    console.log(error);
+    throw new Error(error);
   }
 }
 
@@ -33,7 +36,8 @@ export async function postProject(data) {
 
 export async function checkValidAddress(address) {
   try {
-    const json = await getProject(address);
+    const response = await fetch(`${SERVER_URL}/project/${address}`, { method: 'GET' });
+    const json = await response.json();
 
     if (!json.ok && json.error.status === 404) {
       return true;
@@ -41,7 +45,7 @@ export async function checkValidAddress(address) {
 
     return false;
   } catch (error) {
-    // TODO: throw error
-    console.log(error);
+    // TODO: catch error
+    throw new Error(error);
   }
 }
