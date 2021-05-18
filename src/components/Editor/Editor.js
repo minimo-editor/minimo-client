@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import * as ICON from 'react-feather';
 import blockImgList from '../../constants/blockImgList';
-import Project from '../Project';
+import EditableProject from '../EditableProject';
 import ColorPicker from '../shared/ColorPicker/ColorPicker';
 import useColorPicker from '../../hooks/useColorPicker';
 import { AuthContext } from '../../contexts/AuthContext';
@@ -108,14 +108,13 @@ export default function Editor() {
         >
           SAVE
         </SaveButton>
-        <Project
-          isEditable
-          handleChangeBlock={handleChangeBlock}
-          onDrop={insertBlock}
+        <EditableProject
+          insertBlock={insertBlock}
           swapBlocks={swapBlocks}
           blocks={blocks}
           setBlocks={setBlocks}
           resetBlockContents={resetBlockContents}
+          handleChangeBlock={handleChangeBlock}
         />
         {/* FIXME: rename -> colorpicker tool ? */}
         <ColorPicker
