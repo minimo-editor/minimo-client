@@ -8,6 +8,7 @@ export default function EditableProject({
   insertBlock,
   resetBlockContents,
   handleChangeBlock,
+  deleteBlock,
 }) {
   return (
     <>
@@ -19,6 +20,7 @@ export default function EditableProject({
             index={index}
             insertBlock={insertBlock}
             swapBlocks={swapBlocks}
+            deleteBlock={deleteBlock}
           >
             <Block
               index={index}
