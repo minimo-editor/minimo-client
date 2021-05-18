@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import uuid from 'react-uuid';
 import styled from 'styled-components';
 
 export default function LinkForm({
@@ -10,7 +9,6 @@ export default function LinkForm({
 
   function onChange(e) {
     const { name, value } = e.target;
-
     setData((prev) => ({
       ...prev,
       [name]: value,
@@ -27,13 +25,13 @@ export default function LinkForm({
       onSubmit={onSubmit}
     >
       {Object.entries(data).map((input) => (
-        <Label key={uuid()}>
+        <Label>
           {input[0]}
           <input
             type='text'
             name={input[0]}
             value={input[1]}
-            onChange={(e) => onChange(e)}
+            onChange={onChange}
           />
         </Label>
       ))}
