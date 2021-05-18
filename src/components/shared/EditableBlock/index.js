@@ -1,1 +1,1 @@
-export { default } from './DropItem';
+export { default } from './EditableBlock';
