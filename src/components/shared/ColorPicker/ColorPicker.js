@@ -20,7 +20,7 @@ export default function ColorPicker({
       <ColorPickerIcon
         onClick={toggleColorPicker}
       >
-        <ICON.Tool fill='white' />
+        <ICON.Aperture fill='white' />
       </ColorPickerIcon>
     </ColorPickerContainer>
   );
