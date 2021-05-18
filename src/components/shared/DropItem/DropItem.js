@@ -1,21 +1,46 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
+import * as ICON from 'react-feather';
+
+function Tools({ makeDraggable, makeNotDraggable }) {
+  return (
+    <ToolWrapper draggable={false}>
+      <MoveTool
+        onMouseDown={makeDraggable}
+        onMOuseUp={makeNotDraggable}
+      >
+        <ICON.Move size={19} />
+      </MoveTool>
+      <RemoveTool>
+        <ICON.X size={19} />
+      </RemoveTool>
+    </ToolWrapper>
+  );
+}
 
 export default function EditableBlock({
   children,
-  draggable,
-  isActive,
   index,
   insertBlock,
   onDragStart,
 }) {
   const [isDragEnter, setIsDragEnter] = useState(false);
-
+  const [isActive, setIsActive] = useState(false);
+  const [isDraggable, setIsDraggable] = useState(false);
   const wrapperRef = useRef();
 
-  function onClick(e) {
-    // e.stopPropagation();
+  function handleClick(e) {
+    if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+      setIsActive(false);
+    } else {
+      setIsActive(true);
+    }
   }
+  useEffect(() => {
+    document.addEventListener('click', handleClick);
+
+    return () => document.addEventListener('click', handleClick);
+  }, []);
 
   function onDragEnter(e) {
     e.preventDefault();
@@ -34,22 +59,9 @@ export default function EditableBlock({
   function onDrop(e) {
     e.preventDefault();
     setIsDragEnter(false);
+
     const blockId = e.dataTransfer.getData('block_id');
-
-    if (blockId) {
-      const newBlock = {
-        type: blockId,
-        data: {},
-      };
-
-      // insertBlock does..
-      // setBlocks((prev) => {
-      //   const prevCopy = [...prev];
-      //   prevCopy.splice(index, 0, newBlock);
-      //   return prevCopy;
-      // });
-      insertBlock(e, index);
-    }
+    insertBlock(index, blockId);
   }
 
   return (
@@ -57,10 +69,9 @@ export default function EditableBlock({
       ref={wrapperRef}
       isDragEnter={isDragEnter}
       isActive={isActive}
-      draggable={draggable}
+      draggable={isDraggable}
       onDrop={onDrop}
-      onClick={onClick}
-      onDragEnterCapture={onDragEnter}
+      onDragEnter={onDragEnter}
       onDragLeave={onDragLeave}
       onDragOver={onDragOver}
       onDragStart={onDragStart}
@@ -68,6 +79,12 @@ export default function EditableBlock({
       <Block>
         {children}
       </Block>
+      {isActive && (
+        <Tools
+          makeDraggable={() => setIsDraggable(true)}
+          makeNotDraggable={() => setIsDraggable(false)}
+        />
+      )}
     </EditableWrapper>
   );
 }
@@ -77,6 +94,10 @@ const EditableWrapper = styled.div`
   padding: 0.5rem 2rem;
   outline: ${({ isActive }) => (isActive ? '1px solid #00da89' : 'none')};
   ${({ isDragEnter }) => isDragEnter && css`
+    & div {
+      pointer-events: none;
+    }
+
     &:before {
       content: '';
       width: 100%;
@@ -88,5 +109,33 @@ const EditableWrapper = styled.div`
 `;
 
 const Block = styled.div`
-  pointer-events: none;
+`;
+
+const ToolWrapper = styled.div`
+  position: absolute;
+  flex-direction: column;
+  width: auto;
+  top: 0;
+  left: auto;
+  right: -40px;
+
+  & div {
+    line-height: 0;
+    padding: 0.3rem;
+    color: white;
+  }
+
+  & svg {
+    vertical-align: middle;
+  }
+`;
+
+const MoveTool = styled.div`
+  cursor: move;
+  background: #169af7;
+`;
+
+const RemoveTool = styled.div`
+  cursor: pointer;
+  background: rgba(255, 85, 4, 0.9);
 `;
