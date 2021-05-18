@@ -52,6 +52,11 @@ export default function Editor() {
     });
   }
 
+  function deleteBlock(targetIndex) {
+    setBlocks((prev) => (
+      [...prev].filter((block, index) => index !== targetIndex)
+    ));
+  }
   function toggleSidebar() {
     setIsSidebarOpen((prev) => !prev);
   }
@@ -100,6 +105,7 @@ export default function Editor() {
           setBlocks={setBlocks}
           resetBlockContents={resetBlockContents}
           handleChangeBlock={handleChangeBlock}
+          deleteBlock={deleteBlock}
         />
         {/* FIXME: rename -> colorpicker tool ? */}
         <ColorPicker
