@@ -7,7 +7,11 @@ import React, {
 import styled, { css } from 'styled-components';
 import * as ICON from 'react-feather';
 
-function Tools({ makeDraggable, makeNotDraggable }) {
+function Tools({
+  makeDraggable,
+  makeNotDraggable,
+  onRemoveClick,
+}) {
   return (
     <ToolWrapper draggable={false}>
       <MoveTool
@@ -16,7 +20,9 @@ function Tools({ makeDraggable, makeNotDraggable }) {
       >
         <ICON.Move size={19} />
       </MoveTool>
-      <RemoveTool>
+      <RemoveTool
+        onClick={onRemoveClick}
+      >
         <ICON.X size={19} />
       </RemoveTool>
     </ToolWrapper>
@@ -28,11 +34,18 @@ export default function EditableBlock({
   index,
   insertBlock,
   swapBlocks,
+  deleteBlock,
 }) {
   const [isDragEnter, setIsDragEnter] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [isDraggable, setIsDraggable] = useState(false);
   const wrapperRef = useRef();
+
+  useEffect(() => {
+    document.addEventListener('click', handleClick);
+
+    return () => document.addEventListener('click', handleClick);
+  }, []);
 
   function handleClick(e) {
     if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
@@ -43,12 +56,6 @@ export default function EditableBlock({
       setIsActive(true);
     }
   }
-
-  useEffect(() => {
-    document.addEventListener('click', handleClick);
-
-    return () => document.addEventListener('click', handleClick);
-  }, []);
 
   function onDragEnter(e) {
     e.preventDefault();
@@ -109,6 +116,7 @@ export default function EditableBlock({
         <Tools
           makeDraggable={() => setIsDraggable(true)}
           makeNotDraggable={() => setIsDraggable(false)}
+          onRemoveClick={() => deleteBlock(index)}
         />
       )}
     </EditableContainer>
