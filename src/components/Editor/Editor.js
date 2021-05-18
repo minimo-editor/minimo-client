@@ -43,15 +43,22 @@ export default function Editor() {
     ));
   }
 
+  function swapBlocks(index1, index2) {
+    setBlocks((prev) => {
+      const prevCopy = [...prev];
+      const firstItem = prevCopy[index1];
+      prevCopy[index1] = prevCopy[index2];
+      prevCopy[index2] = firstItem;
+
+      return prevCopy;
+    });
+  }
+
   function toggleSidebar() {
     setIsSidebarOpen((prev) => !prev);
   }
 
-  function handleDrop(e, index) {
-    e.target.style.borderTop = 'none';
-
-    const blockId = e.dataTransfer.getData('block_id');
-
+  function insertBlock(index, blockId) {
     if (!blockId) {
       return;
     }
@@ -64,26 +71,11 @@ export default function Editor() {
     setBlocks((prev) => {
       const prevCopy = [...prev];
       prevCopy.splice(index, 0, newBlock);
-
       return prevCopy;
     });
   }
 
-  // function handleDragEnter(e, index) {
-  //   e.stopPropagation();
-
-  //   if (e.target !== e.currentTarget) {
-  //     return;
-  //   }
-
-  //   e.target.style.borderTop = '40px solid rgb(0, 0, 0, 0.03)';
-  // }
-
-  // function handleDragLeave(e, index) {
-  //   e.target.style.borderTop = 'none';
-  // }
-
-  function handleDragStart(e, index) {
+  function handleDragStart(e) {
     const { target } = e;
     e.dataTransfer.setData('block_id', target.id);
   }
@@ -119,7 +111,8 @@ export default function Editor() {
         <Project
           isEditable
           handleChangeBlock={handleChangeBlock}
-          onDrop={handleDrop}
+          onDrop={insertBlock}
+          swapBlocks={swapBlocks}
           blocks={blocks}
           setBlocks={setBlocks}
           resetBlockContents={resetBlockContents}
