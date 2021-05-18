@@ -1,4 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  cloneElement,
+} from 'react';
 import styled, { css } from 'styled-components';
 import * as ICON from 'react-feather';
 
@@ -7,7 +12,7 @@ function Tools({ makeDraggable, makeNotDraggable }) {
     <ToolWrapper draggable={false}>
       <MoveTool
         onMouseDown={makeDraggable}
-        onMOuseUp={makeNotDraggable}
+        onBlur={makeNotDraggable}
       >
         <ICON.Move size={19} />
       </MoveTool>
@@ -22,7 +27,7 @@ export default function EditableBlock({
   children,
   index,
   insertBlock,
-  onDragStart,
+  swapBlocks,
 }) {
   const [isDragEnter, setIsDragEnter] = useState(false);
   const [isActive, setIsActive] = useState(false);
@@ -32,10 +37,13 @@ export default function EditableBlock({
   function handleClick(e) {
     if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
       setIsActive(false);
+      // TODO: delete
+      setIsDraggable(false);
     } else {
       setIsActive(true);
     }
   }
+
   useEffect(() => {
     document.addEventListener('click', handleClick);
 
@@ -44,7 +52,10 @@ export default function EditableBlock({
 
   function onDragEnter(e) {
     e.preventDefault();
-    setIsDragEnter(true);
+
+    if (!isDraggable) {
+      setIsDragEnter(true);
+    }
   }
 
   function onDragLeave(e) {
@@ -56,16 +67,31 @@ export default function EditableBlock({
     e.preventDefault();
   }
 
+  function onDragStart(e) {
+    e.dataTransfer.setData('block_index', index);
+  }
+
   function onDrop(e) {
-    e.preventDefault();
+    // TODO: delete 문제없을 시
+    // e.preventDefault();
     setIsDragEnter(false);
 
     const blockId = e.dataTransfer.getData('block_id');
-    insertBlock(index, blockId);
+
+    if (blockId) {
+      insertBlock(index, blockId);
+      return;
+    }
+
+    const droppedIndex = e.dataTransfer.getData('block_index');
+
+    if (droppedIndex) {
+      swapBlocks(index, droppedIndex);
+    }
   }
 
   return (
-    <EditableWrapper
+    <EditableContainer
       ref={wrapperRef}
       isDragEnter={isDragEnter}
       isActive={isActive}
@@ -76,20 +102,20 @@ export default function EditableBlock({
       onDragOver={onDragOver}
       onDragStart={onDragStart}
     >
-      <Block>
-        {children}
-      </Block>
+      <div>
+        {cloneElement(children, { isActive })}
+      </div>
       {isActive && (
         <Tools
           makeDraggable={() => setIsDraggable(true)}
           makeNotDraggable={() => setIsDraggable(false)}
         />
       )}
-    </EditableWrapper>
+    </EditableContainer>
   );
 }
 
-const EditableWrapper = styled.div`
+const EditableContainer = styled.div`
   position: relative;
   padding: 0.5rem 2rem;
   outline: ${({ isActive }) => (isActive ? '1px solid #00da89' : 'none')};
@@ -106,9 +132,6 @@ const EditableWrapper = styled.div`
       display: block;
     }
   `};
-`;
-
-const Block = styled.div`
 `;
 
 const ToolWrapper = styled.div`
