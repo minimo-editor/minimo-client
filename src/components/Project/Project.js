@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import * as ICON from 'react-feather';
 import blocksMap from '../../utils/blocksMap';
+import EditableBlock from '../shared/DropItem/DropItem';
 
 function Tools({ makeDraggable }) {
   return (
@@ -76,18 +77,18 @@ export default function Project({
     setActiveIndex(index);
   }
 
-  function handleDrop(e, index) {
-    e.preventDefault();
-    const blockId = e.dataTransfer.getData('block_id');
+  // function handleDrop(e, index) {
+  //   e.preventDefault();
+  //   const blockId = e.dataTransfer.getData('block_id');
 
-    if (blockId) {
-      onDrop(e, index);
-    }
+  //   if (blockId) {
+  //     onDrop(e, index);
+  //   }
 
-    // if (draggingItem.current === null || draggingItem.current === undefined) {
-    //  onDrop(e, index);
-    // }
-  }
+  //   // if (draggingItem.current === null || draggingItem.current === undefined) {
+  //   //  onDrop(e, index);
+  //   // }
+  // }
 
   function onDragOver(e) {
     e.stopPropagation();
@@ -99,19 +100,15 @@ export default function Project({
       {blocks.map((block, index) => {
         const Block = blocksMap.get(block.type);
         const isActive = index === activeIndex;
-        const isDragging = index === draggingIndex;
+        const draggable = index === draggingIndex;
 
         return (
-          <BlockWrapper
-            // key={uuid()}
-            onDragEnter={(e) => handleDragEnter(e, index)}
-            onDragLeave={onDragLeave}
-            onDrop={(e) => handleDrop(e, index)}
-            onDragOverCapture={onDragOver}
+          <EditableBlock
+            index={index}
             isActive={isActive}
-            onClick={(e) => onClick(e, index)}
-            draggable={isDragging}
-            onDragStart={(e) => handleDragStart(e, index)}
+            draggable={draggable}
+            onDragStart={handleDragStart}
+            insertBlock={onDrop}
           >
             <Block
               index={index}
@@ -126,7 +123,7 @@ export default function Project({
                 makeDraggable={() => setDraggingIndex(index)}
               />
             )}
-          </BlockWrapper>
+          </EditableBlock>
         );
       })}
     </div>
