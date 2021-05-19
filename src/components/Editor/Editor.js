@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
+import uniqueId from 'lodash.uniqueid';
 import EditableProject from '../EditableProject';
 import ColorPicker from '../shared/ColorPicker/ColorPicker';
 import useColorPicker from '../../hooks/useColorPicker';
@@ -69,6 +70,7 @@ export default function Editor() {
     const newBlock = {
       type: blockId,
       data: {},
+      id: uniqueId(),
     };
 
     setBlocks((prev) => {
