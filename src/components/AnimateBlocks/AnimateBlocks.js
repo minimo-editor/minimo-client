@@ -31,6 +31,11 @@ export default function AnimateBlocks({ children }) {
         const domNode = child.ref.current;
         const firstBox = prevBoundingBox[child.key];
         const lastBox = boundingBox[child.key];
+
+        if (!firstBox || !lastBox) {
+          return;
+        }
+
         const changeInY = firstBox.top - lastBox.top;
 
         if (changeInY) {
@@ -44,7 +49,7 @@ export default function AnimateBlocks({ children }) {
               // NOTE: After the previous frame, remove
               // the transistion to play the animation
               domNode.style.transform = '';
-              domNode.style.transition = 'transform 700ms';
+              domNode.style.transition = 'transform 300ms';
             });
           });
         }
