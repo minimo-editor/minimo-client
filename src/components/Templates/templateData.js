@@ -9,7 +9,7 @@ const templates = [
           contents: {
             texts: 'Happy Wedding not happy',
           },
-          styles: 'default',
+          styles: { color: 'tomato' },
         },
         id: 'basic-title-1',
       },
@@ -19,7 +19,7 @@ const templates = [
           contents: {
             src: '//g0.evitecdn.com/pages/signed-out-virtual-homepage/6210705586454528/21f2897a86ca4a338a9ff2a6dd83665f.png',
           },
-          styles: 'default',
+          styles: {},
         },
         id: 'basic-img-1',
       },
@@ -46,7 +46,7 @@ const templates = [
           contents: {
             texts: 'Happy Wedding',
           },
-          styles: 'default',
+          styles: {},
         },
         id: 'wedding-title-1',
       },
@@ -56,7 +56,7 @@ const templates = [
           contents: {
             src: '//g0.evitecdn.com/pages/signed-out-virtual-homepage/6210705586454528/21f2897a86ca4a338a9ff2a6dd83665f.png',
           },
-          styles: 'default',
+          styles: {},
         },
         id: 'wedding-img-1',
       },
