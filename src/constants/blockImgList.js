@@ -4,6 +4,10 @@ export default [
     src: 'https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-01.png',
   },
   {
+    id: 'paragraph',
+    src: 'https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-03.png',
+  },
+  {
     id: 'img',
     src: 'https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-05.png',
   },
