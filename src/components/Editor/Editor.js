@@ -7,6 +7,7 @@ import useColorPicker from '../../hooks/useColorPicker';
 import { AuthContext } from '../../contexts/AuthContext';
 import { ProjectContext } from '../../contexts/ProjectContext';
 import Sidebar from '../Sidebar';
+import blocksDefaultDataMap from '../../utils/blocksDefaultDataMap';
 
 export default function Editor() {
   const { userId } = useContext(AuthContext);
@@ -67,10 +68,14 @@ export default function Editor() {
       return;
     }
 
+    // TODO: 보기좋게
+    const defaultData = blocksDefaultDataMap.get(blockId)();
+    const id = uniqueId();
+
     const newBlock = {
+      id,
       type: blockId,
-      data: {},
-      id: uniqueId(),
+      data: defaultData,
     };
 
     setBlocks((prev) => {
