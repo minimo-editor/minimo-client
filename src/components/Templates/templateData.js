@@ -11,6 +11,7 @@ const templates = [
           },
           styles: 'default',
         },
+        id: 'basic-title-1',
       },
       {
         type: 'img',
@@ -20,6 +21,7 @@ const templates = [
           },
           styles: 'default',
         },
+        id: 'basic-img-1',
       },
       {
         type: 'social',
@@ -30,6 +32,7 @@ const templates = [
             youtubeLink: '',
           },
         },
+        id: 'basic-social-1',
       },
     ],
   },
@@ -45,6 +48,7 @@ const templates = [
           },
           styles: 'default',
         },
+        id: 'wedding-title-1',
       },
       {
         type: 'img',
@@ -54,6 +58,7 @@ const templates = [
           },
           styles: 'default',
         },
+        id: 'wedding-img-1',
       },
       {
         type: 'social',
@@ -64,6 +69,7 @@ const templates = [
             youtubeLink: '',
           },
         },
+        id: 'wedding-social-1',
       },
     ],
   },
