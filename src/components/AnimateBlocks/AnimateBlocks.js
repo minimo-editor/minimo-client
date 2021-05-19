@@ -36,6 +36,7 @@ export default function AnimateBlocks({ children }) {
         if (changeInY) {
           requestAnimationFrame(() => {
             // NOTE: Before the DOM paints, invert child to old position
+            // NOTE: 밖으로 뺄 수 있음 빼보장
             domNode.style.transform = `translateY(${changeInY}px)`;
             domNode.style.transition = 'transform 0s';
 
