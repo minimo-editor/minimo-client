@@ -92,7 +92,7 @@ const SocialsContainer = styled.div`
 const SocialIcon = styled.a`
   background: ${({ bgColor }) => bgColor ?? 'white'};
   border-radius: 50%;
-  padding: 1rem;
+  padding: 5%;
   line-height: 0;
   cursor: pointer;
 `;
