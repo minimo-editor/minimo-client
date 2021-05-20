@@ -27,4 +27,8 @@ export default [
     id: 'wishlist',
     src: '/assets/wishlist.png',
   },
+  {
+    id: 'map',
+    src: 'https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/element-map.png',
+  },
 ];
