@@ -1,12 +1,27 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { OkButton } from '../StyledButton';
+import uploadImageToS3 from '../../../apis/S3';
 
-export default function ImgUploader() {
+export default function ImgUploader({ handleUpload }) {
+  const [imgFiles, setImgFiles] = useState([]);
   const [imgs, setImgs] = useState([]);
 
-  function onFileChange(e) {
-    console.log('file change');
+  async function onClick() {
+    try {
+      // TODO: usePromise / async 사용으로 바꾸기
+      const url = await uploadImageToS3(imgFiles[0]);
+
+      handleUpload({ src: url });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function onFileChange(e) {
     const { files } = e.target;
+
+    setImgFiles(files);
 
     Object.values(files).forEach((file) => {
       const reader = new FileReader();
@@ -26,11 +41,20 @@ export default function ImgUploader() {
     });
   }
 
+  function onDragEnterCapture(e) {
+    e.stopPropagation();
+  }
+
   return (
     <ImgUploaderContainer>
       <DropZone>
         <PlaceHolder>DRAG & DROP IMAGE HERE</PlaceHolder>
-        <input type='file' onChange={onFileChange} />
+        <input
+          type='file'
+          onChangeCapture={onFileChange}
+          onDragEnterCapture={onDragEnterCapture}
+          accept='image/x-png, image/jpeg, image/gif'
+        />
       </DropZone>
       <PreviewImgContainer>
         {imgs && (
@@ -39,6 +63,9 @@ export default function ImgUploader() {
           ))
         )}
       </PreviewImgContainer>
+      <OkButton onClick={onClick}>
+        Ok
+      </OkButton>
     </ImgUploaderContainer>
   );
 }
@@ -57,15 +84,22 @@ const PlaceHolder = styled.p`
 `;
 
 const ImgUploaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
-  height: 300px;
+  background: rgba(255,255,255,1);
+  padding: 12px 12px;
+  border: 1px solid rgb(243, 243, 243);
+  box-shadow: 4px 17px 20px 0px rgb(0 0 0 / 8%);
+  box-sizing: border-box;
 `;
 
 const DropZone = styled.label`
   display: block;
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 200px;
   border: 0.3rem dashed #bfbdbd;
 
   & input {
@@ -87,11 +121,10 @@ const PreviewImg = styled.img`
 // TODO: grid
 const PreviewImgContainer = styled.div`
   width: 100%;
-  height: 30%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   grid-auto-rows: 100px;
   margin-top: 1rem;
   gap: 10px;
-  overflow: scroll;
+  overflow-x: scroll;
 `;
