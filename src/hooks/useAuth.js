@@ -7,6 +7,7 @@ async function login(userData) {
   const data = await fetch(`${SERVER_URL}/user`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
     body: JSON.stringify({
       email: userData.email,
       name: userData.displayName,
