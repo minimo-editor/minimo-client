@@ -1,15 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
+import * as ICON from 'react-feather';
 
 export default function Modal({ title, children, handleClose }) {
   return ReactDOM.createPortal(
     <>
-      <ModalBackground onClick={handleClose} />
+      <ModalBackground
+        onClick={handleClose}
+        onDragEnter={(e) => e.stopPropagation()}
+      />
       <ModalContainer>
-        <ModalClose onClick={handleClose} />
-        <ModalContent>
+        <ModalHeader>
           <Title>{title}</Title>
+          <ModalClose onClick={handleClose}>
+            <ICON.X color='darkgrey' />
+          </ModalClose>
+        </ModalHeader>
+        <ModalContent>
           {children}
         </ModalContent>
       </ModalContainer>
@@ -18,19 +26,23 @@ export default function Modal({ title, children, handleClose }) {
   );
 }
 
-// Modal.propTypes = {
-//   children: PropTypes.element.isRequired,
-//   handleClose: PropTypes.func.isRequired,
-// };
+const ModalHeader = styled.header`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
 
 const ModalContainer = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
+  text-align: right;
   transform: translate(-50%, -50%);
-  transition: all .3s ease-in-out .3s;
-  overflow: hidden;
-  outline: 0;
+  background: rgba(255, 255, 255, 1);
+  border: 1px solid rgb(243, 243, 243);
+  box-shadow: 4px 17px 20px 0px rgb(0 0 0 / 8%);
+  padding: 12px 12px;
+  box-sizing: border-box;
 `;
 
 const ModalBackground = styled.div`
@@ -47,13 +59,13 @@ const ModalContent = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  pointer-events: auto;
+  /* pointer-events: auto; */
   min-width: 500px;
-  min-height: 500px;
-  max-width: 100%;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  min-height: fit-content;
+  /* max-width: 100%; */
+  /* background-color: #fff; */
+  /* background-clip: padding-box; */
+  /* border: 1px solid rgba(0, 0, 0, 0.2); */
   border-radius: 0.3rem;
   outline: 0;
   padding: 2rem;
@@ -63,18 +75,12 @@ const Title = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 1rem;
+  margin-left: 1rem;
+  font-family: sans-serif;
 `;
 
 const ModalClose = styled.button`
-  box-sizing: content-box;
-  width: 1em;
-  height: 1em;
-  background: transparent url("https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-close-512.png") center/2em auto no-repeat;
-  border: 0;
-  border-radius: 0.25rem;
-  padding: 0.25em 0.25em;
+  all: unset;
   cursor: pointer;
-  opacity: 0.5;
 `;
