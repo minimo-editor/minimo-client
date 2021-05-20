@@ -34,6 +34,16 @@ const templates = [
         },
         id: 'basic-social-1',
       },
+      {
+        type: 'map',
+        data: {
+          contents: {
+            location: {},
+            address: '',
+          },
+        },
+        id: 'basic-map-1',
+      },
     ],
   },
   {
