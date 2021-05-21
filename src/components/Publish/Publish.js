@@ -1,21 +1,31 @@
+/* eslint-disable no-useless-escape */
 import React, {
-  useContext, useRef, useState,
+  useContext, useState,
 } from 'react';
+import * as ICON from 'react-feather';
 import styled from 'styled-components';
 import { checkValidAddress, postProject } from '../../apis/project';
 import { ProjectContext } from '../../contexts/ProjectContext';
-
+import { OkButton } from '../shared/StyledButton';
 // TODO: validation ***이곳 매우 중요
+
+function getValidText(text) {
+  const speacialTextRegex = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\ '\"\\(\=]/gi;
+  return text.replace(speacialTextRegex, '');
+}
 
 export default function Publish() {
   const { project, setProject } = useContext(ProjectContext);
-  const [isAddressValid, setIsAddressValid] = useState(false);
-  const [result, setResult] = useState(false);
+  const [address, setAddress] = useState('');
+  const [isAddressValid, setIsAddressValid] = useState(null);
+  const [result, setResult] = useState('');
 
-  const addressRef = useRef();
+  function onChange(e) {
+    setIsAddressValid(null);
+    setAddress(getValidText(e.target.value));
+  }
 
   async function onClick() {
-    const { value: address } = addressRef.current;
     const isValid = await checkValidAddress(address);
     setIsAddressValid(isValid);
 
@@ -37,6 +47,7 @@ export default function Publish() {
     try {
       const postResult = await postProject(project);
       setResult(postResult);
+      console.log(postResult);
     } catch (error) {
       setResult(false);
     }
@@ -44,100 +55,117 @@ export default function Publish() {
 
   return (
     <Container>
+      <Title>Publish</Title>
       <FormContainer
         onSubmit={onSubmit}
       >
         <Label>
-          Project name
-          <input
-            ref={addressRef}
+          Title
+          <TextInput
             required
+            placeholder='Project Title'
             type='text'
           />
         </Label>
         <Label>
           Address
-          <input
-            ref={addressRef}
+          <TextInput
             required
+            placeholder='Project address'
             type='text'
+            onChange={onChange}
+            value={address}
           />
-          <button
+        </Label>
+        <AddressCheckWrapper>
+          <CheckButton
             type='button'
             onClick={onClick}
           >
             check
-          </button>
-        </Label>
-        <button
+          </CheckButton>
+          <span>
+            www.minimo.life/
+            {address}
+          </span>
+          {isAddressValid && (
+            <CheckIcon>
+              <ICON.CheckCircle size={15} color='green' />
+            </CheckIcon>
+          )}
+          {isAddressValid === false && (
+            <CheckIcon>
+              <ICON.Slash size={15} color='red' />
+              {' '}
+              try different address.
+            </CheckIcon>
+          )}
+        </AddressCheckWrapper>
+        <OkButton
           disabled={!isAddressValid}
           type='submit'
         >
           publish
-        </button>
+        </OkButton>
       </FormContainer>
       <div>
-        <p>{result ? 'success' : 'fail'}</p>
-        <p>{project.address}</p>
+        <p>{result === true && 'SUCCESS'}</p>
+        <p>{result === false && 'FAIL, TRY AGAIN'}</p>
       </div>
     </Container>
   );
 }
 
+const Title = styled.h2`
+  text-align: center;
+`;
+
+const CheckIcon = styled.div`
+  display: inline-block;
+  margin-left: 0.3rem;
+  color: red;
+`;
+
+const CheckButton = styled.button`
+  all: unset;
+  display: inline;
+  background: #f7f7f7;
+  padding: 0.25rem;
+  border: 0.05rem solid #e0dfdf;
+  border-radius: 2px;
+  margin-right: 0.25rem;
+
+  &:hover {
+    background: #e0dfdf;
+  }
+`;
+
+const AddressCheckWrapper = styled.div`
+  width: 100%;
+  text-align: left;
+  color: #505050;
+  margin-top: 0.25rem;
+  margin-left: 0.5rem;
+`;
+
 const Container = styled.div`
   margin: auto;
+  margin-top: 4rem;
   background: #fff;
   position: relative;
   border-radius: 2px;
   padding: 2rem;
   width: 550px;
-  box-shadow: 
-    0 16px 24px 2px rgba(0, 0, 0, 0.14),
-    0 6px 30px 5px rgba(0, 0, 0, 0.12),
-    0 8px 10px -5px rgba(0, 0, 0, 0.3);
-  transition: transform .1s ease-in-out;
-`;
-
-const InputContainer = styled.div`
-  position: relative;
-  opacity: 0;
-  width: 350px;
-  height: 100px;
-  margin-top: 25px;
-  transition: opacity .3s ease-in-out;
-`;
-
-const InputLabel = styled.label`
-  position: absolute;
-  pointer-events: none;
-  top: 0;
-  left: 0;
-  font-size: 20px;
-  font-weight: bold;
-  padding: 0 5px;
-  transition: .2s ease-in-out;
-`;
-
-const InputField = styled.input`
-  width: 100%;
-  padding: 0 5px;
-  border: none;
-  font-size: 20px;
-  font-weight: bold;
-  outline: 0;
-  background: transparent;
-  box-shadow:none;
-`;
-
-const InputProgress = styled.div`
-  position: absolute;
-  border-bottom: 2px solid #25a3ff;
-  padding: 3px 0;
-  width: 0;
-  transition: width .6s ease-in-out;
+  align-items: center;
+  background: rgba(255,255,255,1);
+  border: 1px solid rgb(243, 243, 243);
+  box-shadow: 4px 17px 20px 0px rgb(0 0 0 / 8%);
+  padding: 12px 12px;
+  box-sizing: border-box;
 `;
 
 const Label = styled.label`
+  color: #696767;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -159,4 +187,26 @@ const FormContainer = styled.form`
   align-items: center;
   width: 100%;
   margin: auto;
+`;
+
+const TextInput = styled.input`
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box;
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 15px;
+  letter-spacing: 1px;
+  padding: 0;
+  padding-left: 8px;
+  color: #111111;
+  display: inline-block;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 0;
+  background-color: #fbfbfb;
+
+  &:focus {
+    outline: none;
+  }
 `;
