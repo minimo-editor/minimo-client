@@ -14,11 +14,12 @@ export default function Templates() {
     const { value } = e.target;
 
     setSelectedTemplate(value);
+
     const templateData = templates.find((each) => each.concept === value);
 
     setProject((prev) => ({
       ...prev,
-      ...templateData,
+      ...JSON.parse(JSON.stringify(templateData)),
       creatorId: userId,
     }));
   }
