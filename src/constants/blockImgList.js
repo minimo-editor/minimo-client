@@ -24,11 +24,15 @@ export default [
     src: 'https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-12.png',
   },
   {
+    id: 'map',
+    src: 'https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/element-map.png',
+  },
+  {
     id: 'wishlist',
     src: '/assets/wishlist.png',
   },
   {
-    id: 'map',
-    src: 'https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/element-map.png',
+    id: 'longshadow',
+    src: '/assets/longshadow.png',
   },
 ];
