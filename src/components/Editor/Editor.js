@@ -71,7 +71,6 @@ export default function Editor() {
     // TODO: 보기좋게
     const defaultData = blocksDefaultDataMap.get(blockId)();
     const id = uniqueId();
-
     const newBlock = {
       id,
       type: blockId,
