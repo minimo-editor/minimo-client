@@ -10,6 +10,7 @@ export default function EditableProject({
   insertBlock,
   resetBlockContents,
   handleChangeBlock,
+  handleChangeStyle,
   deleteBlock,
 }) {
   return (
@@ -32,6 +33,7 @@ export default function EditableProject({
                 data={block.data}
                 // NOTE: text는 onchange, link는 reset을 쓸 듯.
                 onChange={handleChangeBlock}
+                handleChangeStyle={handleChangeStyle}
                 resetBlockContents={resetBlockContents}
               />
             </EditableBlock>
