@@ -1,32 +1,41 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import styled from 'styled-components';
 import ContentEditable from 'react-contenteditable';
-import isEmptyObject from '../../../utils/isEmptyObject';
+import useColorPicker from '../../../hooks/useColorPicker';
+import { TextColorPicker } from '../../shared/ColorPicker';
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  text-align: center;
   width: 100%;
   color: black;
   font-weight: bolder;
   font-size: 2.5rem;
 `;
 
-const defaultData = {
-  contents: {
-    texts: 'Happy <div>&nbsp; &nbsp; &nbsp; Title</div>',
-  },
-  styles: { color: 'black' },
-};
-
 export default function Title({
-  data = defaultData, isEditable = true, onChange, index,
+  data,
+  index,
+  isActive,
+  onChange,
+  handleChangeStyle,
+  isEditable = true,
 }) {
-  const titleData = isEmptyObject(data) ? defaultData : data;
-  const { texts } = titleData.contents;
-  const { styles } = titleData;
+  const {
+    color,
+    isColorPickerOpen,
+    toggleColorPicker,
+    handleChangeColor,
+  } = useColorPicker();
+
+  const { texts } = data.contents;
+  const { styles } = data;
+
+  function onChangeColor(newColor) {
+    handleChangeColor(newColor);
+    handleChangeStyle(newColor.hex, index, 'color');
+  }
 
   return (
     <Container>
@@ -36,6 +45,14 @@ export default function Title({
         onChange={(e) => onChange(e, index, 'texts')}
         disabled={!isEditable}
       />
+      {isActive && (
+        <TextColorPicker
+          color={color}
+          onChange={onChangeColor}
+          toggleColorPicker={toggleColorPicker}
+          isColorPickerOpen={isColorPickerOpen}
+        />
+      )}
     </Container>
   );
 }

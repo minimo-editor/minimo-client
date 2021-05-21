@@ -3,6 +3,6 @@ export default function () {
     contents: {
       texts: 'Happy <div>&nbsp; &nbsp; &nbsp; Title</div>',
     },
-    styles: { color: 'black' },
+    styles: { color: 'grey' },
   };
 }
