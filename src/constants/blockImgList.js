@@ -32,7 +32,7 @@ export default [
     src: '/assets/wishlist.png',
   },
   {
-    id: 'longshadow',
+    id: 'longShadowText',
     src: '/assets/longshadow.png',
   },
 ];
