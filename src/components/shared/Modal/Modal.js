@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import * as ICON from 'react-feather';
 
-export default function Modal({ title, children, handleClose }) {
+export default function Modal({ children, handleClose }) {
   return ReactDOM.createPortal(
     <>
       <ModalBackground
@@ -12,7 +12,7 @@ export default function Modal({ title, children, handleClose }) {
       />
       <ModalContainer>
         <ModalHeader>
-          <Title>{title}</Title>
+          <Title>{' '}</Title>
           <ModalClose onClick={handleClose}>
             <ICON.X color='darkgrey' />
           </ModalClose>
