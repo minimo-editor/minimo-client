@@ -43,6 +43,21 @@ export default function Editor() {
     ));
   }
 
+  function handleChangeStyle(value, index, prop) {
+    setBlocks((prev) => (
+      [...prev].map((each, idx) => {
+        if (index === idx) {
+          each.data.styles = {
+            ...each.data.styles,
+            [prop]: value,
+          };
+        }
+
+        return each;
+      })
+    ));
+  }
+
   function swapBlocks(index1, index2) {
     setBlocks((prev) => {
       const prevCopy = [...prev];
@@ -111,6 +126,7 @@ export default function Editor() {
           setBlocks={setBlocks}
           resetBlockContents={resetBlockContents}
           handleChangeBlock={handleChangeBlock}
+          handleChangeStyle={handleChangeStyle}
           deleteBlock={deleteBlock}
         />
         {/* FIXME: rename -> colorpicker tool ? */}
