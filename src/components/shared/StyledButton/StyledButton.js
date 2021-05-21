@@ -41,4 +41,8 @@ export const OkButton = styled(StyledButton)`
   padding-right: 30px;
   min-width: 135px;
   background: #f7f7f7;
+
+  &:hover {
+    background: #e0dfdf;
+  }
 `;
