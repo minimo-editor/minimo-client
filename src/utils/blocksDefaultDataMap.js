@@ -4,6 +4,7 @@ import { getDefaultVideo } from '../components/Blocks/Video';
 import { getDefaultSocials } from '../components/Blocks/Socials';
 import { getDefaultParagraph } from '../components/Blocks/Paragraph';
 import { getDefaultMapData } from '../components/Blocks/GoogleMaps';
+import { getDefaultLongShadowText } from '../components/Blocks/LongShadowText';
 
 const blocksDefaultDataMap = new Map();
 
@@ -19,6 +20,7 @@ blocksDefaultDataMap
   .set('social', getDefaultSocials)
   .set('paragraph', getDefaultParagraph)
   .set('blank', getEmptyData)
-  .set('map', getDefaultMapData);
+  .set('map', getDefaultMapData)
+  .set('longShadowText', getDefaultLongShadowText);
 
 export default blocksDefaultDataMap;

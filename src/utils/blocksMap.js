@@ -5,6 +5,7 @@ import Socials from '../components/Blocks/Socials';
 import Blank from '../components/Blocks/Blank';
 import Paragraph from '../components/Blocks/Paragraph';
 import GoogleMaps from '../components/Blocks/GoogleMaps';
+import LongShadowText from '../components/Blocks/LongShadowText';
 
 const blocksMap = new Map();
 
@@ -15,6 +16,7 @@ blocksMap
   .set('social', Socials)
   .set('paragraph', Paragraph)
   .set('blank', Blank)
-  .set('map', GoogleMaps);
+  .set('map', GoogleMaps)
+  .set('longShadowText', LongShadowText);
 
 export default blocksMap;
