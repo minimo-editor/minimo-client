@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import styled from 'styled-components';
 import blocksMap from '../../../utils/blocksMap';
@@ -14,7 +15,7 @@ export default function ProjectViewer({ project }) {
 
         return (
           <BlockWrapper
-            // key={uuid()}
+            key={index}
             draggable={false}
           >
             <Block
