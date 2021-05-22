@@ -77,6 +77,10 @@ const Button = styled.button`
   border-radius: 50%;
   background-color: grey;
   cursor: pointer;
+
+  &:hover {
+    background-color: darkgray;
+  }
 `;
 
 const Container = styled.div`
