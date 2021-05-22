@@ -31,7 +31,7 @@ export default function Iframe({
       <VideoWrapper>
         <iframe
           width='100%'
-          height='315'
+          height='215'
           src={contents.src}
           title='YouTube video player'
           frameBorder='0'
