@@ -47,7 +47,7 @@ const templates = [
     ],
   },
   {
-    concept: 'wedding',
+    concept: 'poster',
     backgroundColor: '#169af7',
     blocks: [
       {

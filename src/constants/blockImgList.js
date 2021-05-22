@@ -27,10 +27,10 @@ export default [
     id: 'map',
     src: 'https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/element-map.png',
   },
-  {
-    id: 'wishlist',
-    src: '/assets/wishlist.png',
-  },
+  // {
+  //   id: 'wishlist',
+  //   src: '/assets/wishlist.png',
+  // },
   {
     id: 'longShadowText',
     src: '/assets/longshadow.png',

@@ -6,6 +6,7 @@ import ColorPicker from '../shared/ColorPicker/ColorPicker';
 import useColorPicker from '../../hooks/useColorPicker';
 import { AuthContext } from '../../contexts/AuthContext';
 import { ProjectContext } from '../../contexts/ProjectContext';
+import { OkButton } from '../shared/StyledButton';
 import Sidebar from '../Sidebar';
 import blocksDefaultDataMap from '../../utils/blocksDefaultDataMap';
 
@@ -109,16 +110,16 @@ export default function Editor() {
   }
 
   return (
-    <>
+    <Container>
+      <SaveButton
+        type='button'
+        onClick={onClickSave}
+      >
+        SAVE
+      </SaveButton>
       <ProjectWrapper
         bgColor={bgColor}
       >
-        <SaveButton
-          type='button'
-          onClick={onClickSave}
-        >
-          SAVE
-        </SaveButton>
         <EditableProject
           insertBlock={insertBlock}
           swapBlocks={swapBlocks}
@@ -141,13 +142,19 @@ export default function Editor() {
         isSidebarOpen={isSidebarOpen}
         toggleSidebar={toggleSidebar}
       />
-    </>
+    </Container>
   );
 }
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const ProjectWrapper = styled.main`
   position: relative;
-  margin: 150px auto;
   max-width: 800px;
   width: 100%;
   padding: 0 35px;
@@ -155,8 +162,11 @@ const ProjectWrapper = styled.main`
   background: ${({ bgColor }) => bgColor ?? 'none'};
 `;
 
-const SaveButton = styled.button`
-  position: absolute;
-  top: -30px;
-  right: 30px;
+const SaveButton = styled(OkButton)`
+  text-align: center;
+  margin-top: 2em;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: grey;
 `;
