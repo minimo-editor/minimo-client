@@ -66,6 +66,7 @@ export default function ProjectStepBar() {
 const StepsContainer = styled.div`
   height: 100px;
   width: 500px;
+  margin-bottom: 2rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

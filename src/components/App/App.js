@@ -28,7 +28,7 @@ function App() {
           </Route>
           {user && (
             <Route exact path='/editor'>
-              <Navbar />
+              <Navbar isEditor />
               <ProjectProvider>
                 <ProjectStepBar />
                 <ProjectManager />

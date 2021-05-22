@@ -110,13 +110,14 @@ const Container = styled.div`
   width: 100%;
   position: relative;
   width: 100%;
-  /* height: 768px; */
-  overflow: hidden;
-  background: rgb(15, 65, 59);
-  padding: 40px;
+  /* height: 768px;
+  overflow: hidden; */
+  /* background: rgb(15, 65, 59); */
+  /* padding: 40px; */
   box-sizing: border-box;
   display: flex;
   background-image: url('/assets/background.png');
   background-position: center;
   background-repeat: no-repeat;
+  background-size: cover;
 `;

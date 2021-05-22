@@ -4,19 +4,21 @@ import firebase from 'firebase';
 import styled from 'styled-components';
 import { AuthContext } from '../../contexts/AuthContext';
 
-export default function Navbar() {
+export default function Navbar({ isEditor }) {
   const { user } = useContext(AuthContext);
   return (
     <>
       <Header>
-        <HomeLink to='/home'>
+        <HomeLink to='/'>
           <Logo>
             minimo
           </Logo>
         </HomeLink>
-        <User>
-          {user && `Hello, ${user.displayName}`}
-        </User>
+        {!isEditor && (
+          <User>
+            {user && `Hello, ${user.displayName}`}
+          </User>
+        )}
         <Auth>
           {user && (
             <LogoutButton
@@ -26,11 +28,13 @@ export default function Navbar() {
               Log Out
             </LogoutButton>
           )}
-          <LoginLink to={user ? '/editor' : '/login'}>
-            <LoginButton>
-              Get Started
-            </LoginButton>
-          </LoginLink>
+          {!isEditor && (
+            <LoginLink to={user ? '/editor' : '/login'}>
+              <LoginButton>
+                Get Started
+              </LoginButton>
+            </LoginLink>
+          )}
         </Auth>
       </Header>
     </>
