@@ -5,6 +5,7 @@ import {
   BrowserRouter as Router,
   Redirect,
 } from 'react-router-dom';
+import styled from 'styled-components';
 import Navbar from '../Navbar';
 import Login from '../Login';
 import ProjectManager from '../ProjectManager';
@@ -18,27 +19,34 @@ function App() {
   const { user } = useContext(AuthContext);
 
   return (
-    <Router>
-      <Switch>
-        <Route exact path='/'>
-          <Navbar />
-          <Main />
-        </Route>
-        {user && (
-          <Route exact path='/editor'>
+    <Container>
+      <Router>
+        <Switch>
+          <Route exact path='/'>
             <Navbar />
-            <ProjectProvider>
-              <ProjectStepBar />
-              <ProjectManager />
-            </ProjectProvider>
+            <Main />
           </Route>
-        )}
-        {!user && <Route exact path='/login' component={Login} />}
-        <Route exact path='/:address' component={ProjectByAddress} />
-        <Redirect to='/' />
-      </Switch>
-    </Router>
+          {user && (
+            <Route exact path='/editor'>
+              <Navbar />
+              <ProjectProvider>
+                <ProjectStepBar />
+                <ProjectManager />
+              </ProjectProvider>
+            </Route>
+          )}
+          {!user && <Route exact path='/login' component={Login} />}
+          <Route exact path='/:address' component={ProjectByAddress} />
+          <Redirect to='/' />
+        </Switch>
+      </Router>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  width: 100%;
+  height: 100vh;
+`;
 
 export default App;
