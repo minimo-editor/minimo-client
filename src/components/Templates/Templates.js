@@ -87,4 +87,5 @@ const Header = styled.header`
   margin: auto;
   color: #5a5a5a;
   font-weight: 500;
+  margin-bottom: 1rem;
 `;
