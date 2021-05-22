@@ -43,7 +43,7 @@ export default function ProjectStepBar() {
       </Button>
       <StepsContainer>
         {STEPS.map(({ step, title }) => (
-          <Step>
+          <Step key={step}>
             <Circle
               status={getStatus(step, currentStep)}
             >
