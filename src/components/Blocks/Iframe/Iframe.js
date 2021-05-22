@@ -8,10 +8,10 @@ import ConfigIcon from '../../shared/Config/Config';
 import LinkForm from '../../shared/LinkForm';
 
 const defaultVideoContents = {
-  src: 'https://cdn.dribbble.com/users/361958/screenshots/15114989/media/e8d6dac6dcc7172d310b23a4df9be2bc.mp4',
+  src: 'https://www.youtube.com/embed/3C4HKB0Wts8',
 };
 
-export default function Video({
+export default function Iframe({
   data,
   index,
   isActive,
@@ -29,11 +29,14 @@ export default function Video({
   return (
     <>
       <VideoWrapper>
-        <video
-          title={index}
-          autoPlay
-          loop
+        <iframe
+          width='100%'
+          height='315'
           src={contents.src}
+          title='YouTube video player'
+          frameBorder='0'
+          allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+          allowFullScreen
         />
       </VideoWrapper>
       {modalOpen && (

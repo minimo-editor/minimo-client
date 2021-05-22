@@ -12,7 +12,7 @@ export default [
     src: 'https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/basic-05.png',
   },
   {
-    id: 'video',
+    id: 'iframe',
     src: 'https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/element-video.png',
   },
   {
@@ -26,6 +26,10 @@ export default [
   {
     id: 'map',
     src: 'https://innovastudio.com/builderdemo/assets/minimalist-blocks/preview/element-map.png',
+  },
+  {
+    id: 'video',
+    src: 'https://www.mendipvale.nhs.uk/wp-content/uploads/2019/10/vp-video-editing.jpg',
   },
   // {
   //   id: 'wishlist',

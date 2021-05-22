@@ -6,6 +6,7 @@ import Blank from '../components/Blocks/Blank';
 import Paragraph from '../components/Blocks/Paragraph';
 import GoogleMaps from '../components/Blocks/GoogleMaps';
 import LongShadowText from '../components/Blocks/LongShadowText';
+import Iframe from '../components/Blocks/Iframe';
 
 const blocksMap = new Map();
 
@@ -17,6 +18,7 @@ blocksMap
   .set('paragraph', Paragraph)
   .set('blank', Blank)
   .set('map', GoogleMaps)
+  .set('iframe', Iframe)
   .set('longShadowText', LongShadowText);
 
 export default blocksMap;

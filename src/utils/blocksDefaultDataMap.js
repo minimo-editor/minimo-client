@@ -5,6 +5,7 @@ import { getDefaultSocials } from '../components/Blocks/Socials';
 import { getDefaultParagraph } from '../components/Blocks/Paragraph';
 import { getDefaultMapData } from '../components/Blocks/GoogleMaps';
 import { getDefaultLongShadowText } from '../components/Blocks/LongShadowText';
+import { getDefaultIframe } from '../components/Blocks/Iframe';
 
 const blocksDefaultDataMap = new Map();
 
@@ -21,6 +22,7 @@ blocksDefaultDataMap
   .set('paragraph', getDefaultParagraph)
   .set('blank', getEmptyData)
   .set('map', getDefaultMapData)
+  .set('iframe', getDefaultIframe)
   .set('longShadowText', getDefaultLongShadowText);
 
 export default blocksDefaultDataMap;
