@@ -1,15 +1,15 @@
 const templates = [
   {
     concept: 'basic',
-    backgroundColor: '#fff',
+    backgroundColor: '#efcbc5',
     blocks: [
       {
         type: 'title',
         data: {
           contents: {
-            texts: 'Happy Wedding not happy',
+            texts: 'JOIN US',
           },
-          styles: { color: 'tomato' },
+          styles: { color: 'white' },
         },
         id: 'basic-title-1',
       },
@@ -17,7 +17,7 @@ const templates = [
         type: 'img',
         data: {
           contents: {
-            src: '//g0.evitecdn.com/pages/signed-out-virtual-homepage/6210705586454528/21f2897a86ca4a338a9ff2a6dd83665f.png',
+            src: 'https://api2.projector.com/v2/image/3060d7cf-529f-4168-8cd6-f34d553ee963?width=1024',
           },
           styles: {},
         },
@@ -48,27 +48,39 @@ const templates = [
   },
   {
     concept: 'wedding',
-    backgroundColor: 'pink',
+    backgroundColor: '#169af7',
     blocks: [
       {
-        type: 'title',
+        type: 'longShadowText',
         data: {
           contents: {
-            texts: 'Happy Wedding',
+            texts: 'giveaway  alert',
           },
-          styles: {},
+          styles: {
+            color: 'white',
+          },
         },
-        id: 'wedding-title-1',
+        id: 'cool-title-1',
       },
       {
         type: 'img',
         data: {
           contents: {
-            src: '//g0.evitecdn.com/pages/signed-out-virtual-homepage/6210705586454528/21f2897a86ca4a338a9ff2a6dd83665f.png',
+            src: 'https://api2.projector.com/v2/image/db477c2a-e23b-4e83-bad9-ddda759fec95?width=1024',
           },
           styles: {},
         },
         id: 'wedding-img-1',
+      },
+      {
+        type: 'title',
+        data: {
+          contents: {
+            texts: 'contact me via',
+          },
+          styles: { color: 'white' },
+        },
+        id: 'basic-title-1',
       },
       {
         type: 'social',

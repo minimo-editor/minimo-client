@@ -26,7 +26,6 @@ export default function Templates() {
 
   return (
     <>
-      <Title>Select a template</Title>
       <TemplatesContainer>
         {templates.map((template) => (
           <Template
