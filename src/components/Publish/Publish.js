@@ -109,12 +109,24 @@ export default function Publish() {
         </OkButton>
       </FormContainer>
       <div>
-        <p>{result === true && 'SUCCESS'}</p>
-        <p>{result === false && 'FAIL, TRY AGAIN'}</p>
+        <SuccessMessage>{result === true && 'SUCCESS!'}</SuccessMessage>
+        <FailMessage>{result === false && 'FAIL, TRY AGAIN'}</FailMessage>
       </div>
     </Container>
   );
 }
+
+const SuccessMessage = styled.div`
+  color: green;
+  text-align: center;
+  margin-top: 1rem;
+`;
+
+const FailMessage = styled.div`
+  color: red;
+  text-align: center;
+  margin-top: 1rem;
+`;
 
 const Title = styled.h2`
   text-align: center;
