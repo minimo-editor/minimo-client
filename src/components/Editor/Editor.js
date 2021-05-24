@@ -48,10 +48,7 @@ export default function Editor() {
     setBlocks((prev) => (
       [...prev].map((each, idx) => {
         if (index === idx) {
-          each.data.styles = {
-            ...each.data.styles,
-            [prop]: value,
-          };
+          each.data.styles[prop] = value;
         }
 
         return each;
