@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import ContentEditable from 'react-contenteditable';
 import useColorPicker from '../../../hooks/useColorPicker';
@@ -41,7 +41,7 @@ export default function Title({
     <Container>
       <ContentEditable
         html={texts}
-        style={styles}
+        style={{ ...styles }}
         onChange={(e) => onChange(e, index, 'texts')}
         disabled={!isEditable}
       />
