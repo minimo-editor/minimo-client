@@ -72,6 +72,7 @@ export default function Editor() {
       [...prev].filter((block, index) => index !== targetIndex)
     ));
   }
+
   function toggleSidebar() {
     setIsSidebarOpen((prev) => !prev);
   }
