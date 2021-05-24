@@ -1,5 +1,4 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import ContentEditable from 'react-contenteditable';
 import useColorPicker from '../../../hooks/useColorPicker';
