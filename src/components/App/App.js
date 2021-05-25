@@ -14,6 +14,26 @@ import ProjectStepBar from '../ProjectStepBar';
 import ProjectByAddress from '../ProjectByAddress';
 import { AuthContext } from '../../contexts/AuthContext';
 import Main from '../Main';
+import Stepper from '../shared/Stepper';
+
+const STEPS = [
+  {
+    step: 1,
+    title: 'first title',
+  },
+  {
+    step: 2,
+    title: 'second title',
+  },
+  {
+    step: 3,
+    title: 'third title',
+  },
+  {
+    step: 4,
+    title: 'fourth title',
+  },
+];
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -24,6 +44,7 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <Navbar />
+            <Stepper steps={STEPS} />
             <Main />
           </Route>
           {user && (
