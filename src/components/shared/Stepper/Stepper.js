@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import * as ICON from 'react-feather';
+import React from 'react';
 import styled, { css } from 'styled-components';
 
 function getStatus(stepNumber, currentStepNumber) {
@@ -15,66 +14,38 @@ function getStatus(stepNumber, currentStepNumber) {
 
 export default function Stepper({
   steps,
+  currentStep,
 }) {
   const minStep = steps[0].step;
   const maxStep = steps[steps.length - 1].step;
 
-  const [currentStep, setCurrentStep] = useState(minStep);
-
-  function prevStep() {
-    setCurrentStep((prev) => {
-      if (prev - 1 > minStep) {
-        return prev - 1;
-      }
-
-      return minStep;
-    });
-  }
-
-  function nextStep() {
-    setCurrentStep((prev) => {
-      if (prev + 1 < maxStep) {
-        return prev + 1;
-      }
-
-      return maxStep;
-    });
-  }
-
   return (
-    <Container>
-      <Button onClick={prevStep}>
-        <ICON.ArrowLeftCircle color='white' />
-      </Button>
-      <StepsContainer>
-        {steps.map(({ step, title }) => (
-          <Step key={step}>
-            <Circle
-              status={getStatus(step, currentStep)}
-            >
-              <span>{step}</span>
-            </Circle>
-            <Title>{title}</Title>
-            {/* TODO: step min /step max로 관리 */}
-            <Bar isLeft={step > 1} />
-            <Bar isRight={step < 4} />
-          </Step>
-        ))}
-      </StepsContainer>
-      <Button onClick={nextStep}>
-        <ICON.ArrowRightCircle color='white' />
-      </Button>
-    </Container>
+    <>
+      <Container>
+        <StepsContainer>
+          {steps.map(({ step, label }) => (
+            <Step key={step}>
+              <Circle
+                status={getStatus(step, currentStep)}
+              >
+                <span>{step}</span>
+              </Circle>
+              <Label>{label}</Label>
+              <Bar isLeft={step > minStep} />
+              <Bar isRight={step < maxStep} />
+            </Step>
+          ))}
+        </StepsContainer>
+      </Container>
+    </>
   );
 }
 
 const StepsContainer = styled.div`
   height: 100px;
-  width: 500px;
   margin-bottom: 2rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 `;
 
 const Button = styled.button`
@@ -95,10 +66,9 @@ const Container = styled.div`
 `;
 
 const Step = styled.div`
-  display: table-cell;
   position: relative;
   padding: 24px;
-  width: 25%;
+  width: -webkit-fill-available;
 `;
 
 const Circle = styled.div`
@@ -115,11 +85,10 @@ const Circle = styled.div`
 
   ${({ status }) => status === 'active' && css`
       background: rgb(33, 150, 243);
-    `
-};
+    `};
 `;
 
-const Title = styled.div`
+const Label = styled.div`
   text-align: center;
   margin-top: 16px;
   font-size: 14px;
