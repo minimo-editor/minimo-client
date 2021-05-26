@@ -1,76 +1,81 @@
-import React, { useContext } from 'react';
-import styled, { css } from 'styled-components';
+import React from 'react';
+import styled from 'styled-components';
 import * as ICON from 'react-feather';
-import { ProjectContext } from '../../contexts/ProjectContext';
+import Editor from '../Editor/Editor';
+import Preview from '../Preview/Preview';
+import Publish from '../Publish';
+import Templates from '../Templates';
+import Stepper from '../shared/Stepper';
+import useStepper from '../../hooks/useStepper';
 
 const STEPS = [
   {
+    step: 0,
+    label: 'Select a template',
+  },
+  {
     step: 1,
-    title: 'Select a template',
+    label: 'Edit your project',
   },
   {
     step: 2,
-    title: 'Edit your project',
+    label: 'Preview',
   },
   {
     step: 3,
-    title: 'Preview',
-  },
-  {
-    step: 4,
-    title: 'Publish',
+    label: 'Publish',
   },
 ];
 
 export default function ProjectStepBar() {
-  const { step: currentStep, prevStep, nextStep } = useContext(ProjectContext);
-
-  function getStatus(stepNumber, currentStepNumber) {
-    switch (true) {
-      case (stepNumber === currentStepNumber):
-        return 'active';
-      case (stepNumber < currentStepNumber):
-        return 'done';
-      default:
-        return 'none';
-    }
-  }
+  const { currentStep, moveToNextStep, moveToPrevStep } = useStepper(STEPS.length);
 
   return (
-    <Container>
-      <Button onClick={prevStep}>
-        <ICON.ArrowLeftCircle color='white' />
-      </Button>
-      <StepsContainer>
-        {STEPS.map(({ step, title }) => (
-          <Step key={step}>
-            <Circle
-              status={getStatus(step, currentStep)}
-            >
-              <span>{step}</span>
-            </Circle>
-            <Title>{title}</Title>
-            {/* TODO: step min /step max로 관리 */}
-            <Bar isLeft={step > 1} />
-            <Bar isRight={step < 4} />
-          </Step>
-        ))}
-      </StepsContainer>
-      <Button onClick={nextStep}>
-        <ICON.ArrowRightCircle color='white' />
-      </Button>
-    </Container>
+    <>
+      <StepperContainer>
+        <Button onClick={moveToPrevStep}>
+          <ICON.ArrowLeftCircle color='white' />
+        </Button>
+        <Stepper
+          steps={STEPS}
+          currentStep={currentStep}
+        />
+        <Button onClick={moveToNextStep}>
+          <ICON.ArrowRightCircle color='white' />
+        </Button>
+      </StepperContainer>
+      {getStepContent(currentStep)}
+    </>
   );
 }
 
-const StepsContainer = styled.div`
-  height: 100px;
-  width: 500px;
-  margin-bottom: 2rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
+// TODO: 어떻게하면 한곳에서 정의할 수 있을까 label과 함께..
+function getStepContent(step) {
+  switch (step) {
+    case 0:
+      return (
+        <Templates />
+      );
+    case 1:
+      return (
+        <Editor />
+      );
+    case 2:
+      return (
+        <Preview />
+      );
+    case 3:
+      return (
+        <Publish />
+      );
+    default:
+      return (
+        <div>
+          Error, try again.
+        </div>
+      );
+  }
+}
 
 const Button = styled.button`
   all: unset;
@@ -83,60 +88,8 @@ const Button = styled.button`
   }
 `;
 
-const Container = styled.div`
+const StepperContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-const Step = styled.div`
-  display: table-cell;
-  position: relative;
-  padding: 24px;
-  width: 25%;
-`;
-
-const Circle = styled.div`
-  width: 24px;
-  height: 24px;
-  margin: 0 auto;
-  background: #9E9E9E;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 2em;
-  font-size: 12px;
-  font-weight: bolder;
-  color: white;
-
-  ${({ status }) => status === 'active' && css`
-      background: rgb(33, 150, 243);
-    `
-};
-`;
-
-const Title = styled.div`
-  text-align: center;
-  margin-top: 16px;
-  font-size: 14px;
-  font-weight: normal;
-  color: grey;
-`;
-
-const Bar = styled.div`
-  position: absolute;
-  top: 36px;
-  height: 1px;
-  border-top: 1px solid #BDBDBD;
-
-  ${({ isLeft }) => isLeft && css`
-    left: 0;
-    right: 50%;
-    margin-right: 20px;
-  `};
-
-  ${({ isRight }) => isRight && css`
-    right: 0;
-    left: 50%;
-    margin-left: 20px;
-  `};
 `;
