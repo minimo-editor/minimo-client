@@ -12,23 +12,28 @@ const STEPS = [
   {
     step: 0,
     label: 'Select a template',
+    content: Templates,
   },
   {
     step: 1,
     label: 'Edit your project',
+    content: Editor,
   },
   {
     step: 2,
     label: 'Preview',
+    content: Preview,
   },
   {
     step: 3,
     label: 'Publish',
+    content: Publish,
   },
 ];
 
 export default function ProjectStepBar() {
   const { currentStep, moveToNextStep, moveToPrevStep } = useStepper(STEPS.length);
+  const Content = STEPS[currentStep].content;
 
   return (
     <>
@@ -44,37 +49,9 @@ export default function ProjectStepBar() {
           <ICON.ArrowRightCircle color='white' />
         </Button>
       </StepperContainer>
-      {getStepContent(currentStep)}
+      <Content />
     </>
   );
-}
-
-// TODO: 어떻게하면 한곳에서 정의할 수 있을까 label과 함께..
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return (
-        <Templates />
-      );
-    case 1:
-      return (
-        <Editor />
-      );
-    case 2:
-      return (
-        <Preview />
-      );
-    case 3:
-      return (
-        <Publish />
-      );
-    default:
-      return (
-        <div>
-          Error, try again.
-        </div>
-      );
-  }
 }
 
 const Button = styled.button`
