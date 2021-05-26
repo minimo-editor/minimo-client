@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import uniqueId from 'lodash.uniqueid';
 import EditableProject from '../EditableProject';
-import ColorPicker from '../shared/ColorPicker/ColorPicker';
+import ColorPicker from '../shared/ColorPicker';
 import useColorPicker from '../../hooks/useColorPicker';
 import { AuthContext } from '../../contexts/AuthContext';
 import { ProjectContext } from '../../contexts/ProjectContext';
