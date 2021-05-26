@@ -8,12 +8,11 @@ import {
 import styled from 'styled-components';
 import Navbar from '../Navbar';
 import Login from '../Login';
-import ProjectManager from '../ProjectManager';
 import { ProjectProvider } from '../../contexts/ProjectContext';
-import ProjectStepBar from '../ProjectStepBar';
 import ProjectByAddress from '../ProjectByAddress';
 import { AuthContext } from '../../contexts/AuthContext';
 import Main from '../Main';
+import ProjectStepBar from '../ProjectStepBar/ProjectStepBar';
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -31,7 +30,6 @@ function App() {
               <Navbar isEditor />
               <ProjectProvider>
                 <ProjectStepBar />
-                <ProjectManager />
               </ProjectProvider>
             </Route>
           )}
