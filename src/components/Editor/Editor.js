@@ -1,20 +1,28 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import uniqueId from 'lodash.uniqueid';
 import EditableProject from '../EditableProject';
 import ColorPicker from '../shared/ColorPicker';
 import useColorPicker from '../../hooks/useColorPicker';
-import { AuthContext } from '../../contexts/AuthContext';
 import { ProjectContext } from '../../contexts/ProjectContext';
 import { OkButton } from '../shared/StyledButton';
 import Sidebar from '../Sidebar';
-import blocksDefaultDataMap from '../../utils/blocksDefaultDataMap';
+import useBlocks from './useBlocks';
+import useSidebar from './useSidebar';
 
 export default function Editor() {
-  const { userId } = useContext(AuthContext);
-  const { project, setProject } = useContext(ProjectContext);
-  const [blocks, setBlocks] = useState(project.blocks);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { project } = useContext(ProjectContext);
+
+  const {
+    blocks,
+    setBlocks,
+    swapBlocks,
+    deleteBlock,
+    insertBlock,
+    resetBlockContents,
+    handleChangeBlock,
+    handleChangeStyle,
+    handleClickSave,
+  } = useBlocks();
 
   const {
     color: bgColor,
@@ -23,95 +31,16 @@ export default function Editor() {
     handleChangeColor,
   } = useColorPicker(project.backgroundColor);
 
-  function resetBlockContents(index, contents) {
-    setBlocks((prev) => {
-      const prevCopy = [...prev];
-      prevCopy[index].data.contents = contents;
-
-      return prevCopy;
-    });
-  }
-
-  function handleChangeBlock(e, index, name) {
-    setBlocks((prev) => (
-      [...prev].map((each, idx) => {
-        if (index === idx) {
-          each.data.contents[name] = e.target.value;
-        }
-
-        return each;
-      })
-    ));
-  }
-
-  function handleChangeStyle(value, index, prop) {
-    setBlocks((prev) => (
-      [...prev].map((each, idx) => {
-        if (index === idx) {
-          each.data.styles[prop] = value;
-        }
-
-        return each;
-      })
-    ));
-  }
-
-  function swapBlocks(index1, index2) {
-    setBlocks((prev) => {
-      const prevCopy = [...prev];
-      const firstItem = prevCopy[index1];
-      prevCopy[index1] = prevCopy[index2];
-      prevCopy[index2] = firstItem;
-
-      return prevCopy;
-    });
-  }
-
-  function deleteBlock(targetIndex) {
-    setBlocks((prev) => (
-      [...prev].filter((block, index) => index !== targetIndex)
-    ));
-  }
-
-  function toggleSidebar() {
-    setIsSidebarOpen((prev) => !prev);
-  }
-
-  function insertBlock(index, blockId) {
-    if (!blockId) {
-      return;
-    }
-
-    // TODO: 보기좋게
-    const defaultData = blocksDefaultDataMap.get(blockId)();
-    const id = uniqueId();
-    const newBlock = {
-      id,
-      type: blockId,
-      data: defaultData,
-    };
-
-    setBlocks((prev) => {
-      const prevCopy = [...prev];
-      prevCopy.splice(index, 0, newBlock);
-      return prevCopy;
-    });
-  }
-
-  function onClickSave() {
-    setProject((prev) => ({
-      ...prev,
-      blocks,
-      backgroundColor: bgColor,
-      creatorId: userId,
-    }));
-  }
+  const {
+    isSidebarOpen,
+    toggleSidebar,
+  } = useSidebar();
 
   return (
     <Container>
       <SaveButton
         type='button'
-        onClick={onClickSave}
+        onClick={handleClickSave}
       >
         SAVE
       </SaveButton>
