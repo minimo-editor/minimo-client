@@ -12,7 +12,7 @@ import { ProjectProvider } from '../../contexts/ProjectContext';
 import ProjectByAddress from '../ProjectByAddress';
 import { AuthContext } from '../../contexts/AuthContext';
 import Main from '../Main';
-import ProjectStepBar from '../ProjectStepBar/ProjectStepBar';
+import ProjectFormStepper from '../ProjectFormStepper';
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -29,7 +29,7 @@ function App() {
             <Route exact path='/editor'>
               <Navbar isEditor />
               <ProjectProvider>
-                <ProjectStepBar />
+                <ProjectFormStepper />
               </ProjectProvider>
             </Route>
           )}
