@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import * as ICON from 'react-feather';
 import Editor from '../Editor/Editor';
@@ -7,6 +7,7 @@ import Publish from '../Publish';
 import Templates from '../Templates';
 import Stepper from '../shared/Stepper';
 import useStepper from '../../hooks/useStepper';
+import { ProjectContext } from '../../contexts/ProjectContext';
 
 const STEPS = [
   {
@@ -32,6 +33,8 @@ const STEPS = [
 ];
 
 export default function ProjectFormStepper() {
+  const { project } = useContext(ProjectContext);
+
   const { currentStep, moveToNextStep, moveToPrevStep } = useStepper(STEPS.length);
   const Content = STEPS[currentStep].content;
 
@@ -45,7 +48,10 @@ export default function ProjectFormStepper() {
           steps={STEPS}
           currentStep={currentStep}
         />
-        <Button onClick={moveToNextStep}>
+        <Button
+          onClick={moveToNextStep}
+          disabled={!project}
+        >
           <ICON.ArrowRightCircle color='white' />
         </Button>
       </StepperContainer>
@@ -62,6 +68,10 @@ const Button = styled.button`
 
   &:hover {
     background-color: darkgray;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
   }
 `;
 
