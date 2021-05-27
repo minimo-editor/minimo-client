@@ -31,7 +31,7 @@ export default [
     id: 'video',
     src: 'https://www.mendipvale.nhs.uk/wp-content/uploads/2019/10/vp-video-editing.jpg',
   },
-  // {
+  // { TODO
   //   id: 'wishlist',
   //   src: '/assets/wishlist.png',
   // },
