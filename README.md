@@ -88,7 +88,7 @@
     </section>
     ```
 
-     minim의 `json` 형식
+     minimo의 `json` 형식
 
     ```jsx
     {
