@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import * as ICON from 'react-feather';
 import useModal from '../../../hooks/useModal';
@@ -63,6 +64,15 @@ export default function Img({
     </>
   );
 }
+
+Img.propTypes = {
+  data: PropTypes.shape({
+    contents: PropTypes.object,
+  }),
+  index: PropTypes.number.isRequired,
+  isActive: PropTypes.bool.isRequired,
+  resetBlockContents: PropTypes.func.isRequired,
+};
 
 const IconButton = styled.div`
   display: inline-block;
