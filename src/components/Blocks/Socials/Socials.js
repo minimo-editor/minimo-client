@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 import * as ICON from 'react-feather';
@@ -78,6 +79,15 @@ export default function Socials({
     </>
   );
 }
+
+Socials.propTypes = {
+  data: PropTypes.shape({
+    contents: PropTypes.object,
+  }).isRequired,
+  index: PropTypes.number.isRequired,
+  isActive: PropTypes.any,
+  resetBlockContents: PropTypes.func.isRequired,
+};
 
 const SocialsContainer = styled.div`
   position: relative;
