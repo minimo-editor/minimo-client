@@ -52,6 +52,15 @@ export default function Map({
 
   const initialLocation = isEmptyObject(markedLocation) ? defaultLocation : markedLocation;
 
+  const onMapLoad = useCallback((map) => {
+    mapRef.current = map;
+  }, []);
+
+  const panTo = useCallback(({ lat, lng }) => {
+    mapRef.current.panTo({ lat, lng });
+    mapRef.current.setZoom(15);
+  }, []);
+
   function onClick() {
     const newContents = {
       location: marker,
@@ -61,15 +70,6 @@ export default function Map({
     resetBlockContents(index, newContents);
     setModalOpen(false);
   }
-
-  const onMapLoad = useCallback((map) => {
-    mapRef.current = map;
-  }, []);
-
-  const panTo = useCallback(({ lat, lng }) => {
-    mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(15);
-  }, []);
 
   if (loadError) {
     return 'Error';
