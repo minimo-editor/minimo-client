@@ -1,6 +1,5 @@
-// TODO: add track caption
-/* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import useModal from '../../../hooks/useModal';
 import Modal from '../../shared/Modal';
@@ -57,8 +56,18 @@ export default function Iframe({
   );
 }
 
+Iframe.propTypes = {
+  data: PropTypes.shape({
+    contents: PropTypes.object,
+  }),
+  index: PropTypes.number.isRequired,
+  isActive: PropTypes.bool.isRequired,
+  resetBlockContents: PropTypes.func.isRequired,
+};
+
 const VideoWrapper = styled.div`
   width: 100%;
+
   & video {
     width: 100%;
   }
