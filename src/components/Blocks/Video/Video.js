@@ -1,5 +1,5 @@
-// TODO: add track caption
 /* eslint-disable jsx-a11y/media-has-caption */
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 import useModal from '../../../hooks/useModal';
@@ -53,6 +53,15 @@ export default function Video({
     </>
   );
 }
+
+Video.propTypes = {
+  data: PropTypes.shape({
+    contents: PropTypes.object,
+  }).isRequired,
+  index: PropTypes.number.isRequired,
+  isActive: PropTypes.bool,
+  resetBlockContents: PropTypes.func.isRequired,
+};
 
 const VideoWrapper = styled.div`
   width: 100%;
