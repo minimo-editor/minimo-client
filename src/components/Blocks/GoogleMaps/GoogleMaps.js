@@ -1,4 +1,3 @@
-/* eslint-disable react/button-has-type */
 import PropTypes from 'prop-types';
 import React, { useCallback, useRef, useState } from 'react';
 import {
@@ -164,7 +163,6 @@ const Address = styled.div`
 const IconWrapper = styled.div`
   width: 100%;
   height: 35px;
-  /* background: #86e292; */
   text-align: center;
   line-height: 2;
   font-size: 1.1rem;
