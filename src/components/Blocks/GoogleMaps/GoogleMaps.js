@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import React, { useCallback, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   GoogleMap,
   useLoadScript,
@@ -43,12 +43,13 @@ export default function Map({
     address: markedAddress = '',
   } = data.contents;
 
-  const { modalOpen, setModalOpen, toggle } = useModal();
-  const { isLoaded, loadError } = useLoadScript(googleMapsConfig);
   const [marker, setMarker] = useState(markedLocation);
   const [address, setAddress] = useState(markedAddress);
 
   const mapRef = useRef();
+  const { modalOpen, setModalOpen, toggle } = useModal();
+  const { isLoaded, loadError } = useLoadScript(googleMapsConfig);
+
   const initialLocation = isEmptyObject(markedLocation) ? defaultLocation : markedLocation;
 
   function onClick() {
@@ -70,8 +71,13 @@ export default function Map({
     mapRef.current.setZoom(15);
   }, []);
 
-  if (loadError) return 'Error';
-  if (!isLoaded) return 'Loading...';
+  if (loadError) {
+    return 'Error';
+  }
+
+  if (!isLoaded) {
+    return 'Loading...';
+  }
 
   return (
     <Container
@@ -94,7 +100,6 @@ export default function Map({
       >
         {marker.lat && (
           <Marker
-            key={`${marker.lat}-${marker.lng}`}
             position={{ lat: marker.lat, lng: marker.lng }}
           />
         )}
