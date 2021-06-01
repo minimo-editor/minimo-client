@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import firebase from 'firebase';
 import styled from 'styled-components';
 import { AuthContext } from '../../contexts/AuthContext';
 
-export default function Navbar({ isEditor }) {
+export default function Navbar({ isEditor = false }) {
   const { user } = useContext(AuthContext);
+
   return (
     <>
       <Header>
@@ -40,6 +42,10 @@ export default function Navbar({ isEditor }) {
     </>
   );
 }
+
+Navbar.propTypes = {
+  isEditor: PropTypes.bool.isRequired,
+};
 
 const Auth = styled.div`
   display: flex;
