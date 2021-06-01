@@ -48,10 +48,10 @@ export default function Editor() {
         bgColor={bgColor}
       >
         <EditableProject
-          insertBlock={insertBlock}
-          swapBlocks={swapBlocks}
           blocks={blocks}
           setBlocks={setBlocks}
+          insertBlock={insertBlock}
+          swapBlocks={swapBlocks}
           resetBlockContents={resetBlockContents}
           handleChangeBlock={handleChangeBlock}
           handleChangeStyle={handleChangeStyle}
@@ -60,9 +60,9 @@ export default function Editor() {
         {/* FIXME: rename -> colorpicker tool ? */}
         <ColorPicker
           color={bgColor}
+          isColorPickerOpen={isColorPickerOpen}
           onChange={handleChangeColor}
           toggleColorPicker={toggleColorPicker}
-          isColorPickerOpen={isColorPickerOpen}
         />
       </ProjectWrapper>
       <Sidebar
