@@ -1,4 +1,5 @@
 /* eslint-disable react/button-has-type */
+import PropTypes from 'prop-types';
 import React, { useCallback, useRef, useState } from 'react';
 import {
   GoogleMap,
@@ -7,7 +8,6 @@ import {
 } from '@react-google-maps/api';
 import * as ICON from 'react-feather';
 import styled from 'styled-components';
-
 import '@reach/combobox/styles.css';
 import Search from './Search';
 import Locate from './Locate';
@@ -40,14 +40,14 @@ export default function Map({
   resetBlockContents,
 }) {
   const {
-    location: markedLocation,
-    address: markedAddress,
+    location: markedLocation = {},
+    address: markedAddress = '',
   } = data.contents;
 
   const { modalOpen, setModalOpen, toggle } = useModal();
   const { isLoaded, loadError } = useLoadScript(googleMapsConfig);
-  const [marker, setMarker] = useState(markedLocation || {});
-  const [address, setAddress] = useState(markedAddress || '');
+  const [marker, setMarker] = useState(markedLocation);
+  const [address, setAddress] = useState(markedAddress);
 
   const mapRef = useRef();
   const initialLocation = isEmptyObject(markedLocation) ? defaultLocation : markedLocation;
@@ -125,6 +125,18 @@ export default function Map({
     </Container>
   );
 }
+
+Map.propTypes = {
+  data: PropTypes.shape({
+    contents: PropTypes.shape({
+      location: PropTypes.object,
+      address: PropTypes.string,
+    }).isRequired,
+  }),
+  index: PropTypes.number.isRequired,
+  isActive: PropTypes.bool.isRequired,
+  resetBlockContents: PropTypes.func.isRequired,
+};
 
 const Container = styled.div`
   position: relative;
