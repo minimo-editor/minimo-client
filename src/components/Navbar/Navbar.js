@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import firebase from 'firebase';
+import PropTypes from 'prop-types';
+import firebase from 'firebase/app';
 import styled from 'styled-components';
 import { AuthContext } from '../../contexts/AuthContext';
 
@@ -44,7 +44,7 @@ export default function Navbar({ isEditor = false }) {
 }
 
 Navbar.propTypes = {
-  isEditor: PropTypes.bool.isRequired,
+  isEditor: PropTypes.bool,
 };
 
 const Auth = styled.div`
