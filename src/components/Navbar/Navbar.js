@@ -9,47 +9,39 @@ export default function Navbar({ isEditor = false }) {
   const { user } = useContext(AuthContext);
 
   return (
-    <>
-      <Header>
-        <HomeLink to='/'>
-          <Logo>
-            minimo
-          </Logo>
-        </HomeLink>
-        {!isEditor && (
-          <User>
-            {user && `Hello, ${user.displayName}`}
-          </User>
-        )}
-        <Auth>
-          {user && (
-            <LogoutButton
-              type='button'
-              onClick={() => firebase.auth().signOut()}
-            >
-              Log Out
-            </LogoutButton>
-          )}
-          {!isEditor && (
-            <LoginLink to={user ? '/editor' : '/login'}>
-              <LoginButton>
-                Get Started
-              </LoginButton>
-            </LoginLink>
-          )}
-        </Auth>
-      </Header>
-    </>
+    <NavbarContainer>
+      <HomeLink to='/'>
+        <Logo>
+          minimo
+        </Logo>
+      </HomeLink>
+      {!isEditor && (
+        <User>
+          {user && `Hello, ${user.displayName}`}
+        </User>
+      )}
+      {user && (
+        <LogoutButton
+          type='button'
+          onClick={() => firebase.auth().signOut()}
+        >
+          Log Out
+        </LogoutButton>
+      )}
+      {!isEditor && (
+        <StartLink to={user ? '/editor' : '/login'}>
+          <StartButton>
+            Get Started
+          </StartButton>
+        </StartLink>
+      )}
+    </NavbarContainer>
   );
 }
 
 Navbar.propTypes = {
   isEditor: PropTypes.bool,
 };
-
-const Auth = styled.div`
-  display: flex;
-`;
 
 const User = styled.div`
   margin: auto;
@@ -60,7 +52,7 @@ const User = styled.div`
   text-decoration: none;
 `;
 
-const Header = styled.div`
+const NavbarContainer = styled.div`
   width: 100%;
   height: 80px;
   display: flex;
@@ -98,9 +90,10 @@ const Button = styled.div`
   height: 40px;
 `;
 
-const LoginButton = styled(Button)`
+const StartButton = styled(Button)`
   background-color: rgb(0, 0, 0);
   color: rgb(255, 255, 255);
+
   &:hover {
     background-color: rgb(3, 69, 207);
     color: rgb(255, 255, 255);
@@ -118,6 +111,6 @@ const LogoutButton = styled(Button)`
   }
 `;
 
-const LoginLink = styled(Link)`
+const StartLink = styled(Link)`
   text-decoration: none;
 `;
