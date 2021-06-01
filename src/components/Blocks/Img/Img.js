@@ -34,28 +34,26 @@ export default function Img({
         <Modal
           handleClose={() => setModalOpen(false)}
         >
-          <>
-            <ButtonsContainer>
-              <IconButton onClick={() => setIsInputTypeLink(true)}>
-                <ICON.Link color='white' />
-              </IconButton>
-              <IconButton onClick={() => setIsInputTypeLink(false)}>
-                <ICON.File color='white' />
-              </IconButton>
-            </ButtonsContainer>
-            {isInputTypeLink
-              ? (
-                <LinkForm
-                  inputs={contents}
-                  handleSubmitForm={handleSubmitForm}
-                />
-              )
-              : (
-                <ImgUploader
-                  handleUpload={handleSubmitForm}
-                />
-              )}
-          </>
+          <ButtonsContainer>
+            <IconButton onClick={() => setIsInputTypeLink(true)}>
+              <ICON.Link color='white' />
+            </IconButton>
+            <IconButton onClick={() => setIsInputTypeLink(false)}>
+              <ICON.File color='white' />
+            </IconButton>
+          </ButtonsContainer>
+          {isInputTypeLink
+            ? (
+              <LinkForm
+                inputs={contents}
+                handleSubmitForm={handleSubmitForm}
+              />
+            )
+            : (
+              <ImgUploader
+                handleUpload={handleSubmitForm}
+              />
+            )}
         </Modal>
       )}
       {isActive && (
@@ -68,10 +66,10 @@ export default function Img({
 Img.propTypes = {
   data: PropTypes.shape({
     contents: PropTypes.object,
-  }),
+  }).isRequired,
   index: PropTypes.number.isRequired,
-  isActive: PropTypes.bool.isRequired,
-  resetBlockContents: PropTypes.func.isRequired,
+  isActive: PropTypes.bool,
+  resetBlockContents: PropTypes.func,
 };
 
 const IconButton = styled.div`
