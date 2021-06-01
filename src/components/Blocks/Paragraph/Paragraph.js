@@ -1,17 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ContentEditable from 'react-contenteditable';
 import getDefaultParagraph from './defaultData';
 import isEmptyObject from '../../../utils/isEmptyObject';
 import useColorPicker from '../../../hooks/useColorPicker';
 import { TextColorPicker } from '../../shared/ColorPicker';
-
-const Container = styled.div`
-  position: relative;
-  text-align: center;
-  width: 100%;
-  font-size: 1rem;
-`;
 
 export default function Paragragh({
   data,
@@ -42,18 +36,34 @@ export default function Paragragh({
     <Container>
       <ContentEditable
         html={texts}
-        style={styles}
+        style={{ ...styles }}
         onChange={(e) => onChange(e, index, 'texts')}
         disabled={!isEditable}
       />
       {isActive && (
         <TextColorPicker
           color={color}
+          isColorPickerOpen={isColorPickerOpen}
           onChange={onChangeColor}
           toggleColorPicker={toggleColorPicker}
-          isColorPickerOpen={isColorPickerOpen}
         />
       )}
     </Container>
   );
 }
+
+Paragragh.propTypes = {
+  data: PropTypes.object,
+  index: PropTypes.number.isRequired,
+  isEditable: PropTypes.bool,
+  isActive: PropTypes.bool,
+  onChange: PropTypes.func.isRequired,
+  handleChangeStyle: PropTypes.func.isRequired,
+};
+
+const Container = styled.div`
+  position: relative;
+  text-align: center;
+  width: 100%;
+  font-size: 1rem;
+`;
