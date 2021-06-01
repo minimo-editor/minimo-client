@@ -136,10 +136,10 @@ Map.propTypes = {
       location: PropTypes.object,
       address: PropTypes.string,
     }).isRequired,
-  }),
+  }).isRequired,
   index: PropTypes.number.isRequired,
-  isActive: PropTypes.bool.isRequired,
-  resetBlockContents: PropTypes.func.isRequired,
+  isActive: PropTypes.bool,
+  resetBlockContents: PropTypes.func,
 };
 
 const Container = styled.div`

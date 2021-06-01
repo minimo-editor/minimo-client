@@ -53,12 +53,17 @@ export default function Paragragh({
 }
 
 Paragragh.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.shape({
+    contents: PropTypes.shape({
+      texts: PropTypes.string,
+    }),
+    styles: PropTypes.object,
+  }).isRequired,
+  handleChangeStyle: PropTypes.func,
   index: PropTypes.number.isRequired,
-  isEditable: PropTypes.bool,
   isActive: PropTypes.bool,
-  onChange: PropTypes.func.isRequired,
-  handleChangeStyle: PropTypes.func.isRequired,
+  isEditable: PropTypes.bool,
+  onChange: PropTypes.func,
 };
 
 const Container = styled.div`

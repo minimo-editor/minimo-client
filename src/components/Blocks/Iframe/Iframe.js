@@ -61,8 +61,8 @@ Iframe.propTypes = {
     contents: PropTypes.object,
   }),
   index: PropTypes.number.isRequired,
-  isActive: PropTypes.bool.isRequired,
-  resetBlockContents: PropTypes.func.isRequired,
+  isActive: PropTypes.bool,
+  resetBlockContents: PropTypes.func,
 };
 
 const VideoWrapper = styled.div`

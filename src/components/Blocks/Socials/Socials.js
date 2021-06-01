@@ -85,8 +85,8 @@ Socials.propTypes = {
     contents: PropTypes.object,
   }).isRequired,
   index: PropTypes.number.isRequired,
-  isActive: PropTypes.any,
-  resetBlockContents: PropTypes.func.isRequired,
+  isActive: PropTypes.bool,
+  resetBlockContents: PropTypes.func,
 };
 
 const SocialsContainer = styled.div`
