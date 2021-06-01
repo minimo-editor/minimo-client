@@ -7,8 +7,8 @@ import { AuthContext } from '../../contexts/AuthContext';
 
 export default function Templates() {
   const { userId } = useContext(AuthContext);
-  const [selectedTemplate, setSelectedTemplate] = useState(null);
   const { setProject } = useContext(ProjectContext);
+  const [selectedTemplate, setSelectedTemplate] = useState(null);
 
   function onChange(e) {
     const { value } = e.target;
