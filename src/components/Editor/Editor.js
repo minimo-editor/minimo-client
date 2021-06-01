@@ -40,7 +40,7 @@ export default function Editor() {
     <Container>
       <SaveButton
         type='button'
-        onClick={handleClickSave}
+        onClick={() => handleClickSave(bgColor)}
       >
         SAVE
       </SaveButton>
