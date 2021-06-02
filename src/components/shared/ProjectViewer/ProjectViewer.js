@@ -1,4 +1,5 @@
 /* eslint-disable react/no-array-index-key */
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 import blocksMap from '../../../utils/blocksMap';
@@ -15,7 +16,7 @@ export default function ProjectViewer({ project }) {
 
         return (
           <BlockWrapper
-            key={index}
+            key={block.id}
             draggable={false}
           >
             <Block
@@ -29,6 +30,13 @@ export default function ProjectViewer({ project }) {
     </MobileView>
   );
 }
+
+ProjectViewer.propTypes = {
+  project: PropTypes.shape({
+    backgroundColor: PropTypes.string.isRequired,
+    blocks: PropTypes.object.isRequired,
+  }),
+};
 
 const BlockWrapper = styled.div`
   position: relative;
