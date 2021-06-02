@@ -1,32 +1,56 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import ContentEditable from 'react-contenteditable';
 import styled from 'styled-components';
 
+const COLOR_MINT = '#01ded3';
+const SHADOW_DISTANCE = 200;
+
+function getTextShadow(distance = SHADOW_DISTANCE, color = COLOR_MINT) {
+  let textShadow = '';
+
+  for (let i = 0; i < distance; i++) {
+    textShadow += `${(textShadow ? ',' : '') + i}px ${i}px 0 ${color}`;
+  }
+
+  return textShadow;
+}
+
 export default function LongShadowText({
-  data, isEditable = true, onChange, index,
+  data,
+  index,
+  isEditable = true,
+  onChange,
 }) {
   const { texts } = data.contents;
   const { styles } = data;
 
-  let textShadow = '';
-
-  for (let i = 0; i < 200; i++) {
-    textShadow += `${(textShadow ? ',' : '') + i * 1}px ${i * 1}px 0 #01ded3`;
-  }
-
   return (
     <Container
-      textShadow={textShadow}
+      textShadow={getTextShadow()}
     >
       <ContentEditable
         html={texts}
-        style={styles}
+        style={{ ...styles }}
+        // TODO: constant
         onChange={(e) => onChange(e, index, 'texts')}
         disabled={!isEditable}
       />
     </Container>
   );
 }
+
+LongShadowText.propTypes = {
+  data: PropTypes.shape({
+    contents: PropTypes.shape({
+      texts: PropTypes.string,
+    }),
+    styles: PropTypes.object,
+  }).isRequired,
+  index: PropTypes.number.isRequired,
+  isEditable: PropTypes.bool,
+  onChange: PropTypes.func,
+};
 
 const Container = styled.div`
   font-size: 3rem;
