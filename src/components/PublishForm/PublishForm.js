@@ -1,73 +1,26 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import * as ICON from 'react-feather';
 import styled from 'styled-components';
-import { checkValidAddress, postProject } from '../../apis/project';
-import { ProjectContext } from '../../contexts/ProjectContext';
 import { OkButton } from '../shared/StyledButton';
-// TODO: validation ***이곳 매우 중요
-
-function getValidText(text) {
-  // eslint-disable-next-line no-useless-escape
-  const speacialTextRegex = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\ '\"\\(\=]/gi;
-  return text.replace(speacialTextRegex, '');
-}
+import usePublishForm from './usePublishForm';
 
 export default function PublishForm() {
-  const { project, setProject } = useContext(ProjectContext);
-
-  const [title, setTitle] = useState('');
-  const [address, setAddress] = useState('');
-  const [result, setResult] = useState('');
-
-  const [isAddressValid, setIsAddressValid] = useState(null);
-
-  function onChangeTitle(e) {
-    const { value } = e.target;
-
-    setTitle(value);
-    setProject((prev) => ({
-      ...prev,
-      title: value,
-    }));
-  }
-
-  function onChange(e) {
-    setIsAddressValid(null);
-    setAddress(getValidText(e.target.value));
-  }
-
-  async function onClick() {
-    const isValid = await checkValidAddress(address);
-    setIsAddressValid(isValid);
-
-    if (isValid) {
-      setProject((prev) => ({
-        ...prev,
-        address,
-      }));
-    }
-  }
-
-  async function onSubmit(e) {
-    e.preventDefault();
-
-    if (!isAddressValid) {
-      return;
-    }
-
-    try {
-      const postResult = await postProject(project);
-      setResult(postResult);
-    } catch (error) {
-      setResult(false);
-    }
-  }
+  const {
+    title,
+    address,
+    result,
+    isAddressValid,
+    handleSubmitForm,
+    handleChangeTitle,
+    handleChangeAddress,
+    handleClickCheckAddress,
+  } = usePublishForm();
 
   return (
     <Container>
       <Title>Publish</Title>
       <FormContainer
-        onSubmit={onSubmit}
+        onSubmit={handleSubmitForm}
       >
         <Label>
           Title
@@ -77,7 +30,7 @@ export default function PublishForm() {
             placeholder='Project Title'
             maxLength={25}
             value={title}
-            onChange={onChangeTitle}
+            onChange={handleChangeTitle}
           />
         </Label>
         <Label>
@@ -86,14 +39,14 @@ export default function PublishForm() {
             required
             placeholder='Project address'
             type='text'
-            onChange={onChange}
+            onChange={handleChangeAddress}
             value={address}
           />
         </Label>
         <AddressCheckWrapper>
           <CheckButton
             type='button'
-            onClick={onClick}
+            onClick={handleClickCheckAddress}
           >
             check
           </CheckButton>
