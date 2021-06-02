@@ -1,7 +1,4 @@
-/* eslint-disable no-useless-escape */
-import React, {
-  useContext, useState,
-} from 'react';
+import React, { useContext, useState } from 'react';
 import * as ICON from 'react-feather';
 import styled from 'styled-components';
 import { checkValidAddress, postProject } from '../../apis/project';
@@ -10,15 +7,29 @@ import { OkButton } from '../shared/StyledButton';
 // TODO: validation ***이곳 매우 중요
 
 function getValidText(text) {
+  // eslint-disable-next-line no-useless-escape
   const speacialTextRegex = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\ '\"\\(\=]/gi;
   return text.replace(speacialTextRegex, '');
 }
 
 export default function Publish() {
   const { project, setProject } = useContext(ProjectContext);
+
+  const [title, setTitle] = useState('');
   const [address, setAddress] = useState('');
-  const [isAddressValid, setIsAddressValid] = useState(null);
   const [result, setResult] = useState('');
+
+  const [isAddressValid, setIsAddressValid] = useState(null);
+
+  function onChangeTitle(e) {
+    const { value } = e.target;
+
+    setTitle(value);
+    setProject((prev) => ({
+      ...prev,
+      title: value,
+    }));
+  }
 
   function onChange(e) {
     setIsAddressValid(null);
@@ -47,7 +58,6 @@ export default function Publish() {
     try {
       const postResult = await postProject(project);
       setResult(postResult);
-      console.log(postResult);
     } catch (error) {
       setResult(false);
     }
@@ -63,8 +73,11 @@ export default function Publish() {
           Title
           <TextInput
             required
-            placeholder='Project Title'
             type='text'
+            placeholder='Project Title'
+            maxLength={25}
+            value={title}
+            onChange={onChangeTitle}
           />
         </Label>
         <Label>
@@ -101,12 +114,12 @@ export default function Publish() {
             </CheckIcon>
           )}
         </AddressCheckWrapper>
-        <OkButton
-          disabled={!isAddressValid}
+        <SubmitButton
+          disabled={!isAddressValid || !title}
           type='submit'
         >
           publish
-        </OkButton>
+        </SubmitButton>
       </FormContainer>
       <div>
         <SuccessMessage>{result === true && 'SUCCESS!'}</SuccessMessage>
@@ -220,5 +233,11 @@ const TextInput = styled.input`
 
   &:focus {
     outline: none;
+  }
+`;
+
+const SubmitButton = styled(OkButton)`
+  &:disabled {
+    cursor: not-allowed;
   }
 `;
