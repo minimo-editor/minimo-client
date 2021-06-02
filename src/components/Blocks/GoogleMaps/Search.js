@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -11,6 +12,8 @@ import {
   ComboboxOption,
 } from '@reach/combobox';
 
+const OK = 'OK';
+
 export default function Search({ panTo, setMarker, setAddress }) {
   const {
     ready,
@@ -18,12 +21,7 @@ export default function Search({ panTo, setMarker, setAddress }) {
     suggestions: { status, data },
     setValue,
     clearSuggestions,
-  } = usePlacesAutocomplete({
-    requestOptions: {
-      location: { lat: () => 43.6532, lng: () => -79.3832 },
-      radius: 100 * 1000,
-    },
-  });
+  } = usePlacesAutocomplete({ debounce: 300 });
 
   const handleInput = (e) => {
     setValue(e.target.value);
@@ -36,33 +34,41 @@ export default function Search({ panTo, setMarker, setAddress }) {
     try {
       const results = await getGeocode({ address });
       const { lat, lng } = await getLatLng(results[0]);
+
       panTo({ lat, lng });
       setMarker({ lat, lng });
       setAddress(address);
     } catch (error) {
+      // TODO: error component
       console.log('😱 Error: ', error);
     }
   };
 
   return (
-    // TODO: delete
-    <div className='search'>
-      <Combobox onSelect={handleSelect}>
-        <ComboboxInput
-          value={value}
-          onChange={handleInput}
-          disabled={!ready}
-          placeholder='Search your location'
-        />
-        <ComboboxPopover>
-          <ComboboxList>
-            {status === 'OK'
-              && data.map(({ id, description }) => (
-                <ComboboxOption key={id} value={description} />
-              ))}
-          </ComboboxList>
-        </ComboboxPopover>
-      </Combobox>
-    </div>
+    <Combobox onSelect={handleSelect}>
+      <ComboboxInput
+        value={value}
+        disabled={!ready}
+        onChange={handleInput}
+        placeholder='Search your location'
+      />
+      <ComboboxPopover>
+        <ComboboxList>
+          {status === OK
+            && data.map(({ place_id: id, description }) => (
+              <ComboboxOption
+                key={id}
+                value={description}
+              />
+            ))}
+        </ComboboxList>
+      </ComboboxPopover>
+    </Combobox>
   );
 }
+
+Search.propTypes = {
+  panTo: PropTypes.func,
+  setAddress: PropTypes.func,
+  setMarker: PropTypes.func,
+};
