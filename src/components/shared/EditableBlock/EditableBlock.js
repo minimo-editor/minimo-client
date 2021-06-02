@@ -23,7 +23,7 @@ export default function EditableBlock({
   useEffect(() => {
     document.addEventListener('click', handleClick);
 
-    return () => document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
   }, []);
 
   function handleClick(e) {
