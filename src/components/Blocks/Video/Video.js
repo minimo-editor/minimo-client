@@ -14,7 +14,7 @@ const defaultVideoContents = {
 export default function Video({
   data,
   index,
-  isActive,
+  isActive = false,
   resetBlockContents,
 }) {
   // FIXME: to have data.
@@ -60,7 +60,7 @@ Video.propTypes = {
   }).isRequired,
   index: PropTypes.number.isRequired,
   isActive: PropTypes.bool,
-  resetBlockContents: PropTypes.func.isRequired,
+  resetBlockContents: PropTypes.func,
 };
 
 const VideoWrapper = styled.div`
