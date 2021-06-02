@@ -12,7 +12,7 @@ function getValidText(text) {
   return text.replace(speacialTextRegex, '');
 }
 
-export default function Publish() {
+export default function PublishForm() {
   const { project, setProject } = useContext(ProjectContext);
 
   const [title, setTitle] = useState('');

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import * as ICON from 'react-feather';
 import Editor from '../Editor/Editor';
 import Preview from '../Preview/Preview';
-import Publish from '../Publish';
+import PublishForm from '../PublishForm';
 import Templates from '../Templates';
 import Stepper from '../shared/Stepper';
 import useStepper from '../../hooks/useStepper';
@@ -28,7 +28,7 @@ const STEPS = [
   {
     step: 3,
     label: 'Publish',
-    content: Publish,
+    content: PublishForm,
   },
 ];
 
