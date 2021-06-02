@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, {
   useEffect,
   useRef,
@@ -5,29 +6,7 @@ import React, {
   cloneElement,
 } from 'react';
 import styled, { css } from 'styled-components';
-import * as ICON from 'react-feather';
-
-function Tools({
-  makeDraggable,
-  makeNotDraggable,
-  onRemoveClick,
-}) {
-  return (
-    <ToolWrapper draggable={false}>
-      <MoveTool
-        onMouseDown={makeDraggable}
-        onBlur={makeNotDraggable}
-      >
-        <ICON.Move size={19} />
-      </MoveTool>
-      <RemoveTool
-        onClick={onRemoveClick}
-      >
-        <ICON.X size={19} />
-      </RemoveTool>
-    </ToolWrapper>
-  );
-}
+import Tools from './Tools';
 
 export default function EditableBlock({
   children,
@@ -65,7 +44,7 @@ export default function EditableBlock({
     }
   }
 
-  function onDragLeave(e) {
+  function onDragLeave() {
     setIsDragEnter(false);
   }
 
@@ -116,12 +95,20 @@ export default function EditableBlock({
         <Tools
           makeDraggable={() => setIsDraggable(true)}
           makeNotDraggable={() => setIsDraggable(false)}
-          onRemoveClick={() => deleteBlock(index)}
+          onClickRemove={() => deleteBlock(index)}
         />
       )}
     </EditableContainer>
   );
 }
+
+EditableBlock.propTypes = {
+  children: PropTypes.element.isRequired,
+  index: PropTypes.number.isRequired,
+  deleteBlock: PropTypes.func.isRequired,
+  insertBlock: PropTypes.func.isRequired,
+  swapBlocks: PropTypes.func.isRequired,
+};
 
 const EditableContainer = styled.div`
   position: relative;
@@ -140,33 +127,4 @@ const EditableContainer = styled.div`
       display: block;
     }
   `};
-`;
-
-const ToolWrapper = styled.div`
-  position: absolute;
-  flex-direction: column;
-  width: auto;
-  top: 0;
-  left: auto;
-  right: -40px;
-
-  & div {
-    line-height: 0;
-    padding: 0.3rem;
-    color: white;
-  }
-
-  & svg {
-    vertical-align: middle;
-  }
-`;
-
-const MoveTool = styled.div`
-  cursor: move;
-  background: #169af7;
-`;
-
-const RemoveTool = styled.div`
-  cursor: pointer;
-  background: rgba(255, 85, 4, 0.9);
 `;
