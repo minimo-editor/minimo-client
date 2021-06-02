@@ -9,7 +9,7 @@ import * as ICON from 'react-feather';
 import styled from 'styled-components';
 import '@reach/combobox/styles.css';
 import Search from './Search';
-import MyLocationButtonMak from './MyLocationButton';
+import CurrentPositionButton from './CurrentPositionButton';
 import googleMapsConfig from '../../../configs/googleMapsConfig';
 import useModal from '../../../hooks/useModal';
 import ConfigIcon from '../../shared/Config/Config';
@@ -71,16 +71,20 @@ export default function Map({
     setModalOpen(false);
   }
 
-  function handleMyLocationClick() {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        panTo({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
-      },
-      () => null,
-    );
+  function handleCurrentPositionClick() {
+    function success(position) {
+      panTo({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      });
+    }
+
+    function error(err) {
+      // TODO: error component.
+      console.warn(err.message);
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error);
   }
 
   if (loadError) {
@@ -96,7 +100,7 @@ export default function Map({
       draggable={false}
     >
       <Address>
-        <MyLocationButtonMak onClick={handleMyLocationClick} />
+        <CurrentPositionButton onClick={handleCurrentPositionClick} />
         <IconWrapper>
           <ICON.MapPin color='white' size={20} />
           {address}
