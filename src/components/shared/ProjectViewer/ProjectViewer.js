@@ -34,7 +34,7 @@ export default function ProjectViewer({ project }) {
 ProjectViewer.propTypes = {
   project: PropTypes.shape({
     backgroundColor: PropTypes.string.isRequired,
-    blocks: PropTypes.object.isRequired,
+    blocks: PropTypes.array.isRequired,
   }),
 };
 

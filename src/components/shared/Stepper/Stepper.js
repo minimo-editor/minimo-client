@@ -42,7 +42,7 @@ export default function Stepper({
 
 Stepper.propTypes = {
   currentStep: PropTypes.number.isRequired,
-  steps: PropTypes.object.isRequired,
+  steps: PropTypes.array.isRequired,
 };
 
 const StepsContainer = styled.div`
