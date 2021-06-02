@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 import ContentEditable from 'react-contenteditable';
@@ -16,10 +17,10 @@ const Container = styled.div`
 export default function Title({
   data,
   index,
-  isActive,
+  isActive = false,
+  isEditable = true,
   onChange,
   handleChangeStyle,
-  isEditable = true,
 }) {
   const {
     color,
@@ -55,3 +56,17 @@ export default function Title({
     </Container>
   );
 }
+
+Title.propTypes = {
+  data: PropTypes.shape({
+    contents: PropTypes.shape({
+      texts: PropTypes.string,
+    }),
+    styles: PropTypes.object,
+  }).isRequired,
+  handleChangeStyle: PropTypes.func,
+  index: PropTypes.number.isRequired,
+  isActive: PropTypes.bool,
+  isEditable: PropTypes.bool,
+  onChange: PropTypes.func,
+};
