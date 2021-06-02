@@ -9,7 +9,7 @@ import * as ICON from 'react-feather';
 import styled from 'styled-components';
 import '@reach/combobox/styles.css';
 import Search from './Search';
-import MyLocationButton from './MyLocationButton';
+import MyLocationButtonMak from './MyLocationButton';
 import googleMapsConfig from '../../../configs/googleMapsConfig';
 import useModal from '../../../hooks/useModal';
 import ConfigIcon from '../../shared/Config/Config';
@@ -96,7 +96,7 @@ export default function Map({
       draggable={false}
     >
       <Address>
-        <MyLocationButton onClick={handleMyLocationClick} />
+        <MyLocationButtonMak onClick={handleMyLocationClick} />
         <IconWrapper>
           <ICON.MapPin color='white' size={20} />
           {address}
