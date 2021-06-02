@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -53,6 +54,14 @@ function PhoneDisplay({
     </PhoneContainer>
   );
 }
+
+PhoneDisplay.propTypes = {
+  src: PropTypes.string,
+  bottom: PropTypes.string,
+  left: PropTypes.string,
+  right: PropTypes.string,
+  top: PropTypes.string,
+};
 
 const PhoneContainer = styled.div`
   display: flex;
