@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { StyledButton } from '../StyledButton';
@@ -47,6 +48,11 @@ export default function LinkForm({
     </FormContainer>
   );
 }
+
+LinkForm.propTypes = {
+  inputs: PropTypes.object,
+  handleSubmitForm: PropTypes.func,
+};
 
 const Label = styled.label`
   display: flex;
