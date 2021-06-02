@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import * as ICON from 'react-feather';
 import styled from 'styled-components';
@@ -27,6 +28,13 @@ export default function TextColorPicker({
     </>
   );
 }
+
+TextColorPicker.propTypes = {
+  color: PropTypes.string.isRequired,
+  isColorPickerOpen: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  toggleColorPicker: PropTypes.func.isRequired,
+};
 
 const ColorPickerContainer = styled.div`
   position: absolute;

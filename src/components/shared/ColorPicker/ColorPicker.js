@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import * as ICON from 'react-feather';
 import styled from 'styled-components';
@@ -25,6 +26,13 @@ export default function ColorPicker({
     </ColorPickerContainer>
   );
 }
+
+ColorPicker.propTypes = {
+  color: PropTypes.string.isRequired,
+  isColorPickerOpen: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
+  toggleColorPicker: PropTypes.func.isRequired,
+};
 
 const ColorPickerIcon = styled.div`
   position: absolute;
