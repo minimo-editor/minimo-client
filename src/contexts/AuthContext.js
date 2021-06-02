@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, {
   createContext,
   useReducer,
@@ -70,3 +71,7 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
+
+AuthProvider.propTypes = {
+  children: PropTypes.element,
+};
