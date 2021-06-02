@@ -18,7 +18,7 @@ export default function Title({
   data,
   index,
   isActive = false,
-  isEditable = true,
+  isEditable = false,
   onChange,
   handleChangeStyle,
 }) {
