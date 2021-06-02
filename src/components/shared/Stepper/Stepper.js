@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled, { css } from 'styled-components';
 
@@ -20,26 +21,29 @@ export default function Stepper({
   const maxStep = steps[steps.length - 1].step;
 
   return (
-    <>
-      <Container>
-        <StepsContainer>
-          {steps.map(({ step, label }) => (
-            <Step key={step}>
-              <Circle
-                status={getStatus(step, currentStep)}
-              >
-                <span>{step}</span>
-              </Circle>
-              <Label>{label}</Label>
-              <Bar isLeft={step > minStep} />
-              <Bar isRight={step < maxStep} />
-            </Step>
-          ))}
-        </StepsContainer>
-      </Container>
-    </>
+    <Container>
+      <StepsContainer>
+        {steps.map(({ step, label }) => (
+          <Step key={step}>
+            <Circle
+              status={getStatus(step, currentStep)}
+            >
+              <span>{step}</span>
+            </Circle>
+            <Label>{label}</Label>
+            <Bar isLeft={step > minStep} />
+            <Bar isRight={step < maxStep} />
+          </Step>
+        ))}
+      </StepsContainer>
+    </Container>
   );
 }
+
+Stepper.propTypes = {
+  currentStep: PropTypes.number.isRequired,
+  steps: PropTypes.object.isRequired,
+};
 
 const StepsContainer = styled.div`
   height: 100px;
