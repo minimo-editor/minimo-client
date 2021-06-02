@@ -1,8 +1,8 @@
-/* eslint-disable react/no-array-index-key */
+import PropTypes from 'prop-types';
 import React, { createRef } from 'react';
-import blocksMap from '../../utils/blocksMap';
 import AnimateBlocks from '../AnimateBlocks';
 import EditableBlock from '../shared/EditableBlock';
+import blocksMap from '../../utils/blocksMap';
 
 export default function EditableProject({
   blocks,
@@ -43,3 +43,13 @@ export default function EditableProject({
     </AnimateBlocks>
   );
 }
+
+EditableProject.propTypes = {
+  blocks: PropTypes.array.isRequired,
+  insertBlock: PropTypes.func.isRequired,
+  deleteBlock: PropTypes.func.isRequired,
+  swapBlocks: PropTypes.func.isRequired,
+  resetBlockContents: PropTypes.func.isRequired,
+  handleChangeBlock: PropTypes.func.isRequired,
+  handleChangeStyle: PropTypes.func.isRequired,
+};
