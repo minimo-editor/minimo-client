@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { createContext, useState } from 'react';
 
 export const ProjectContext = createContext();
@@ -17,3 +18,7 @@ export function ProjectProvider({ children }) {
     </ProjectContext.Provider>
   );
 }
+
+ProjectProvider.propTypes = {
+  children: PropTypes.element,
+};
