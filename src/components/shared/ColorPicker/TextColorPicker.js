@@ -31,7 +31,7 @@ export default function TextColorPicker({
 
 TextColorPicker.propTypes = {
   color: PropTypes.string.isRequired,
-  isColorPickerOpen: PropTypes.func.isRequired,
+  isColorPickerOpen: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   toggleColorPicker: PropTypes.func.isRequired,
 };
