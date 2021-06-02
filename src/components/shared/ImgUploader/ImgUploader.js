@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { OkButton } from '../StyledButton';
@@ -14,6 +15,7 @@ export default function ImgUploader({ handleUpload }) {
 
       handleUpload({ src: url });
     } catch (error) {
+      // TODO: error component
       console.log(error);
     }
   }
@@ -69,6 +71,10 @@ export default function ImgUploader({ handleUpload }) {
     </ImgUploaderContainer>
   );
 }
+
+ImgUploader.propTypes = {
+  handleUpload: PropTypes.func,
+};
 
 const PlaceHolder = styled.p`
   margin: 0;
