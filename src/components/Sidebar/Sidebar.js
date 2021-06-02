@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 import * as ICON from 'react-feather';
@@ -40,6 +41,11 @@ export default function Sidebar({
     </SidebarContainer>
   );
 }
+
+Sidebar.propTypes = {
+  isSidebarOpen: PropTypes.bool,
+  toggleSidebar: PropTypes.func.isRequired,
+};
 
 const SidebarContainer = styled.div`
   position: fixed;
