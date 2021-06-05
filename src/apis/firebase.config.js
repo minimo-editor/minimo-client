@@ -1,4 +1,3 @@
-// TODO: firebase/app 과의 차이 알아보기
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
