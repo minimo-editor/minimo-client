@@ -8,7 +8,7 @@ export default function PublishForm() {
   const {
     title,
     address,
-    result,
+    isPublished,
     isAddressValid,
     handleSubmitForm,
     handleChangeTitle,
@@ -75,8 +75,12 @@ export default function PublishForm() {
         </SubmitButton>
       </FormContainer>
       <div>
-        <SuccessMessage>{result === true && 'SUCCESS!'}</SuccessMessage>
-        <FailMessage>{result === false && 'FAIL, TRY AGAIN'}</FailMessage>
+        <SuccessMessage>
+          {isPublished && 'SUCCESS!'}
+        </SuccessMessage>
+        <FailMessage>
+          {!isPublished && 'FAIL, TRY AGAIN'}
+        </FailMessage>
       </div>
     </Container>
   );

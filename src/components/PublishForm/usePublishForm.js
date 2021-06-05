@@ -13,7 +13,7 @@ export default function usePublishForm() {
 
   const [title, setTitle] = useState('');
   const [address, setAddress] = useState('');
-  const [result, setResult] = useState('');
+  const [isPublished, setIsPublished] = useState('');
 
   const [isAddressValid, setIsAddressValid] = useState(null);
 
@@ -52,17 +52,17 @@ export default function usePublishForm() {
     }
 
     try {
-      const postResult = await postProject(project);
-      setResult(postResult);
+      const isPosted = await postProject(project);
+      setIsPublished(isPosted);
     } catch (error) {
-      setResult(false);
+      setIsPublished(false);
     }
   }
 
   return {
     title,
     address,
-    result,
+    isPublished,
     isAddressValid,
     handleSubmitForm,
     handleChangeTitle,
