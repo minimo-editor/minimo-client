@@ -6,23 +6,19 @@ import useColorPicker from '../../hooks/useColorPicker';
 import { ProjectContext } from '../../contexts/ProjectContext';
 import { OkButton } from '../shared/StyledButton';
 import Sidebar from '../Sidebar';
-import useBlocks from './useBlocks';
 import useSidebar from './useSidebar';
 
 export default function Editor() {
-  const { project } = useContext(ProjectContext);
-
   const {
-    blocks,
-    setBlocks,
+    project,
+    addBlock,
     swapBlocks,
     deleteBlock,
-    insertBlock,
     resetBlockContents,
-    handleChangeBlock,
-    handleChangeStyle,
-    handleClickSave,
-  } = useBlocks();
+    handleChangeBgColor,
+    handleChangeBlockContents,
+    handleChangeBlockStyles,
+  } = useContext(ProjectContext);
 
   const {
     color: bgColor,
@@ -36,32 +32,30 @@ export default function Editor() {
     toggleSidebar,
   } = useSidebar();
 
+  function onChangeBgColor(color) {
+    handleChangeBgColor(color);
+    handleChangeColor(color);
+  }
+
   return (
     <Container>
-      <SaveButton
-        type='button'
-        onClick={() => handleClickSave(bgColor)}
-      >
-        SAVE
-      </SaveButton>
       <ProjectWrapper
-        bgColor={bgColor}
+        bgColor={project.backgroundColor}
       >
         <EditableProject
-          blocks={blocks}
-          setBlocks={setBlocks}
-          insertBlock={insertBlock}
+          blocks={project.blocks}
+          insertBlock={addBlock}
           swapBlocks={swapBlocks}
-          resetBlockContents={resetBlockContents}
-          handleChangeBlock={handleChangeBlock}
-          handleChangeStyle={handleChangeStyle}
           deleteBlock={deleteBlock}
+          resetBlockContents={resetBlockContents}
+          handleChangeBlock={handleChangeBlockContents}
+          handleChangeStyle={handleChangeBlockStyles}
         />
         {/* FIXME: rename -> colorpicker tool ? */}
         <ColorPicker
           color={bgColor}
           isColorPickerOpen={isColorPickerOpen}
-          onChange={handleChangeColor}
+          onChange={onChangeBgColor}
           toggleColorPicker={toggleColorPicker}
         />
       </ProjectWrapper>
@@ -88,7 +82,7 @@ const ProjectWrapper = styled.main`
   box-sizing: border-box;
   background: ${({ bgColor }) => bgColor ?? 'none'};
 `;
-
+// TODO: delete
 const SaveButton = styled(OkButton)`
   text-align: center;
   margin-top: 2em;
