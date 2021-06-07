@@ -29,6 +29,7 @@ export default function EditableProject({
               deleteBlock={deleteBlock}
             >
               <Block
+                isEditable
                 index={index}
                 data={block.data}
                 // NOTE: text는 onchange, link는 reset을 쓸 듯.
