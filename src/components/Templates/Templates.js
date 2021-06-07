@@ -7,7 +7,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 
 export default function Templates() {
   const { userId } = useContext(AuthContext);
-  const { setProject } = useContext(ProjectContext);
+  const { handleSelectTemplate } = useContext(ProjectContext);
   const [selectedTemplate, setSelectedTemplate] = useState(null);
 
   function onChange(e) {
@@ -17,11 +17,7 @@ export default function Templates() {
 
     const templateData = templates.find((each) => each.concept === value);
 
-    setProject((prev) => ({
-      ...prev,
-      ...JSON.parse(JSON.stringify(templateData)),
-      creatorId: userId,
-    }));
+    handleSelectTemplate(templateData, userId);
   }
 
   return (
