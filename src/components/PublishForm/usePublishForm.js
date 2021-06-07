@@ -9,23 +9,10 @@ function getValidText(text) {
 }
 
 export default function usePublishForm() {
-  const { project, setProject } = useContext(ProjectContext);
-
-  const [title, setTitle] = useState('');
+  const { project, setProject, handleChangeTitle } = useContext(ProjectContext);
   const [address, setAddress] = useState('');
   const [isPublished, setIsPublished] = useState('');
-
   const [isAddressValid, setIsAddressValid] = useState(null);
-
-  function handleChangeTitle(e) {
-    const { value } = e.target;
-
-    setTitle(value);
-    setProject((prev) => ({
-      ...prev,
-      title: value,
-    }));
-  }
 
   function handleChangeAddress(e) {
     setIsAddressValid(null);
@@ -60,7 +47,7 @@ export default function usePublishForm() {
   }
 
   return {
-    title,
+    title: project.title,
     address,
     isPublished,
     isAddressValid,
