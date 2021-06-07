@@ -14,7 +14,7 @@ export default function ProjectByAddress() {
 
   return (
     <>
-      {/* useAsync를 쓰는 경우 아래 나타날 것들이 항상 같은 패턴일 듯, 재사용 가능할 듯 */}
+      {/* NOTE: useAsync를 쓰는 경우 아래 나타날 것들이 항상 같은 패턴일 듯, 재사용 가능할 듯 */}
       {data && <ProjectViewer project={data} />}
       {error && <Redirect to='/' />}
       {loading && <p>loading</p>}
