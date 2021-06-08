@@ -8,6 +8,7 @@ export const TYPES = {
   DELETE_BLOCK: 'DELETE_BLOCK',
   ADD_BLOCK: 'ADD_BLOCK',
   CHANGE_TITLE: 'CHANGE_TITLE',
+  CHANGE_ADDRESS: 'CHANGE_ADDRESS',
 };
 
 export default function projectReducer(draft, action) {
@@ -57,6 +58,11 @@ export default function projectReducer(draft, action) {
     case TYPES.CHANGE_TITLE: {
       const newTitle = action.payload;
       draft.title = newTitle;
+      return;
+    }
+    case TYPES.CHANGE_ADDRESS: {
+      const newAddress = action.payload;
+      draft.address = newAddress;
       return;
     }
     default:
