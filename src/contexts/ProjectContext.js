@@ -10,6 +10,7 @@ export const ProjectContext = createContext();
 const initialState = {
   title: '',
   concept: '',
+  address: '',
   backgroundColor: 'white',
   creatorId: '',
   blocks: [],
@@ -100,6 +101,10 @@ export function ProjectProvider({ children }) {
     dispatch({ type: TYPES.CHANGE_TITLE, payload: value });
   }
 
+  function updateAddress(newAddress) {
+    dispatch({ type: TYPES.CHANGE_ADDRESS, payload: newAddress });
+  }
+
   return (
     <ProjectContext.Provider
       value={{
@@ -113,6 +118,7 @@ export function ProjectProvider({ children }) {
         handleChangeBlockContents,
         handleChangeBlockStyles,
         handleChangeTitle,
+        updateAddress,
       }}
     >
       {children}
