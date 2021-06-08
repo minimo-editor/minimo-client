@@ -1,15 +1,17 @@
 import { useContext, useState } from 'react';
 import { checkValidAddress, postProject } from '../../apis/project';
 import { ProjectContext } from '../../contexts/ProjectContext';
-
-function getValidText(text) {
-  // eslint-disable-next-line no-useless-escape
-  const speacialTextRegex = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\ '\"\\(\=]/gi;
-  return text.replace(speacialTextRegex, '');
-}
+import getValidText from '../../utils/getValidTexts';
 
 export default function usePublishForm() {
-  const { project, setProject, handleChangeTitle } = useContext(ProjectContext);
+  const {
+    project,
+    handleChangeTitle,
+    updateAddress,
+  } = useContext(ProjectContext);
+
+  const { title } = project;
+
   const [address, setAddress] = useState('');
   const [isPublished, setIsPublished] = useState('');
   const [isAddressValid, setIsAddressValid] = useState(null);
@@ -24,10 +26,7 @@ export default function usePublishForm() {
     setIsAddressValid(isValid);
 
     if (isValid) {
-      setProject((prev) => ({
-        ...prev,
-        address,
-      }));
+      updateAddress(address);
     }
   }
 
@@ -47,12 +46,12 @@ export default function usePublishForm() {
   }
 
   return {
-    title: project.title,
+    title,
     address,
     isPublished,
     isAddressValid,
-    handleSubmitForm,
     handleChangeTitle,
+    handleSubmitForm,
     handleChangeAddress,
     handleClickCheckAddress,
   };

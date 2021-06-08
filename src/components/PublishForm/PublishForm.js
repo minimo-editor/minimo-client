@@ -10,8 +10,8 @@ export default function PublishForm() {
     address,
     isPublished,
     isAddressValid,
-    handleSubmitForm,
     handleChangeTitle,
+    handleSubmitForm,
     handleChangeAddress,
     handleClickCheckAddress,
   } = usePublishForm();
@@ -79,7 +79,7 @@ export default function PublishForm() {
           {isPublished && 'SUCCESS!'}
         </SuccessMessage>
         <FailMessage>
-          {!isPublished && 'FAIL, TRY AGAIN'}
+          {isPublished === false && 'FAIL, TRY AGAIN'}
         </FailMessage>
       </div>
     </Container>
