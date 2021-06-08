@@ -33,7 +33,7 @@ const STEPS = [
 ];
 
 export default function ProjectFormStepper() {
-  const { project } = useContext(ProjectContext);
+  const { project: { blocks } } = useContext(ProjectContext);
 
   const { currentStep, moveToNextStep, moveToPrevStep } = useStepper(STEPS.length);
   const Content = STEPS[currentStep].content;
@@ -50,7 +50,7 @@ export default function ProjectFormStepper() {
         />
         <Button
           onClick={moveToNextStep}
-          disabled={!project}
+          disabled={blocks.length < 1}
         >
           <ICON.ArrowRightCircle color='white' />
         </Button>
