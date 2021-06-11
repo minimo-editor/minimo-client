@@ -1,56 +1,71 @@
-import { useReducer, useEffect } from 'react';
+import { useReducer, useEffect, useCallback } from 'react';
+
+const TYPES = {
+  LOADING: 'LOADING',
+  SUCCESS: 'SUCCESS',
+  ERROR: 'ERROR',
+};
+
+const initialState = {
+  loading: false,
+  data: null,
+  error: false,
+};
+
+function useAsync(asyncFunction, immediate = true) {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const { LOADING, SUCCESS, ERROR } = TYPES;
+
+  const executeAsyncFn = useCallback(() => {
+    (async function fetch() {
+      try {
+        dispatch({ type: LOADING });
+        const data = await asyncFunction();
+        dispatch({ type: SUCCESS, payload: data });
+      } catch (err) {
+        dispatch({ type: ERROR, payload: err });
+      }
+    })();
+  }, [asyncFunction]);
+
+  useEffect(() => {
+    if (immediate) {
+      executeAsyncFn();
+    }
+  }, [asyncFunction, immediate]);
+
+  return {
+    ...state,
+    executeAsyncFn,
+  };
+}
 
 function reducer(state, action) {
+  const { LOADING, SUCCESS, ERROR } = TYPES;
+
   switch (action.type) {
-    case 'LOADING':
+    case LOADING:
       return {
         loading: true,
         data: null,
         error: null,
       };
-    case 'SUCCESS':
+    case SUCCESS:
       return {
         loading: false,
-        data: action.data,
+        data: action.payload,
         error: null,
       };
-    case 'ERROR':
+    case ERROR:
       return {
         loading: false,
         data: null,
-        error: action.error,
+        error: action.payload,
       };
     default:
-      throw new Error(`Unexpected action type: ${action.type}`);
+      throw state;
   }
-}
-
-function useAsync(callback, deps = []) {
-  const [state, dispatch] = useReducer(reducer, {
-    loading: false,
-    data: null,
-    error: false,
-  });
-
-  const fetchData = async () => {
-    dispatch({ type: 'LOADING' });
-
-    try {
-      const data = await callback();
-
-      dispatch({ type: 'SUCCESS', data });
-    } catch (err) {
-      dispatch({ type: 'ERROR', error: err });
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, deps);
-
-  const { loading, data, error } = state;
-
-  return { loading, data, error };
 }
 
 export default useAsync;
