@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 
-const firebaseUiConfig = {
+export default {
   signInFlow: 'popup',
   signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -13,5 +13,3 @@ const firebaseUiConfig = {
     signInSuccessWithAuthResult: () => false,
   },
 };
-
-export default firebaseUiConfig;
