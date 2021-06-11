@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import uniqueId from 'lodash.uniqueid';
 import React, { createContext } from 'react';
-import useImmerReducer from '../hooks/useImmutableReducer';
+import useImmerReducer from '../hooks/useImmerReducer';
 import projectReducer, { TYPES } from '../reducers/projectReducer';
 import blocksDefaultDataMap from '../utils/blocksDefaultDataMap';
 
