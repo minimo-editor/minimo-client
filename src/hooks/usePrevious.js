@@ -11,5 +11,3 @@ function usePrevious(value) {
 }
 
 export default usePrevious;
-
-// NOTE: https://reactjs.org/docs/hooks-faq.html#how-to-get-the-previous-props-or-state
