@@ -10,11 +10,11 @@ export default function authReducer(state, action) {
     case TYPES.AUTH_TRY:
       return { ...state, isLoading: true };
     case TYPES.AUTH_SUCCESS:
-      return { ...state, isLoading: false };
+      return { ...state, isLoading: false, isAuthenticated: true };
     case TYPES.AUTH_ERROR:
       return { ...state, isLoading: false, error: action.payload };
     case TYPES.AUTH_CLEAN_UP:
-      return { ...state, isLoading: false, error: null };
+      return { ...state, isLoading: false, error: {} };
     default:
       return state;
   }
