@@ -13,7 +13,7 @@ const mockState = {
 
 const STATE = 0;
 
-test('should dispatch update background color', async () => {
+test('should update background color', async () => {
   const { result } = renderHook(() => useImmerReducer(projectReducer, mockState));
   const [state, dispatch] = result.current;
 
@@ -27,7 +27,7 @@ test('should dispatch update background color', async () => {
   expect(result.current[STATE].backgroundColor).toBe('red');
 });
 
-test('should dispatch update title', async () => {
+test('should update title', async () => {
   const { result } = renderHook(() => useImmerReducer(projectReducer, mockState));
   const [state, dispatch] = result.current;
 
@@ -41,7 +41,7 @@ test('should dispatch update title', async () => {
   expect(result.current[STATE].title).toBe('new title');
 });
 
-test('should dispatch add new block', () => {
+test('should add new block', () => {
   const { result } = renderHook(() => useImmerReducer(projectReducer, mockState));
   const [state, dispatch] = result.current;
 
