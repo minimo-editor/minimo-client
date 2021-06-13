@@ -32,7 +32,6 @@ export default function EditableProject({
                 isEditable
                 index={index}
                 data={block.data}
-                // NOTE: text는 onchange, link는 reset을 쓸 듯.
                 onChange={handleChangeBlock}
                 handleChangeStyle={handleChangeStyle}
                 resetBlockContents={resetBlockContents}
