@@ -153,6 +153,59 @@
 
 ---
 
+## 📖 프로젝트 사용 방법
+
+1. 디렉토리 이동
+    ```
+    // client
+
+    cd minimo-client
+
+    // server
+
+    cd minimo-server
+    ```
+
+2. package.json에 정의된 패키지 설치
+    ```
+    npm install
+    ```
+
+3. Firebase Realtime Database 사용에 필요한 `dotenv` 설정
+
+    디렉토리 최상단에 `.env.example`을 `.env`로 변경 후 아래의 값들을 변경
+
+    ```
+    // client
+
+    REACT_APP_API_KEY=[FIREBASE_CONFIG_API_KEY]
+    REACT_APP_AUTH_DOMAIN=[FIREBASE_CONFIG_AUTH_DOMAIN]
+
+    REACT_APP_SERVER_URL=[SERVER_URL]
+
+    REACT_APP_AWS_ACCESS_KEY=[AWS_S3_ACCESS_KE]
+    REACT_APP_AWS_SECRET_KEY=[AWS_S3_SECRET_KEY]
+
+    REACT_APP_GOOGLE_API_KEY=[GOOGLE_API_KEY]
+
+    // server
+
+    PORT=[PORT_NUMBER]
+    MONGO_URL=[MONGO_DB_URL]
+    ```
+<br>
+
+4. 실행
+   ```
+   // client
+
+   npm start
+
+   // server
+
+   npm run dev
+   ```
+
 ## 🙇‍♂️ **프로젝트를 마치며**
 
 - 프로젝트를 끝내고 스스로 잘했다고 생각한 점은 핵심 기능 관련 라이브러리를 사용하지 않았다는 것 입니다.
