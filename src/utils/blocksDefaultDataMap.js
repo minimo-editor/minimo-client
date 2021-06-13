@@ -6,13 +6,9 @@ import { getDefaultParagraph } from '../components/Blocks/Paragraph';
 import { getDefaultMapData } from '../components/Blocks/GoogleMaps';
 import { getDefaultLongShadowText } from '../components/Blocks/LongShadowText';
 import { getDefaultIframe } from '../components/Blocks/Iframe';
+import { getDefaultBlankData } from '../components/Blocks/Blank';
 
 const blocksDefaultDataMap = new Map();
-
-// TODO: delete...
-function getEmptyData() {
-  return {};
-}
 
 blocksDefaultDataMap
   .set('title', getDefaultTitle)
@@ -20,7 +16,7 @@ blocksDefaultDataMap
   .set('video', getDefaultVideo)
   .set('social', getDefaultSocials)
   .set('paragraph', getDefaultParagraph)
-  .set('blank', getEmptyData)
+  .set('blank', getDefaultBlankData)
   .set('map', getDefaultMapData)
   .set('iframe', getDefaultIframe)
   .set('longShadowText', getDefaultLongShadowText);
