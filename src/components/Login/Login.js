@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
-import firebase from 'firebase/app';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { Redirect } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
-import firebaseUiConfig from '../../configs/firebaseUi';
+import firebase from '../../configs/firebase';
 
 export default function Login() {
   const { user } = useContext(AuthContext);
@@ -13,7 +12,7 @@ export default function Login() {
       ? <Redirect to={{ pathname: '/editor' }} />
       : (
         <StyledFirebaseAuth
-          uiConfig={firebaseUiConfig}
+          uiConfig={firebase.uiConfig}
           firebaseAuth={firebase.auth()}
         />
       )

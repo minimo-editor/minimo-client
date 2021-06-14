@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import firebase from 'firebase/app';
 import styled from 'styled-components';
+import firebase from '../../configs/firebase';
 import { AuthContext } from '../../contexts/AuthContext';
 import { LightPinkButton, BlackButton } from '../shared/StyledButton';
 

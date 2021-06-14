@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import firebase from '../apis/firebase.config';
+import firebase from '../configs/firebase';
 import authReducer, { TYPES } from '../reducers/authReducer';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
@@ -34,7 +34,6 @@ export function AuthProvider({ children }) {
 
     async function fetchUserData() {
       const idToken = await user.getIdToken();
-      // TODO: IdToken 검정
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
