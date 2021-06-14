@@ -1,8 +1,25 @@
 # minimo
 
-미니모는 간단한 모바일 초대장, 카드 등을 드래그 앤 드롭으로 쉽게 제작할 수 있는 웹 에디터입니다.
+미니모는 모바일 초대장, 카드 등을 드래그 앤 드롭으로 쉽게 제작할 수 있는 미니 웹 빌더입니다.
 
 ![메인사진](./public/assets/background.png)
+
+  ![JavaScript](https://img.shields.io/badge/JavaScript-%23323330.svg?style=flat-square&logo=javascript&logoColor=%23F7DF1E)
+  ![html5](https://img.shields.io/badge/-HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
+  ![CSS3](https://img.shields.io/badge/CSS3-%231572B6.svg?style=flat-square&logo=css3&logoColor=white)
+  ![React](https://img.shields.io/badge/-React-45b8d8?style=flat-square&logo=react&logoColor=white)
+  ![Styled Components](https://img.shields.io/badge/-Styled_Components-db7092?style=flat-square&logo=styled-components&logoColor=white)
+  ![MongoDB](https://img.shields.io/badge/-MongoDB-13aa52?style=flat-square&logo=mongodb&logoColor=white)
+  ![Nodejs](https://img.shields.io/badge/-Nodejs-43853d?style=flat-square&logo=node.js&logoColor=white)
+  ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=flat-square&logo=express&logoColor=%2361DAFB)
+  ![ESLint](https://img.shields.io/badge/-ESLint-8DD6F9?style=flat-square&logo=eslint&logoColor=white)
+  ![Webpack](https://img.shields.io/badge/-Webpack-8DD6F9?style=flat-square&logo=webpack&logoColor=white)
+  ![Firebase](https://img.shields.io/badge/Firebase-%23039BE5.svg?style=flat-square&logo=firebase)
+  ![AWS](https://img.shields.io/badge/-AWS-FB542B?style=flat-square&logo=amazon&logoColor=white)
+  ![Jest](https://img.shields.io/badge/-Jest-764ABC?style=flat-square&logo=jest&logoColor=white)
+  ![Testing-Library](https://img.shields.io/badge/-TestingLibrary/React-%23E33332?style=flat-square&logo=testing-library&logoColor=white)
+  ![git](https://img.shields.io/badge/-Git-F05032?style=flat-square&logo=git&logoColor=white)
+  ![npm](https://img.shields.io/badge/-NPM-CB3837?style=flat-square&logo=npm&logoColor=white)
 
 🔗  배포링크: [https://www.minimo.life](https://www.minimo.life/)
 
@@ -12,11 +29,15 @@
 
 ---
 
-## 🧑‍💻  **프로젝트 동기**
+## 🧑‍💻  **프로젝트 개요**
 
-처음에는 평소 사용하고싶던 라이브러리들을 사용하여 동적인 요소가 많이 들어간 청첩장 메이커를 만들려고 했지만, '웨딩'이라는 컨셉보다는 에디터 자체를 구현하는 것에 초점을 두기 위해
+웹과 모바일 기기가 많은 발전을 했음에도 불구하고 주변에서 받게되는 `모바일 청첩장`이 다소 정적인 것 같아, 인터렉티브하고 동적인 요소들을 포함한 `모바일 청첩장 메이커`를 만들고 싶었습니다.
 
-이번 프로젝트 기간 동안에는 직접 드래그 드롭과 재사용성이 높은 블락단위의 기본 에디터를 구현하는 것에 목표를 두었습니다.
+2주라는 시간 안에 모든 것을 하려면 `웹 에디터` 와 `드래그 앤 드롭`등 핵심 기능에 라이브러리의 도움을 받아야 할 것 같았습니다.
+
+하지만, 핵심 기능에 라이브러리를 쓰지 않고 직접 구현하는 것이 배울 점이 더 많다고 생각하여 해당 프로젝트 2주 동안은 직접 `드래그 앤 드롭`과 `블록 스타일 웹 에디터(빌더)`의 기본 틀을 만들어 보기로 했습니다.
+
+해당 프로젝트를 통해 `재사용성이 높은 컴포넌트`와 `복잡한 이벤트 핸들링`에 대해 많은 공부를 할 수 있을거라 기대했습니다.
 
 ---
 
@@ -24,25 +45,20 @@
 
 - **기획 :** 2021/05/03 ~ 2021/05/07 **(1주)**
     - 아이디어 브레인스토밍, 기획, 기술 검증
-    - wireframe 작성
-
-        [minimo wireframe](https://www.notion.so/minimo-wireframe-3fd7effb57b54c0791e1b793b5f5fbdd)
+    - [minimo wireframe](https://www.notion.so/minimo-wireframe-3fd7effb57b54c0791e1b793b5f5fbdd) 작성
 
 - **개발 :** 2021/05/10 ~ 2021/05/21 **(2주)**
     - **2주차**
-        - 생성된 프로젝트(제작된 미니웹) 데이터 형식 결정
+        - 아웃풋 데이터 형식 결정
         - 드래그 드롭 구현
         - 블락 구조의 에디터 구현
         - 블락 대표 이미지와 컴포넌트 맵핑
         - 백엔드 user, project api 작업
         - 소셜로그인
     - **3주차**
-        - 에디터 컴포넌트 리팩토링
-        - 드래그 드롭 관련 이벤트 정리
-        - 드래그 드롭 애니메이션 추가
-        - 생성될 미니웹 주소 설정기능
-        - 전역상태관리
-        - 구글 지도, 쉐도우텍스트 등 블락 추가
+        - 컴포넌트 및 커스텀 훅 리팩토링
+        - 드래그 드롭 애니메이션
+        - 기능 및 블록 추가
         - 유닛테스트 작성
         - 배포
 
