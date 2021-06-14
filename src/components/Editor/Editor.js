@@ -4,7 +4,6 @@ import EditableProject from '../EditableProject';
 import ColorPicker from '../shared/ColorPicker';
 import useColorPicker from '../../hooks/useColorPicker';
 import { ProjectContext } from '../../contexts/ProjectContext';
-import { GreyButton } from '../shared/StyledButton';
 import Sidebar from '../Sidebar';
 import useSidebar from './useSidebar';
 
