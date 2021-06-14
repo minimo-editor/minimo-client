@@ -1,22 +1,32 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { OkButton } from '../StyledButton';
 import uploadImageToS3 from '../../../apis/S3';
+import useAsync from '../../../hooks/useAsync';
 
-export default function ImgUploader({ handleUpload }) {
+export default function ImgUploader({ handleUpload, handleClose }) {
   const [imgFiles, setImgFiles] = useState([]);
-  const [imgs, setImgs] = useState([]);
+  const [previewImgs, setPreviewImgs] = useState([]);
 
-  async function onClick() {
-    try {
-      // TODO: usePromise / async 사용으로 바꾸기
-      const url = await uploadImageToS3(imgFiles[0]);
+  const cachedFunction = useCallback(() => uploadImageToS3(imgFiles[0]), [imgFiles]);
 
-      handleUpload({ src: url });
-    } catch (error) {
-      // TODO: error component
-      console.log(error);
+  const {
+    data,
+    loading,
+    error,
+    executeAsyncFn,
+  } = useAsync(cachedFunction, false);
+
+  useEffect(() => {
+    if (data) {
+      handleUpload(data);
+    }
+  }, [data]);
+
+  function handleClickSubmit() {
+    if (imgFiles.length > 0) {
+      executeAsyncFn();
     }
   }
 
@@ -27,7 +37,6 @@ export default function ImgUploader({ handleUpload }) {
 
     Object.values(files).forEach((file) => {
       const reader = new FileReader();
-      // TODO: event말고 콜백이나 다른 방법은 없는지 찾아보기
       reader.readAsDataURL(file);
 
       reader.addEventListener('load', () => {
@@ -38,7 +47,7 @@ export default function ImgUploader({ handleUpload }) {
           src: reader.result,
         };
 
-        setImgs((prev) => prev.concat(img));
+        setPreviewImgs((prev) => prev.concat(img));
       });
     });
   }
@@ -59,15 +68,23 @@ export default function ImgUploader({ handleUpload }) {
         />
       </DropZone>
       <PreviewImgContainer>
-        {imgs && (
-          imgs.map((img) => (
+        {previewImgs && (
+          previewImgs.map((img) => (
             <PreviewImg src={img.src} alt={img.name} />
           ))
         )}
       </PreviewImgContainer>
-      <OkButton onClick={onClick}>
-        Ok
-      </OkButton>
+      {error && 'error occured! please try again.'}
+      {!data && (
+        <OkButton onClick={handleClickSubmit}>
+          {loading ? 'UPLOADING...' : 'CONFIRM'}
+        </OkButton>
+      )}
+      {data && (
+        <OkButton onClick={handleClose}>
+          {loading ? 'UPLOADING...' : 'CLOSE'}
+        </OkButton>
+      )}
     </ImgUploaderContainer>
   );
 }
@@ -124,7 +141,6 @@ const PreviewImg = styled.img`
   object-fit: contain;
 `;
 
-// TODO: grid
 const PreviewImgContainer = styled.div`
   width: 100%;
   display: grid;

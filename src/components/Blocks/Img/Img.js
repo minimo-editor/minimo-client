@@ -51,7 +51,8 @@ export default function Img({
             )
             : (
               <ImgUploader
-                handleUpload={handleSubmitForm}
+                handleUpload={(src) => resetBlockContents(index, { src })}
+                handleClose={() => setModalOpen(false)}
               />
             )}
         </Modal>
