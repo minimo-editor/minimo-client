@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { StyledButton } from '../StyledButton';
+import { OkButton } from '../StyledButton';
 
 export default function LinkForm({
   inputs,
@@ -104,24 +104,4 @@ const TextInput = styled.input`
 
 const ButtonContainerAlignRight = styled.div`
   text-align: right;
-`;
-
-// TODO: delete
-const CancelButton = styled(StyledButton)`
-  display: inline-block;
-  width: auto;
-  height: 50px;
-  padding-left: 30px;
-  padding-right: 30px;
-  background: transparent;
-`;
-
-const OkButton = styled(StyledButton)`
-  display: inline-block;
-  width: auto;
-  height: 50px;
-  padding-left: 30px;
-  padding-right: 30px;
-  min-width: 135px;
-  background: #f7f7f7;
 `;

@@ -90,7 +90,8 @@ export default function ImgUploader({ handleUpload, handleClose }) {
 }
 
 ImgUploader.propTypes = {
-  handleUpload: PropTypes.func,
+  handleUpload: PropTypes.func.isRequired,
+  handleClose: PropTypes.func.isRequired,
 };
 
 const PlaceHolder = styled.p`
