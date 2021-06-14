@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import usePlacesAutocomplete, {
   getGeocode,
@@ -23,6 +23,8 @@ export default function Search({ panTo, setMarker, setAddress }) {
     clearSuggestions,
   } = usePlacesAutocomplete({ debounce: 300 });
 
+  const [error, setError] = useState(null);
+
   const handleInput = (e) => {
     setValue(e.target.value);
   };
@@ -38,9 +40,8 @@ export default function Search({ panTo, setMarker, setAddress }) {
       panTo({ lat, lng });
       setMarker({ lat, lng });
       setAddress(address);
-    } catch (error) {
-      // TODO: error component
-      console.log('😱 Error: ', error);
+    } catch (err) {
+      setError(err);
     }
   };
 
@@ -63,6 +64,7 @@ export default function Search({ panTo, setMarker, setAddress }) {
             ))}
         </ComboboxList>
       </ComboboxPopover>
+      {error && 'Error on searching address! please try again.'}
     </Combobox>
   );
 }
