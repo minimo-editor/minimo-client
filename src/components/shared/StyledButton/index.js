@@ -1,1 +1,6 @@
-export { StyledButton, OkButton } from './StyledButton';
+export {
+  StyledButton,
+  GreyButton,
+  LightPinkButton,
+  BlackButton,
+} from './StyledButton';

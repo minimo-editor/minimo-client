@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { OkButton } from '../StyledButton';
+import { GreyButton } from '../StyledButton';
 import uploadImageToS3 from '../../../apis/S3';
 import useAsync from '../../../hooks/useAsync';
 
@@ -76,14 +76,14 @@ export default function ImgUploader({ handleUpload, handleClose }) {
       </PreviewImgContainer>
       {error && 'error occured! please try again.'}
       {!data && (
-        <OkButton onClick={handleClickSubmit}>
+        <GreyButton onClick={handleClickSubmit}>
           {loading ? 'UPLOADING...' : 'CONFIRM'}
-        </OkButton>
+        </GreyButton>
       )}
       {data && (
-        <OkButton onClick={handleClose}>
+        <GreyButton onClick={handleClose}>
           {loading ? 'UPLOADING...' : 'CLOSE'}
-        </OkButton>
+        </GreyButton>
       )}
     </ImgUploaderContainer>
   );

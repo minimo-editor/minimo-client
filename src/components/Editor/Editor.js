@@ -4,7 +4,7 @@ import EditableProject from '../EditableProject';
 import ColorPicker from '../shared/ColorPicker';
 import useColorPicker from '../../hooks/useColorPicker';
 import { ProjectContext } from '../../contexts/ProjectContext';
-import { OkButton } from '../shared/StyledButton';
+import { GreyButton } from '../shared/StyledButton';
 import Sidebar from '../Sidebar';
 import useSidebar from './useSidebar';
 
@@ -83,7 +83,7 @@ const ProjectWrapper = styled.main`
   background: ${({ bgColor }) => bgColor ?? 'none'};
 `;
 // TODO: delete
-const SaveButton = styled(OkButton)`
+const SaveButton = styled(GreyButton)`
   text-align: center;
   margin-top: 2em;
   margin-bottom: 2rem;

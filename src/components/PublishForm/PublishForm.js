@@ -1,7 +1,7 @@
 import React from 'react';
 import * as ICON from 'react-feather';
 import styled from 'styled-components';
-import { OkButton } from '../shared/StyledButton';
+import { GreyButton } from '../shared/StyledButton';
 import usePublishForm from './usePublishForm';
 
 export default function PublishForm() {
@@ -193,7 +193,7 @@ const TextInput = styled.input`
   }
 `;
 
-const SubmitButton = styled(OkButton)`
+const SubmitButton = styled(GreyButton)`
   &:disabled {
     cursor: not-allowed;
   }

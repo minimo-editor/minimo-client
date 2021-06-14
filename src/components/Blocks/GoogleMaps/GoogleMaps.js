@@ -14,7 +14,7 @@ import googleMapsConfig from '../../../configs/googleMaps';
 import useModal from '../../../hooks/useModal';
 import ConfigIcon from '../../shared/Config/Config';
 import Modal from '../../shared/Modal';
-import { OkButton } from '../../shared/StyledButton/index';
+import { GreyButton } from '../../shared/StyledButton/index';
 import isEmptyObject from '../../../utils/isEmptyObject';
 
 const mapContainerStyle = {
@@ -134,12 +134,12 @@ export default function Map({
               setAddress={setAddress}
             />
           </SearchWrapper>
-          <OkButton
+          <GreyButton
             type='button'
             onClick={onClick}
           >
             Confirm
-          </OkButton>
+          </GreyButton>
         </Modal>
       )}
     </Container>

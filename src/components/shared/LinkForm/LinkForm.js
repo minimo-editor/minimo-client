@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { OkButton } from '../StyledButton';
+import { GreyButton } from '../StyledButton';
 
 export default function LinkForm({
   inputs,
@@ -41,9 +41,9 @@ export default function LinkForm({
         </Label>
       ))}
       <ButtonContainerAlignRight>
-        <OkButton type='submit'>
+        <GreyButton type='submit'>
           Ok
-        </OkButton>
+        </GreyButton>
       </ButtonContainerAlignRight>
     </FormContainer>
   );

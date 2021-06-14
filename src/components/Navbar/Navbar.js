@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import firebase from 'firebase/app';
 import styled from 'styled-components';
 import { AuthContext } from '../../contexts/AuthContext';
+import { LightPinkButton, BlackButton } from '../shared/StyledButton';
 
 export default function Navbar({ isEditor = false }) {
   const { user } = useContext(AuthContext);
@@ -21,18 +22,18 @@ export default function Navbar({ isEditor = false }) {
         </User>
       )}
       {user && (
-        <LogoutButton
+        <LightPinkButton
           type='button'
           onClick={() => firebase.auth().signOut()}
         >
           Log Out
-        </LogoutButton>
+        </LightPinkButton>
       )}
       {!isEditor && (
         <StartLink to={user ? '/editor' : '/login'}>
-          <StartButton>
+          <BlackButton>
             Get Started
-          </StartButton>
+          </BlackButton>
         </StartLink>
       )}
     </NavbarContainer>
@@ -72,43 +73,6 @@ const HomeLink = styled(Link)`
   text-decoration: none;
   font-weight: 900;
   font-size: 2rem;
-`;
-
-const Button = styled.div`
-  padding: 0px 14px;
-  border-radius: 4px;
-  border: none;
-  font-size: 18px;
-  text-decoration: none;
-  font-family: Scto, Arial, sans-serif;
-  font-weight: 500;
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  justify-content: center;
-  height: 40px;
-`;
-
-const StartButton = styled(Button)`
-  background-color: rgb(0, 0, 0);
-  color: rgb(255, 255, 255);
-
-  &:hover {
-    background-color: rgb(3, 69, 207);
-    color: rgb(255, 255, 255);
-  }
-`;
-
-const LogoutButton = styled(Button)`
-  background-color: #faddc7;
-  color: rgb(255, 255, 255);
-  margin-right: 0.5rem;
-
-  &:hover {
-    background-color: #e29559;
-    color: rgb(255, 255, 255);
-  }
 `;
 
 const StartLink = styled(Link)`
