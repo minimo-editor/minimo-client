@@ -72,27 +72,20 @@ export default function Map({
   }
 
   function handleCurrentPositionClick() {
-    function success(position) {
+    navigator.geolocation.getCurrentPosition((position) => {
       panTo({
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       });
-    }
-
-    function error(err) {
-      // TODO: error component.
-      console.warn(err.message);
-    }
-
-    navigator.geolocation.getCurrentPosition(success, error);
+    });
   }
 
   if (loadError) {
-    return 'Error';
+    return 'Error on loading map, please try again.';
   }
 
   if (!isLoaded) {
-    return 'Loading...';
+    return 'Loading the map...';
   }
 
   return (
