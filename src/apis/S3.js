@@ -1,5 +1,5 @@
 import S3FileUpload from 'react-s3';
-import S3Config from '../configs/S3Config';
+import S3Config from '../configs/S3';
 
 export default async function uploadImageToS3(file) {
   try {

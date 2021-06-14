@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import '@reach/combobox/styles.css';
 import Search from './Search';
 import CurrentPositionButton from './CurrentPositionButton';
-import googleMapsConfig from '../../../configs/googleMapsConfig';
+import googleMapsConfig from '../../../configs/googleMaps';
 import useModal from '../../../hooks/useModal';
 import ConfigIcon from '../../shared/Config/Config';
 import Modal from '../../shared/Modal';
