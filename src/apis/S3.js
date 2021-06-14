@@ -6,6 +6,6 @@ export default async function uploadImageToS3(file) {
     const response = await S3FileUpload.uploadFile(file, S3Config);
     return response.location;
   } catch (error) {
-    console.log(error);
+    throw new Error(error.message || 'Failed to upload image to S3.');
   }
 }
