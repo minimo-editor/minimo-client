@@ -6,10 +6,8 @@ export default function Preview() {
   const { project } = useContext(ProjectContext);
 
   return (
-    <>
-      <ProjectViewer
-        project={project}
-      />
-    </>
+    <ProjectViewer
+      project={project}
+    />
   );
 }
