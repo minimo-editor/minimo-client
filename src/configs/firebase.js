@@ -1,6 +1,12 @@
 import firebase from 'firebase/app';
+import 'firebase/auth';
 
-export default {
+firebase.initializeApp({
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+});
+
+firebase.uiConfig = {
   signInFlow: 'popup',
   signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -13,3 +19,5 @@ export default {
     signInSuccessWithAuthResult: () => false,
   },
 };
+
+export default firebase;
