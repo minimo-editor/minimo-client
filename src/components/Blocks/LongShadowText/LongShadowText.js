@@ -32,7 +32,6 @@ export default function LongShadowText({
       <ContentEditable
         html={texts}
         style={{ ...styles }}
-        // TODO: constant
         onChange={(e) => onChange(e, index, 'texts')}
         disabled={!isEditable}
       />

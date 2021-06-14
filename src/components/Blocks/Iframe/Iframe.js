@@ -16,7 +16,6 @@ export default function Iframe({
   isActive,
   resetBlockContents,
 }) {
-  // FIXME: to have data.
   const contents = data?.contents ?? defaultVideoContents;
   const { modalOpen, setModalOpen, toggle } = useModal();
 

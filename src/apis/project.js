@@ -45,7 +45,6 @@ export async function checkValidAddress(address) {
 
     return false;
   } catch (error) {
-    // TODO: catch error
     throw new Error(error);
   }
 }

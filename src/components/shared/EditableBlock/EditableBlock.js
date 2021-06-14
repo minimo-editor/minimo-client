@@ -29,7 +29,6 @@ export default function EditableBlock({
   function handleClick(e) {
     if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
       setIsActive(false);
-      // TODO: delete
       setIsDraggable(false);
     } else {
       setIsActive(true);
@@ -58,8 +57,6 @@ export default function EditableBlock({
   }
 
   function onDrop(e) {
-    // TODO: delete 문제없을 시
-    // e.preventDefault();
     setIsDragEnter(false);
 
     const blockId = e.dataTransfer.getData('block_id');

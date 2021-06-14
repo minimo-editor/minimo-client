@@ -51,7 +51,6 @@ export default function Editor() {
           handleChangeBlock={handleChangeBlockContents}
           handleChangeStyle={handleChangeBlockStyles}
         />
-        {/* FIXME: rename -> colorpicker tool ? */}
         <ColorPicker
           color={bgColor}
           isColorPickerOpen={isColorPickerOpen}
@@ -81,13 +80,4 @@ const ProjectWrapper = styled.main`
   padding: 0 35px;
   box-sizing: border-box;
   background: ${({ bgColor }) => bgColor ?? 'none'};
-`;
-// TODO: delete
-const SaveButton = styled(GreyButton)`
-  text-align: center;
-  margin-top: 2em;
-  margin-bottom: 2rem;
-  font-size: 1.5rem;
-  font-weight: 300;
-  color: grey;
 `;
