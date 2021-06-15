@@ -8,7 +8,7 @@ export default function Sidebar({
   isSidebarOpen,
   toggleSidebar,
 }) {
-  function handleDragStart(e) {
+  function onDragStart(e) {
     const { target } = e;
     e.dataTransfer.setData('block_id', target.id);
   }
@@ -31,7 +31,7 @@ export default function Sidebar({
           <BlockItem
             id={blockImg.id}
             key={blockImg.id}
-            onDragStart={handleDragStart}
+            onDragStart={onDragStart}
             draggable
           >
             <img draggable={false} src={blockImg.src} alt={blockImg.id} />
@@ -97,7 +97,6 @@ const BlockItem = styled.div`
   & img {
     width: 100%;
     display: block;
-    /* opacity: ${({ isDragging }) => (isDragging ? '0' : 'none')}; */
   }
 `;
 
