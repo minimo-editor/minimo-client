@@ -4,6 +4,13 @@ import styled from 'styled-components';
 import { GreyButton } from '../StyledButton';
 import useImgUploader from './useImgUploader';
 
+const MESSAGES = {
+  CONFIRM: 'CONFIRM',
+  CLOSE: 'CLOSE',
+  UPLOADING: 'uploading...',
+  ERROR: 'error occured! please try again.',
+};
+
 export default function ImgUploader({ handleUpload, handleClose }) {
   const {
     data,
@@ -29,19 +36,23 @@ export default function ImgUploader({ handleUpload, handleClose }) {
       <PreviewImgContainer>
         {previewImgs && (
           previewImgs.map((img) => (
-            <PreviewImg src={img.src} alt={img.name} />
+            <PreviewImg
+              key={img.src}
+              src={img.src}
+              alt={img.name}
+            />
           ))
         )}
       </PreviewImgContainer>
-      {error && 'error occured! please try again.'}
+      {error && MESSAGES.ERROR}
       {!data && (
         <GreyButton onClick={handleClickSubmit}>
-          {loading ? 'UPLOADING...' : 'CONFIRM'}
+          {loading ? MESSAGES.UPLOADING : MESSAGES.CONFIRM}
         </GreyButton>
       )}
       {data && (
         <GreyButton onClick={handleClose}>
-          {loading ? 'UPLOADING...' : 'CLOSE'}
+          {loading ? MESSAGES.UPLOADING : MESSAGES.CLOSE}
         </GreyButton>
       )}
     </ImgUploaderContainer>
