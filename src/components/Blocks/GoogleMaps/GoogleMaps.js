@@ -12,7 +12,7 @@ import Search from './Search';
 import CurrentPositionButton from './CurrentPositionButton';
 import googleMapsConfig from '../../../configs/googleMaps';
 import useModal from '../../../hooks/useModal';
-import ConfigIcon from '../../shared/Config/Config';
+import ConfigIcon from '../../shared/ConfigIcon';
 import Modal from '../../shared/Modal';
 import { GreyButton } from '../../shared/StyledButton/index';
 import isEmptyObject from '../../../utils/isEmptyObject';

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import * as ICON from 'react-feather';
 import useModal from '../../../hooks/useModal';
 import Modal from '../../shared/Modal';
-import ConfigIcon from '../../shared/Config/Config';
+import ConfigIcon from '../../shared/ConfigIcon';
 import LinkForm from '../../shared/LinkForm';
 import ImgUploader from '../../shared/ImgUploader';
 

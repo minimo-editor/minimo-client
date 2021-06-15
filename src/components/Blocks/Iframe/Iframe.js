@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import useModal from '../../../hooks/useModal';
 import Modal from '../../shared/Modal';
-import ConfigIcon from '../../shared/Config/Config';
+import ConfigIcon from '../../shared/ConfigIcon';
 import LinkForm from '../../shared/LinkForm';
 
 const defaultVideoContents = {

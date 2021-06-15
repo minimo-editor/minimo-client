@@ -6,7 +6,7 @@ import useModal from '../../../hooks/useModal';
 import Modal from '../../shared/Modal';
 import isEmptyObject from '../../../utils/isEmptyObject';
 import LinkForm from '../../shared/LinkForm';
-import ConfigIcon from '../../shared/Config/Config';
+import ConfigIcon from '../../shared/ConfigIcon';
 
 const DEFAULT_DATA = {
   contents: {
