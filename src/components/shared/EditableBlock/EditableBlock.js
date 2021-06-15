@@ -1,12 +1,8 @@
 import PropTypes from 'prop-types';
-import React, {
-  useEffect,
-  useRef,
-  useState,
-  cloneElement,
-} from 'react';
+import React, { cloneElement } from 'react';
 import styled, { css } from 'styled-components';
 import Tools from './Tools';
+import useEditableBlock from './useEditableBlock';
 
 export default function EditableBlock({
   children,
@@ -15,63 +11,19 @@ export default function EditableBlock({
   swapBlocks,
   deleteBlock,
 }) {
-  const [isDragEnter, setIsDragEnter] = useState(false);
-  const [isActive, setIsActive] = useState(false);
-  const [isDraggable, setIsDraggable] = useState(false);
-  const wrapperRef = useRef();
-
-  useEffect(() => {
-    document.addEventListener('click', handleClick);
-
-    return () => document.removeEventListener('click', handleClick);
-  }, []);
-
-  function handleClick(e) {
-    if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
-      setIsActive(false);
-      setIsDraggable(false);
-    } else {
-      setIsActive(true);
-    }
-  }
-
-  function onDragEnter(e) {
-    e.preventDefault();
-
-    if (!isDraggable) {
-      setIsDragEnter(true);
-    }
-  }
-
-  function onDragLeave() {
-    setIsDragEnter(false);
-  }
-
-  function onDragOver(e) {
-    e.stopPropagation();
-    e.preventDefault();
-  }
-
-  function onDragStart(e) {
-    e.dataTransfer.setData('block_index', index);
-  }
-
-  function onDrop(e) {
-    setIsDragEnter(false);
-
-    const blockId = e.dataTransfer.getData('block_id');
-
-    if (blockId) {
-      insertBlock(index, blockId);
-      return;
-    }
-
-    const droppedIndex = e.dataTransfer.getData('block_index');
-
-    if (droppedIndex) {
-      swapBlocks(index, droppedIndex);
-    }
-  }
+  const {
+    wrapperRef,
+    isDragEnter,
+    isActive,
+    isDraggable,
+    handleDrop,
+    handleDragEnter,
+    handleDragLeave,
+    handleDragOver,
+    handleDragStart,
+    makeDraggable,
+    makeNotDraggable,
+  } = useEditableBlock(index, insertBlock, swapBlocks);
 
   return (
     <EditableContainer
@@ -79,19 +31,19 @@ export default function EditableBlock({
       isDragEnter={isDragEnter}
       isActive={isActive}
       draggable={isDraggable}
-      onDrop={onDrop}
-      onDragEnter={onDragEnter}
-      onDragLeave={onDragLeave}
-      onDragOver={onDragOver}
-      onDragStart={onDragStart}
+      onDrop={handleDrop}
+      onDragEnter={handleDragEnter}
+      onDragLeave={handleDragLeave}
+      onDragOver={handleDragOver}
+      onDragStart={handleDragStart}
     >
       <div>
         {cloneElement(children, { isActive })}
       </div>
       {isActive && (
         <Tools
-          makeDraggable={() => setIsDraggable(true)}
-          makeNotDraggable={() => setIsDraggable(false)}
+          makeDraggable={makeDraggable}
+          makeNotDraggable={makeNotDraggable}
           onClickRemove={() => deleteBlock(index)}
         />
       )}
