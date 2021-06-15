@@ -1,42 +1,33 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { GreyButton } from '../StyledButton';
+import useLinkForm from './useLinkForm';
 
 export default function LinkForm({
   inputs,
   handleSubmitForm,
 }) {
-  const [data, setData] = useState(inputs);
-
-  function onChange(e) {
-    const { name, value } = e.target;
-    setData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  }
-
-  function onSubmit(e) {
-    e.preventDefault();
-    handleSubmitForm(data);
-  }
+  const {
+    data,
+    handleSubmit,
+    handleChange,
+  } = useLinkForm(inputs, handleSubmitForm);
 
   return (
     <FormContainer
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
     >
-      {Object.entries(data).map(([name, value], index) => (
+      {Object.entries(data).map(([name, value]) => (
         <Label
-          // eslint-disable-next-line react/no-array-index-key
-          key={index}
+          key={name}
         >
           <TextInput
             type='text'
             name={name}
             placeholder={name}
             value={value}
-            onChange={onChange}
+            onChange={handleChange}
           />
         </Label>
       ))}
