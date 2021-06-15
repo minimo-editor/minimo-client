@@ -76,7 +76,7 @@
 
     전통적인 WYSIWYG는 하나의 `contenteditable` 요소 안에 서로다른 `html markup` 을 작성하는 방식인데, 이는 편집하는 각각의 요소가 서로에게 영향을 주는 작은 버그가 존재합니다. 저도 이러한 불편함을 겪어본 적이 있기 때문에, 미니모는 `paragraph`, `title`, `image` 등을 각각 독립적인 `contenteditable` 요소로서 편집하도록 구현했습니다.
 
-- json data
+- Clean output data
 
     프로젝트의 결과물은 `html markup` 이 아닌 `json` 형식의 데이터로 저장하였습니다.
 
@@ -152,6 +152,11 @@
 
     또한 백엔드에서의 validation도 더 용이하고, 특정 부분의 데이터만 추출하는 데에도 수월할 것이라고 생각했습니다.
 
+ - 관심사의 분리
+
+   Custom hook으로 `비즈니스 로직`과 `view`관련 로직을 분리하였습니다. Custom hook을 통한 관심사 분리의 장점은 크게
+   `기능 단위로 로직을 분리하기 쉽다` 와 `다른 곳에서 사용이 필요한 경우 hooks 폴더로 이동시켜 범용적으로 사용이 가능하다`
+
 ---
 
 ## 🕹 기능
@@ -167,6 +172,20 @@
 - 특정 위치를 지도에 마크하여 주소와 함께 표시할 수 있습니다.
 - 모바일 화면에 맞게 미리보기가 가능합니다.
 - 원하는 주소를 설정할 수 있습니다.
+
+
+| | |
+| --- | --- |
+| 템플릿 선택 | 배경 변경 / 블록 추가 / 소셜링크 |
+| ![템플릿](./readme_assets/templates.png) | ![basic](./readme_assets/demo1.gif)|
+| 지도 블락 및 이미지 변경 | 텍스트 편집 |
+| ![map](./readme_assets/demo2-map.gif) | ![texts](./readme_assets/demo6-texts.gif) |
+| 블록 스왑 및 삭제 | 모바일 화면 미리보기 |
+| ![방명록](./readme_assets/demo3-dnd.gif) | ![preview](./readme_assets/preview.png) |
+| youtube / video 블락 | blank(공백) 블락 |
+| ![publish](./readme_assets/demo7-video&youtube.gif) | ![published](./readme_assets/demo9-black.gif) |
+| 발행 / 주소설정 | 발행된 페이지 (모바일 화면) |
+| ![publish](./readme_assets/demo4-publish.gif) | ![published](./readme_assets/demo5-miniweb.gif) |
 
 ---
 
