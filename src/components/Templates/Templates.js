@@ -1,50 +1,38 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import templates from './templateData';
 import ProjectViewer from '../shared/ProjectViewer';
-import { ProjectContext } from '../../contexts/ProjectContext';
-import { AuthContext } from '../../contexts/AuthContext';
+import useTemplate from './useTemplate';
 
 export default function Templates() {
-  const { userId } = useContext(AuthContext);
-  const { handleSelectTemplate } = useContext(ProjectContext);
-  const [selectedTemplate, setSelectedTemplate] = useState(null);
-
-  function onChange(e) {
-    const { value } = e.target;
-
-    setSelectedTemplate(value);
-
-    const templateData = templates.find((each) => each.concept === value);
-
-    handleSelectTemplate(templateData, userId);
-  }
+  const {
+    templates,
+    selectedTemplate,
+    handleChangeInput,
+  } = useTemplate();
 
   return (
-    <>
-      <TemplatesContainer>
-        {templates.map((template) => (
-          <Template
-            key={template.concept}
-          >
-            <Header>
-              <Radio
-                type='radio'
-                value={template.concept}
-                onChange={onChange}
-                checked={(selectedTemplate === template.concept)}
-              />
-              <Title>{template.concept}</Title>
-            </Header>
-            <ProjectWrapper>
-              <ProjectViewer
-                project={template}
-              />
-            </ProjectWrapper>
-          </Template>
-        ))}
-      </TemplatesContainer>
-    </>
+    <TemplatesContainer>
+      {templates.map((template) => (
+        <Template
+          key={template.concept}
+        >
+          <Header>
+            <input
+              type='radio'
+              value={template.concept}
+              onChange={handleChangeInput}
+              checked={(selectedTemplate === template.concept)}
+            />
+            <Title>{template.concept}</Title>
+          </Header>
+          <ProjectWrapper>
+            <ProjectViewer
+              project={template}
+            />
+          </ProjectWrapper>
+        </Template>
+      ))}
+    </TemplatesContainer>
   );
 }
 
@@ -75,8 +63,6 @@ const ProjectWrapper = styled.div`
   overflow-y: auto;
   border-radius: 30px;
 `;
-
-const Radio = styled.input``;
 
 const Header = styled.header`
   width: fit-content;
