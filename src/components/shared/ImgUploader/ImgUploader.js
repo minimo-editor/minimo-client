@@ -1,60 +1,19 @@
+import React from 'react';
 import PropTypes from 'prop-types';
-import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { GreyButton } from '../StyledButton';
-import uploadImageToS3 from '../../../apis/S3';
-import useAsync from '../../../hooks/useAsync';
+import useImgUploader from './useImgUploader';
 
 export default function ImgUploader({ handleUpload, handleClose }) {
-  const [imgFiles, setImgFiles] = useState([]);
-  const [previewImgs, setPreviewImgs] = useState([]);
-
-  const cachedFunction = useCallback(() => uploadImageToS3(imgFiles[0]), [imgFiles]);
-
   const {
     data,
     loading,
     error,
-    executeAsyncFn,
-  } = useAsync(cachedFunction, false);
-
-  useEffect(() => {
-    if (data) {
-      handleUpload(data);
-    }
-  }, [data]);
-
-  function handleClickSubmit() {
-    if (imgFiles.length > 0) {
-      executeAsyncFn();
-    }
-  }
-
-  async function onFileChange(e) {
-    const { files } = e.target;
-
-    setImgFiles(files);
-
-    Object.values(files).forEach((file) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-
-      reader.addEventListener('load', () => {
-        const img = {
-          name: file.name,
-          type: file.type,
-          size: file.size,
-          src: reader.result,
-        };
-
-        setPreviewImgs((prev) => prev.concat(img));
-      });
-    });
-  }
-
-  function onDragEnterCapture(e) {
-    e.stopPropagation();
-  }
+    previewImgs,
+    handleDragEnterCapture,
+    handleFileChange,
+    handleClickSubmit,
+  } = useImgUploader(handleUpload);
 
   return (
     <ImgUploaderContainer>
@@ -62,8 +21,8 @@ export default function ImgUploader({ handleUpload, handleClose }) {
         <PlaceHolder>DRAG & DROP IMAGE HERE</PlaceHolder>
         <input
           type='file'
-          onChangeCapture={onFileChange}
-          onDragEnterCapture={onDragEnterCapture}
+          onChangeCapture={handleFileChange}
+          onDragEnterCapture={handleDragEnterCapture}
           accept='image/x-png, image/jpeg, image/gif'
         />
       </DropZone>
