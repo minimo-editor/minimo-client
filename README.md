@@ -155,7 +155,7 @@
  - 관심사의 분리
 
    Custom hook으로 `비즈니스 로직`과 `view`관련 로직을 분리하였습니다. Custom hook을 통한 관심사 분리의 장점은 크게
-   `기능 단위로 로직을 분리하기 쉽다` 와 `다른 곳에서 사용이 필요한 경우 hooks 폴더로 이동시켜 범용적으로 사용이 가능하다`
+   `기능 단위로 로직을 분리하기 쉽다.` 와 `다른 곳에서 사용이 필요한 경우 hooks 폴더로 이동시켜 범용적으로 사용이 가능하다.`였습니다.
 
 ---
 
@@ -183,9 +183,15 @@
 | 블록 스왑 및 삭제 | 모바일 화면 미리보기 |
 | ![방명록](./readme_assets/demo3-dnd.gif) | ![preview](./readme_assets/preview.png) |
 | youtube / video 블락 | blank(공백) 블락 |
-| ![publish](./readme_assets/demo7-video&youtube.gif) | ![published](./readme_assets/demo9-black.gif) |
+| ![video](./readme_assets/demo7-video&youtube.gif) | ![blank](./readme_assets/demo9-black.gif) |
 | 발행 / 주소설정 | 발행된 페이지 (모바일 화면) |
 | ![publish](./readme_assets/demo4-publish.gif) | ![published](./readme_assets/demo5-miniweb.gif) |
+
+---
+
+## ⛑ TEST
+
+  - `React Testing Library`와 `Jest`를 사용하여 `Custom Hook`, `util`, `reducer` 등의 중요 로직을 우선적으로 유닛 테스트를 작성했습니다.
 
 ---
 
@@ -241,12 +247,6 @@
 
    npm run dev
    ```
-
----
-
-## ⛑ TEST
-
-  - `React Testing Library`와 `Jest`를 사용하여 `Custom Hook`, `util`, `reducer` 등의 중요 로직을 우선적으로 유닛 테스트를 작성했습니다.
 
 ---
 
