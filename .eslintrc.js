@@ -33,7 +33,6 @@ module.exports = {
     'no-await-in-loop': 'off',
     'object-shorthand': ['error', 'properties'],
     'no-param-reassign': ['error', { props: false }],
-    // "import/no-unresolved": "off",
     'arrow-body-style': ['warn', 'as-needed'],
     'wrap-iife': ['error', 'inside'],
     'no-unused-expressions': 'off',
