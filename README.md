@@ -1,8 +1,9 @@
 # minimo
 
-미니모는 모바일 초대장, 카드 등을 드래그 앤 드롭으로 쉽게 제작할 수 있는 미니 웹 빌더입니다.
+ **미니모**는 모바일 초대장, 카드 등을 드래그 앤 드롭으로 쉽게 제작할 수 있는 미니 웹 빌더입니다.
 
 ![메인사진](./public/assets/background.png)
+![메인동영상](./public/assets/../../readme_assets/main.gif)
 
   ![JavaScript](https://img.shields.io/badge/JavaScript-%23323330.svg?style=flat-square&logo=javascript&logoColor=%23F7DF1E)
   ![html5](https://img.shields.io/badge/-HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
@@ -29,6 +30,19 @@
 
 ---
 
+## ✨ 목차
+  - [✨ 목차](#-목차)
+  - [🧑‍💻 프로젝트 개요](#‍--프로젝트-개요)
+  - [📅 작업 기간](#--작업-기간)
+  - [🕹 기능](#🕹-기능)
+  - [⛑ TEST](#⛑-test)
+  - [💡 특징](#-특징)
+  - [🌊 어려움](#-어려움)
+  - [📖 프로젝트 사용 방법](#-프로젝트-사용-방법)
+  - [🙇‍♂️ 프로젝트를 마치며](#‍-프로젝트를-마치며)
+
+---
+
 ## 🧑‍💻  **프로젝트 개요**
 
 웹과 모바일 기기가 많은 발전을 했음에도 불구하고 주변에서 받게되는 `모바일 청첩장`이 다소 정적인 것 같아, 인터렉티브하고 동적인 요소들을 포함한 `모바일 청첩장 메이커`를 만들고 싶었습니다.
@@ -37,7 +51,7 @@
 
 하지만, 핵심 기능에 라이브러리를 쓰지 않고 직접 구현하는 것이 배울 점이 더 많다고 생각하여 해당 프로젝트 2주 동안은 직접 `드래그 앤 드롭`과 `블록 스타일 웹 에디터(빌더)`의 기본 틀을 만들어 보기로 했습니다.
 
-해당 프로젝트를 통해 `재사용성이 높은 컴포넌트`와 `복잡한 이벤트 핸들링`에 대해 많은 공부를 할 수 있을거라 기대했습니다.
+해당 프로젝트를 통해 `재사용성이 높은 컴포넌트`와 `복잡한 이벤트 핸들링` 등 **프론트엔드** 관련 많은 학습을 할 수 있을거라 기대했습니다.
 
 ---
 
@@ -49,18 +63,46 @@
 
 - **개발 :** 2021/05/10 ~ 2021/05/21 **(2주)**
     - **2주차**
-        - 아웃풋 데이터 형식 결정
-        - 드래그 드롭 구현
-        - 블락 구조의 에디터 구현
-        - 블락 대표 이미지와 컴포넌트 맵핑
-        - 백엔드 user, project api 작업
-        - 소셜로그인
+        - `에디터` 및 `드래그 앤 드롭` 등 핵심 기능 구현
+        - `사용자 인증`, `전역 상태관리` 등
     - **3주차**
-        - 컴포넌트 및 커스텀 훅 리팩토링
-        - 드래그 드롭 애니메이션
-        - 기능 및 블록 추가
-        - 유닛테스트 작성
-        - 배포
+        - `컴포넌트` 및 `커스텀 훅` 재사용성 있게 리팩토링
+        - 드래그 드롭 `애니메이션`, `추가 블록`, 기능 등
+        - `유닛 테스트` 및 `배포`
+
+---
+
+## 🕹 기능
+
+🔗  [발표영상](https://youtu.be/F8OHnevCS30?t=7328) -
+3분 내외의 간단한 기능소개 부분입니다. 전체적인 플로우를 보실 수 있습니다.
+
+- 기본 템플릿을 선택할 수 있습니다.
+- 드래그 드롭을 통해 쉽게 블록들을 추가할 수 있습니다.
+- 이미지, 동영상, 유튜브 영상 등을 추가할 수 있습니다.
+- 소셜 미디어 버튼에 개인 링크를 연결할 수 있습니다.
+- 특정 위치를 지도에 마크하여 주소와 함께 표시할 수 있습니다.
+- 모바일 화면에 맞게 미리보기가 가능합니다.
+- 원하는 주소를 설정할 수 있습니다.
+
+| | |
+| --- | --- |
+| 템플릿 선택 | 배경 변경 / 블록 추가 / 소셜링크 |
+| ![템플릿](./readme_assets/templates.png) | ![basic](./readme_assets/demo1.gif)|
+| 지도 블락 및 이미지 변경 | 텍스트 편집 |
+| ![map](./readme_assets/demo2-map.gif) | ![texts](./readme_assets/demo6-texts.gif) |
+| 블록 스왑 및 삭제 | 모바일 화면 미리보기 |
+| ![방명록](./readme_assets/demo3-dnd.gif) | ![preview](./readme_assets/preview.png) |
+| youtube / video 블락 | blank(공백) 블락 |
+| ![video](./readme_assets/demo7-video&youtube.gif) | ![blank](./readme_assets/demo9-black.gif) |
+| 발행 / 주소설정 | 발행된 페이지 (모바일 화면) |
+| ![publish](./readme_assets/demo4-publish.gif) | ![published](./readme_assets/demo5-miniweb.gif) |
+
+---
+
+## ⛑ TEST
+
+  - `React Testing Library`와 `Jest`를 사용하여 `Custom Hook`, `util`, `reducer` 등의 중요 로직을 우선적으로 유닛 테스트를 작성했습니다.
 
 ---
 
@@ -159,41 +201,15 @@
 
 ---
 
-## 🕹 기능
+## 🌊 어려움
 
-🔗  [발표영상](https://youtu.be/F8OHnevCS30?t=7328) -
-3분 내외의 간단한 기능소개 부분입니다. 전체적인 플로우를 보실 수 있습니다.
-
-
-- 기본 템플릿을 선택할 수 있습니다.
-- 드래그 드롭을 통해 쉽게 블록들을 추가할 수 있습니다.
-- 이미지, 동영상, 유튜브 영상 등을 추가할 수 있습니다.
-- 소셜 미디어 버튼에 개인 링크를 연결할 수 있습니다.
-- 특정 위치를 지도에 마크하여 주소와 함께 표시할 수 있습니다.
-- 모바일 화면에 맞게 미리보기가 가능합니다.
-- 원하는 주소를 설정할 수 있습니다.
-
-
-| | |
-| --- | --- |
-| 템플릿 선택 | 배경 변경 / 블록 추가 / 소셜링크 |
-| ![템플릿](./readme_assets/templates.png) | ![basic](./readme_assets/demo1.gif)|
-| 지도 블락 및 이미지 변경 | 텍스트 편집 |
-| ![map](./readme_assets/demo2-map.gif) | ![texts](./readme_assets/demo6-texts.gif) |
-| 블록 스왑 및 삭제 | 모바일 화면 미리보기 |
-| ![방명록](./readme_assets/demo3-dnd.gif) | ![preview](./readme_assets/preview.png) |
-| youtube / video 블락 | blank(공백) 블락 |
-| ![video](./readme_assets/demo7-video&youtube.gif) | ![blank](./readme_assets/demo9-black.gif) |
-| 발행 / 주소설정 | 발행된 페이지 (모바일 화면) |
-| ![publish](./readme_assets/demo4-publish.gif) | ![published](./readme_assets/demo5-miniweb.gif) |
+  - `useAsync hook`
+  - `Animate blocks`
+  - `img uploader`
+  - `drag and drop`
 
 ---
 
-## ⛑ TEST
-
-  - `React Testing Library`와 `Jest`를 사용하여 `Custom Hook`, `util`, `reducer` 등의 중요 로직을 우선적으로 유닛 테스트를 작성했습니다.
-
----
 
 ## 📖 프로젝트 사용 방법
 
