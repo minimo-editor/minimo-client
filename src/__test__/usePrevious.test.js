@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
-import usePrevious from './usePrevious';
+import usePrevious from '../hooks/usePrevious';
 
 test('should remember previous state.', () => {
   const mockState = {

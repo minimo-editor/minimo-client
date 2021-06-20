@@ -1,4 +1,4 @@
-import blocksDefaultDataMap from './blocksDefaultDataMap';
+import blocksDefaultDataMap from '../utils/blocksDefaultDataMap';
 import { getDefaultImg } from '../components/Blocks/Img';
 import { getDefaultTitle } from '../components/Blocks/Title';
 import { getDefaultVideo } from '../components/Blocks/Video';

@@ -1,4 +1,4 @@
-import blocksMap from './blocksMap';
+import blocksMap from '../utils/blocksMap';
 import Title from '../components/Blocks/Title';
 import Img from '../components/Blocks/Img';
 import Video from '../components/Blocks/Video';

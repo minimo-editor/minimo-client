@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import App from './App';
-import { AuthProvider } from '../../contexts/AuthContext';
+import App from '../components/App/App';
+import { AuthProvider } from '../contexts/AuthContext';
 import '@testing-library/jest-dom/extend-expect';
 
 test('should display basic elements.', () => {

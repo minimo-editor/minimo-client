@@ -1,6 +1,6 @@
 /* eslint-disable prefer-promise-reject-errors */
 import { act, renderHook } from '@testing-library/react-hooks';
-import useAsync from './useAsync';
+import useAsync from '../hooks/useAsync';
 
 test('should update data if async function resolved', async () => {
   const successMessage = 'successful';

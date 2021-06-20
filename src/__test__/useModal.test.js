@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react-hooks';
-import useModal from './useModal';
+import useModal from '../hooks/useModal';
 
 test('should be able to toggle modal.', () => {
   const { result } = renderHook(useModal);

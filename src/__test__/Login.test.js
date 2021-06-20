@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Login from './Login';
-import { AuthProvider } from '../../contexts/AuthContext';
+import Login from '../components/Login/Login';
+import { AuthProvider } from '../contexts/AuthContext';
 import '@testing-library/jest-dom/extend-expect';
 
 test('should display login ui when not logged in.', () => {

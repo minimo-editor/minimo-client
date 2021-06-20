@@ -1,4 +1,4 @@
-import getValidTexts from './getValidTexts';
+import getValidTexts from '../utils/getValidTexts';
 
 test('should return valid texts', () => {
   const invalidText = 'a b c #';

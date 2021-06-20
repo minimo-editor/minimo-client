@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react-hooks';
-import useStepper from './useStepper';
+import useStepper from '../hooks/useStepper';
 
 test('should move to next step.', () => {
   const { result } = renderHook(() => useStepper(4));

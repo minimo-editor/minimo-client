@@ -1,4 +1,4 @@
-import isEmptyObject from './isEmptyObject';
+import isEmptyObject from '../utils/isEmptyObject';
 
 test('should return true when given empty object.', () => {
   const emptyObject = {};

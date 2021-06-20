@@ -1,4 +1,4 @@
-import authReducer, { TYPES } from './authReducer';
+import authReducer, { TYPES } from '../reducers/authReducer';
 
 const initialState = {
   isAuthenticated: false,

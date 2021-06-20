@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react-hooks';
-import useColorPicker from './useColorPicker';
+import useColorPicker from '../hooks/useColorPicker';
 
 test('should be able to toggle colorpicker.', () => {
   const { result } = renderHook(useColorPicker);

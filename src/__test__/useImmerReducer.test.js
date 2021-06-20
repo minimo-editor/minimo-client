@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react-hooks';
-import useImmerReducer from './useImmerReducer';
+import useImmerReducer from '../hooks/useImmerReducer';
 import projectReducer, { TYPES } from '../reducers/projectReducer';
 
 const mockState = {

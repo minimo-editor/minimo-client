@@ -1,4 +1,4 @@
-import projectReducer, { TYPES } from './projectReducer';
+import projectReducer, { TYPES } from '../reducers/projectReducer';
 
 const initialState = {
   title: '',
