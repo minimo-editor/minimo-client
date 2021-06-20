@@ -2,7 +2,8 @@
 
  **미니모**는 모바일 초대장, 카드 등을 드래그 앤 드롭으로 쉽게 제작할 수 있는 미니 웹 빌더입니다.
 
-![메인사진](./public/assets/background.png)
+<img src="./public/assets/background.png" width="700">
+
 ![메인동영상](./public/assets/../../readme_assets/main.gif)
 
   ![JavaScript](https://img.shields.io/badge/JavaScript-%23323330.svg?style=flat-square&logo=javascript&logoColor=%23F7DF1E)
@@ -54,7 +55,7 @@
 
 ---
 
-## 📅  **작업 기간**
+## 📅 작업 기간
 
 - **기획 :** 2021/05/03 ~ 2021/05/07 **(1주)**
     - 아이디어 브레인스토밍, 기획, 기술 검증
@@ -196,19 +197,21 @@
  - 관심사의 분리
 
    Custom hook으로 `비즈니스 로직`과 `view`관련 로직을 분리하였습니다. Custom hook을 통한 관심사 분리의 장점은 크게
-   `기능 단위로 로직을 분리하기 쉽다.` 와 `다른 곳에서 사용이 필요한 경우 hooks 폴더로 이동시켜 범용적으로 사용이 가능하다.`였습니다.
+   `기능 단위로 로직을 분리하기 쉽다` 와 `다른 곳에서 사용이 필요한 경우 hooks 폴더로 이동시켜 범용적으로 사용이 가능하다` 였습니다.
 
 ---
 
 ## 🌊 어려움
 
   - `useAsync hook`
+
   - `Animate blocks`
+
   - `img uploader`
+
   - `drag and drop`
 
 ---
-
 
 ## 📖 프로젝트 사용 방법
 
