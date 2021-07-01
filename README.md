@@ -30,6 +30,25 @@
 🔗  backend: [https://github.com/minimo-editor/minimo-server](https://github.com/minimo-editor/minimo-server)
 
 ---
+## 🛠 기술 스택
+
+  - Frontend
+    - React
+    - ContextAPI
+    - ES6
+    - Styled-components
+    - Google-Maps-API
+    - Immer
+    - AWS-S3
+    - Jest
+    - React-testing-library
+
+  - Backend
+    - Node.js
+    - Express.js
+    - MongoDB
+    - Mongoose
+---
 
 ## ✨ 목차
 
