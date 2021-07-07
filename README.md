@@ -149,7 +149,7 @@
 | | |
 | --- | --- |
 | 기존 코드 | 기존 코드 데모 |
-|![noAnimateImg](./readme_assets/noAnimateBlocks.png))| ![withoutAnimate](./readme_assets/no_animation_blocks.gif)|
+|![noAnimateImg](./readme_assets/noAnimateBlocks.png)| ![withoutAnimate](./readme_assets/no_animation_blocks.gif)|
 | AnimateBlock 추가한 코드 | AnimateBlock 추가 후 데모 |
 |![withBlockImg](./readme_assets/animateBlocks.png)| ![withBlock](./readme_assets/animation_blocks.gif)|
 
